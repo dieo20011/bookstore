@@ -31,5 +31,10 @@ class CategoryController extends Controller
     public function add(Request $request) {
         return view('admin.category.formAddCategory');
     }
+    public function store(Request $request) {
+        dd($request->all());
+        $name = $request->has('name') ? $request->all()['name'] : "null";
+        return view('admin.category.formAddCategory');
+    }
 
 }

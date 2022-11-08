@@ -28,10 +28,11 @@ Route::middleware('checkLogin')->prefix('Admin')->name('admin')->group(
    } 
 );
 
-Route::middleware('checkLogin')->prefix('Category')->name('category.')->group(
+Route::middleware('checkLogin')->prefix('Admin/Category')->name('category.')->group(
     function() {
         Route::match(['get', 'post'], '/', [CategoryController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/show/{id}', [CategoryController::class, 'show'])->name('show');
+        Route::match(['get', 'post'], '/store', [CategoryController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [CategoryController::class, 'add'])->name('add');
 
     }

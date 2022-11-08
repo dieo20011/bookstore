@@ -1,6 +1,9 @@
 @extends('admin.home.master')
 @section('content')
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="category_form">
+<div class="alert alert-primary" role="alert">
+    A simple primary alert—check it out!
+</div>
+<form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data" id="category_form">
 @csrf
 <div class="modal-body">
 
@@ -19,12 +22,13 @@
             <span class="errMassage"></span>
     </div>
 
-    <input type="text" hidden name="controller" value="category">
-    <input type="text" hidden name="action" value="store">
+    {{-- <input type="text" hidden name="controller" value="category">
+    <input type="text" hidden name="action" value="store"> --}}
 </div>
 <div class="modal-footer">
-    <a class="btn btn-dark" href="?controller=category&action=index" role="button">Back</a>
-    <button type="submit" name="add-btn" class="btn btn-primary add-btn">Add</button>
+    <a class="btn btn-dark" href="{{ route('category.index') }}" role="button">Back</a>
+    {{-- name="add-btn" --}}
+    <button type="submit"  class="btn btn-primary add-btn">Add</button>
 </div>
 </form>
 @endsection
