@@ -13,9 +13,9 @@
 </div>
 <!-- End of Main Content -->
 </div>
+
 <!-- End of Content Wrapper -->
-
-
+@include('admin.includes.scripts');
 </body>
 
 </html>

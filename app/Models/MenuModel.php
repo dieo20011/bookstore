@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+class MenuModel extends Model
+{
+    protected $table = 'danhmuc';
+    protected $ID = 'MaDM';
+    public function getAll($limit = 10, $start = 0, $column = 'MaDM', $orderBy ="asc") {
+        $menus = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
+        return $menus;
+    }
+    public function findById($id) {
+        $menu = DB::table($this->table)->where($this->ID, $id)->first();
+        return $menu;
+    }
+    public function updateData($id, $data) {
+        $menu = DB::table($this->table)->where($this->ID, $id)->update($data);
+        return $menu;
+    }
+
+    public function deleteData($id) {
+        $menu = DB::table($this->table)->where($this->ID, $id)->delete();
+        return $menu;
+    }
+
+    public function store($data) {
+        $menu = DB::table($this->table)->insertGetId($data);
+        return $menu;
+    }
+    
+}

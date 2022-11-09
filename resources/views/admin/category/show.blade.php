@@ -3,11 +3,9 @@
 <form action="{{ route('category.index') }}" method="POST">
     @csrf
     <div class="modal-body">
-            {{-- <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>"> --}}
             <input type="text" hidden name="controller" value="category">
             <input type="text" hidden name="action" value="index">
             <button type="submit" name="registerbtn" class="btn btn-dark">Back To List</button>
-            <!-- <a class="btn btn-dark" href="?controller=publisher&action=index" role="button">Back</a> -->
     </div>
 </form>
 <form action="{{ route('category.index') }}" method="POST" enctype="multipart/form-data" id="category_form_show">

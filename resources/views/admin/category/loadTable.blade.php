@@ -18,9 +18,6 @@
       <td>
           <form action="{{route('category.show', ['id'=> $value['MaTL']]) }}" method="POST">
             @csrf
-              <input type="hidden" name="controller" value="category">
-              <input type="hidden" name="action" value="show">
-              <input type="hidden" name="id" value="<?php echo $value['MaTL']?>">
               <input type="hidden" name="page" value="<?php echo $data['pageCurrent']?>">
               <button  type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
           </form>

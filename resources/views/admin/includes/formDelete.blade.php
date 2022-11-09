@@ -11,10 +11,13 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 
-                <form action="./index.php" method="POST">
+                <form action="{{ route('menu.delete') }}" method="POST">
+                    @csrf
                     <input type="text" hidden id="delete_id" name='id'>
+                    <input type="text" hidden name='column'>
+                    <input type="text" hidden name='byOrder'>
                     <input type="text" hidden  id="pageNumber" name='page'>
-                    <input type="text" hidden name='controller' value="<?php if(isset($data['pageTitle'])){echo $data['pageTitle'];}?>">
+                    {{-- <input type="text" hidden name='controller' value="<?php if(isset($data['pageTitle'])){echo $data['pageTitle'];}?>"> --}}
                     <button type="submit" name="action" value="delete" class="btn btn-danger">DELETE</button>
                 </form>
             </div>

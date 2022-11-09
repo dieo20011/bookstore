@@ -5,6 +5,27 @@ function loadNotification() {
 }
 
 $(document).ready(function(){
+    function load_data(url, page, column="ID", byOrder="asc"){
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+        url: url,
+        method:"POST",
+        data:{
+            page: page,
+            column: column,
+            byOrder: byOrder
+        },
+        success : function(data){     
+            $('.table-responsive').html(data);
+        }
+
+        });
+    }  
+
     $('.deleteBtn').on('click' , function(){
         $('#deletemodal').modal('show');
         $tr = $(this).closest('tr');
@@ -13,11 +34,20 @@ $(document).ready(function(){
             return $(this).text();
         }).get();
 
-        var pageN = $("input#page").val();
+        var pageN = $("li.page-item.active").children().attr( "page");
+        console.log(pageN)
 
+        var column = $('th.sortKey').attr('column');
+
+        var byOder = $('th.sortKey').attr('byOder');
+        console.log(column);
+        console.log(byOder)
+        $("input[name='column']").val(column);
+        $('input[name="byOrder"]').val(byOder);
         $('#delete_id').val(data[0]);
 
         $('#pageNumber').val(pageN);
+        
     });
 });
 

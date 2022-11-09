@@ -94,7 +94,7 @@
            <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=Category&action=index">Danh sách thể loại</a>
+                   <a class="collapse-item" href="{{ route('category.index') }}">Danh sách thể loại</a>
                </div>
            </div>
        </li>
@@ -107,7 +107,7 @@
            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=Menu&action=index">Danh sách danh mục</a>
+                   <a class="collapse-item" href="{{ route('menu.index') }}">Danh sách danh mục</a>
                </div>
            </div>
        </li>
