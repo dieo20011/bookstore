@@ -39,7 +39,6 @@ class CategoryController extends Controller
     {
 
         dd($request);
-        return;
     }
     public function add(Request $request) {
         return view('admin.category.formAddCategory');
