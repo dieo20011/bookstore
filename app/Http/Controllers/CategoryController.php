@@ -3,28 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryModel;
+use App\Models\MenuModel;
 use Illuminate\Http\Request;
 use DB;
 class CategoryController extends Controller
 {
     private $category;
+    private $limit = 3;
+    // private $menu;
     
     public function __construct() {
         $this->category = new CategoryModel();
+        // $this->menu = new MenuModel();
     }
     public function index(Request $request) {
-       
-        $limit = 8;
-        $data['category'] = $this->category->getAll();
-        $data['pageCurrent'] = $request->has('page') ? $request->all()['page'] : 1;
-        $data = json_decode(json_encode($data), True);
-        $data['totalPage'] = ceil(count($data['category'] )/$limit);
-        return view('admin.category.home', ['data' => $data]);
+
+        return Pagination($this->limit, $this->category, 'home', 'category', $request);
+    }
+
+    public function pagination(Request $request) {
+  
+        return Pagination($this->limit, $this->category, 'loadTable', 'category', $request);
     }
 
     public function show($id) {
         $category = $this->category->findById($id);
-        $data['category'] = json_decode(json_encode($category), True);
+        $data['menu'] = getGroup('danhmuc');
+        // $data['menu'] = getGroupSecond($this->menu);
+
+        $data['category'] = $category;
+        $data = json_decode(json_encode($data), True);
         return view('admin.category.show', ['data' => $data]);
     }
 

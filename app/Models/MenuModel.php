@@ -9,7 +9,7 @@ class MenuModel extends Model
 {
     protected $table = 'danhmuc';
     protected $ID = 'MaDM';
-    public function getAll($limit = 10, $start = 0, $column = 'MaDM', $orderBy ="asc") {
+    public function getAll($limit = 100, $start = 0, $orderBy ="asc", $column = 'MaDM') {
         $menus = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
         return $menus;
     }

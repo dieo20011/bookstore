@@ -21,11 +21,11 @@
         <div class="form-group">
             <label for="exampleFormControlSelect1">Danh sách danh mục</label>
             <select name="MaDM"  class="form-control" rules="required" id="exampleFormControlSelect1">
-                {{-- <?php foreach($data['menu'] as $key => $value) {?>
-                <option value="<?php echo $value['MaDM'] ?>"    <?php if($data['category']['MaDM'] == $value['MaDM'])
+                <?php foreach($data['menu'] as $key => $value) {?>
+                <option value="<?php echo $value['MaDM'] ?>" <?php if($data['category']['MaDM'] == $value['MaDM'])
                     echo "selected";
                 ?>><?php echo $value['TenDM'] ?></option>
-                <?php }?> --}}
+                <?php }?>
             </select>
             <span class="errMassage"></span>
 

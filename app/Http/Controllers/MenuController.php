@@ -11,26 +11,15 @@ class MenuController extends Controller
     public function __construct() {
         $this->menu = new MenuModel();
     }
+    
     public function index(Request $request) {
 
-        $data['menu'] = $this->menu->getAll();
-        $data['totalPage'] = ceil((count($data['menu']))/$this->limit) + 1 ;
-        $data['pageCurrent'] = $request->has('page') ? $request->all()['page'] : 1;
-        $ofset = $data['pageCurrent'] - 1;
-        $data['menu'] = $this->menu->getAll($this->limit, $ofset*$this->limit);
-        $data['byOrder'] = 'asc';
-        $data = json_decode(json_encode($data), True);
-        return view('admin.menu.home', ['data' => $data]);
+        return Pagination($this->limit, $this->menu, 'home', 'menu', $request);
     }
+      
     public function pagination(Request $request) {
-        $data['menu'] = $this->menu->getAll();
-        $data['totalPage'] = ceil((count($data['menu']))/$this->limit) + 1 ;
-        $data['pageCurrent'] = $request->has('page') ? $request->all()['page'] : 1;
-        $ofset = $data['pageCurrent'] - 1;
-        $data['menu'] = $this->menu->getAll($this->limit, $ofset*$this->limit, $request->column == "ID" ? "MaDM" : $request->column, $request->byOrder);
-        $data['byOrder'] = $request->byOrder == 'asc' ? 'desc' :'asc';
-        $data = json_decode(json_encode($data), True);
-        return view('admin.menu.loadTable', ['data' => $data]);
+  
+        return Pagination($this->limit, $this->menu, 'loadTable', 'menu', $request);
     }
 
     public function show($id) {
