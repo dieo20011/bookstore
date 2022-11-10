@@ -35,7 +35,10 @@ class CategoryController extends Controller
         $data = json_decode(json_encode($data), True);
         return view('admin.category.show', ['data' => $data]);
     }
-
+    public function update(Request $request)
+    {
+        dd($request);
+    }
     public function add(Request $request) {
         return view('admin.category.formAddCategory');
     }
