@@ -1,11 +1,8 @@
-<?php
-    include_once('./Views/admin/includes/notification.php');
-?>
-
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="author_form">
-
-<div class="modal-body">
-
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('author.store') }}" method="POST" enctype="multipart/form-data" id="author_form">
+    @csrf
+    <div class="modal-body">
     <div class="form-group">
         <label> Tên tác giả</label>
         <input type="text" name="name" rules="required" class="form-control" placeholder="Tên tác giả" value="">
@@ -30,12 +27,10 @@
         <textarea class="form-control" name="des" rules="required" id="exampleFormControlTextarea1" rows="3"></textarea>
         <span class="errMassage"></span>
     </div>
-    <input type="text" hidden name="controller" value="author">
-    <input type="text" hidden name="action" value="store">
 </div>
 <div class="modal-footer">
-    <a class="btn btn-dark" href="?controller=author&action=index" role="button">Back</a>
-    <button type="submit" name="add-btn" class="btn btn-primary add-btn">Add</button>
+    <a class="btn btn-dark" href="{{ route('author.index') }}" role="button">Back</a>
+    <button type="submit"  class="btn btn-primary add-btn">Add</button>
 </div>
 </form>
-
+@endsection

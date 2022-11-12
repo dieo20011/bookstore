@@ -15,4 +15,4 @@
   <script src="{{asset('js/js/demo/chart-area-demo.js')}}"></script>
   <script src="{{asset('js/js/demo/chart-pie-demo.js')}}"></script>
 
-  {{-- <script src="{{asset('/js/main.js/pagination.js')}}"></script> --}}
+  <script src="{{asset('/js/main.js/admin.js')}}"></script>

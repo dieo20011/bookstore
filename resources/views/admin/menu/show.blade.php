@@ -22,12 +22,11 @@
             <input type="file" name="img" class="form-control" placeholder="Ảnh bìa danh mục" value="<?php echo $data['menu']['img']?>">
             <span class="errMassage"></span>
         </div>
-        <input type="text" hidden name="controller" value="menu">
-        <input type="text" hidden name="action" value="update">
-        {{-- <input type="text" hidden name="id" value="<?php echo $data['menu']['MaDM']?>"> --}}
+        {{-- <input type="text" hidden name="controller" value="menu">
+        <input type="text" hidden name="action" value="update"> --}}
     </div>
     <div class="modal-footer">
-        <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+        <button type="submit"  class="btn btn-primary">Save</button>
     </div>
 </form>
 @endsection

@@ -1,19 +1,14 @@
-<?php
-    include_once('./Views/admin/includes/notification.php');
-?>
-<form action="./index.php" method="POST">
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('author.index') }}" method="POST">
+    @csrf
     <div class="modal-body">
-            <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>">
-            <input type="text" hidden name="controller" value="author">
-            <input type="text" hidden name="action" value="index">
             <button type="submit" name="registerbtn" class="btn btn-dark">Back To List</button>
-            <!-- <a class="btn btn-dark" href="?controller=publisher&action=index" role="button">Back</a> -->
     </div>
 </form>
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="author_form_show">
-
+<form action="{{ route('author.update') }}" method="POST" enctype="multipart/form-data" id="author_form_show">
+@csrf
     <div class="modal-body">
-
         <div class="form-group">
             <label> Tên tác giả </label>
             <input type="text" name="name" class="form-control" rules="required" placeholder="Tên tác giả" value="<?php echo $data['author']['TenTG']?>">
@@ -42,12 +37,9 @@
             <textarea class="form-control" name="des" rules="required"  id="exampleFormControlTextarea1" rows="3"><?php echo $data['author']['MoTa']?></textarea>
             <span class="errMassage"></span>
         </div>
-        <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>">
-        <input type="text" hidden name="controller" value="author">
-        <input type="text" hidden name="action" value="update">
-        <input type="text" hidden name="id" value="<?php echo $data['author']['MaTG']?>">
     </div>
     <div class="modal-footer">
-        <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+        <button type="submit"  class="btn btn-primary">Save</button>
     </div>
 </form>
+@endsection

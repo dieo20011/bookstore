@@ -15,8 +15,8 @@ class CategoryModel extends Model
         return $categories;
     }
     public function findById($id) {
-        $catrgory = DB::table($this->table)->where($this->ID, $id)->first();
-        return $catrgory;
+        $category = DB::table($this->table)->where($this->ID, $id)->first();
+        return $category;
     }
     public function updateData($id, $data) {
         $catrgory = DB::table($this->table)->where($this->ID, $id)->update($data);
@@ -24,13 +24,23 @@ class CategoryModel extends Model
     }
 
     public function deleteData($id) {
-        $catrgory = DB::table($this->table)->where($this->ID, $id)->delete();
-        return $catrgory;
+        $category = DB::table($this->table)->where($this->ID, $id)->delete();
+        return $category;
     }
 
     public function store($data) {
         $menu = DB::table($this->table)->insertGetId($data);
         return $menu;
+    }
+
+    public function getColumnName() {
+        $arrName = DB::getSchemaBuilder()->getColumnListing($this->table);
+        for($i = 0; $i < count($arrName); $i++) {
+            if($arrName[$i] == $this->ID) {
+                unset($arrName[$i]);
+            }
+        }
+        return $arrName;
     }
     
 }

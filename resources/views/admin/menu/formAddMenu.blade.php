@@ -17,7 +17,7 @@
 </div>
 <div class="modal-footer">
     <a class="btn btn-dark" href="{{ route('menu.index') }}" role="button">Back</a>
-    <button type="submit" name="add-btn" class="btn btn-primary add-btn">Add</button>
+    <button type="submit"  class="btn btn-primary add-btn">Add</button>
 </div>
 </form>
 @endsection

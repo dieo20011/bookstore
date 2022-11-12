@@ -120,7 +120,7 @@
            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item"  href="?controller=Author&action=index">Danh sách tác giả</a>
+                   <a class="collapse-item"  href="{{ route('author.index') }}">Danh sách tác giả</a>
                </div>
            </div>
        </li>

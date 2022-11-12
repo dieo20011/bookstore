@@ -8,7 +8,7 @@
             <button type="submit" name="registerbtn" class="btn btn-dark">Back To List</button>
     </div>
 </form>
-<form action="{{ route('category.index') }}" method="POST" enctype="multipart/form-data" id="category_form_show">
+<form action="{{ route('category.update') }}" method="POST" enctype="multipart/form-data" id="category_form_show">
     @csrf
     <div class="modal-body">
 
@@ -30,13 +30,9 @@
             <span class="errMassage"></span>
 
     </div>
-        {{-- <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>"> --}}
-        <input type="text" hidden name="controller" value="category">
-        <input type="text" hidden name="action" value="update">
-        <input type="text" hidden name="id" value="<?php echo $data['category']['MaTL']?>">
     </div>
     <div class="modal-footer">
-        <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+        <button type="submit"  class="btn btn-primary">Save</button>
     </div>
 </form>
 @endsection

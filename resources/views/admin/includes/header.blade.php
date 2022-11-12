@@ -22,6 +22,7 @@
 
   <script src="{{ asset('js/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{asset('/js/main.js/pagination.js')}}"></script>
+
   @yield('css')
       
   </head>

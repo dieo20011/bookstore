@@ -15,7 +15,7 @@ class Tacgia extends Migration
     {
         Schema::create('tacgia', function (Blueprint $table) {
             $table->increments('MaTG');
-            $table->date('TenTG');
+            $table->String('TenTG');
             $table->integer('MaDM');
             $table->string('MoTa');
             $table->string('img');

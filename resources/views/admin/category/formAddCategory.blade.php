@@ -14,20 +14,16 @@
     </div>
     <div class="form-group">
             <label for="exampleFormControlSelect1">Danh sách danh mục</label>
-            {{-- <select name="MaDM"  rules="required" class="form-control" id="exampleFormControlSelect1">
+            <select name="MaDM"  rules="required" class="form-control" id="exampleFormControlSelect1">
                 <?php foreach($data['menu'] as $key => $value) {?>
                 <option value="<?php echo $value['MaDM'] ?>"> <?php echo $value['TenDM'] ?></option>
                 <?php }?>
-            </select> --}}
+            </select>
             <span class="errMassage"></span>
     </div>
-
-    {{-- <input type="text" hidden name="controller" value="category">
-    <input type="text" hidden name="action" value="store"> --}}
 </div>
 <div class="modal-footer">
     <a class="btn btn-dark" href="{{ route('category.index') }}" role="button">Back</a>
-    {{-- name="add-btn" --}}
     <button type="submit"  class="btn btn-primary add-btn">Add</button>
 </div>
 </form>
