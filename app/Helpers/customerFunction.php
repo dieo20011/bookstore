@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\DB;
             case 'category' :
                 return "thể loại";
             case 'author' :
-                return "Tác giả";
+                return "tác giả";
+            case 'supplier':
+                return "nhà cung cấp";
         }
     }
     function Pagination($limit, $model, $pageMain, $title, $request) {

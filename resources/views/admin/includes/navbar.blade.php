@@ -146,7 +146,7 @@
            <div id="collapseEight" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=supplisher&action=index">Danh sách nhà cung cấp</a>
+                   <a class="collapse-item" href="{{route('supplier.index')}}">Danh sách nhà cung cấp</a>
                </div>
            </div>
        </li>
