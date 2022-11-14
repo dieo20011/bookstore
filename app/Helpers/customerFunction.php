@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
                 return "nhà cung cấp";
             case 'publisher':
                 return "nhà xuất bản";
+            case 'promotion':
+                return "chương trình khuyến mãi";
         }
     }
     function Pagination($limit, $model, $pageMain, $title, $request) {

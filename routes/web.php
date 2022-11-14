@@ -10,7 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PublisherController;
-
+use App\Http\Controllers\PromotionController;
 
 
 
@@ -67,6 +67,18 @@ Route::middleware('checkLogin')->prefix('Admin/Publisher')->name('publisher.')->
         Route::match(['get', 'post'], '/store', [PublisherController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [PublisherController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [PublisherController::class, 'delete'])->name('delete');
+
+    }
+);
+Route::middleware('checkLogin')->prefix('Admin/Promotion')->name('promotion.')->group(
+    function() {
+        Route::match(['get', 'post'], '/', [PromotionController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/Pagination', [PromotionController::class, 'pagination'])->name('pagination');
+        Route::match(['get', 'post'], '/show/{id}', [PromotionController::class, 'show'])->name('show');
+        Route::match(['get', 'post'], '/edit', [PromotionController::class, 'update'])->name('update');
+        Route::match(['get', 'post'], '/store', [PromotionController::class, 'store'])->name('store');
+        Route::match(['get', 'post'], '/add', [PromotionController::class, 'add'])->name('add');
+        Route::match(['get', 'post'], '/delete', [PromotionController::class, 'delete'])->name('delete');
 
     }
 );

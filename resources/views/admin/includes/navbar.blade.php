@@ -133,7 +133,7 @@
            <div id="collapseSevent" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=Promotion&action=index">Danh sách CTKM</a>
+                   <a class="collapse-item" href="{{route('promotion.index')}}">Danh sách CTKM</a>
                </div>
            </div>
        </li>

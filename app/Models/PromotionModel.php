@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-class CategoryModel extends Model
+
+class PromotionModel extends Model
 {
     use HasFactory;
-    protected $table = 'theloai';
-    protected $ID = 'MaTL';
-    public function getAll($limit = 10, $start = 0, $orderBy ="asc", $column = 'MaTL') {
-        $categories = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
-        return $categories;
+    protected $table = 'ctkm';
+    protected $ID = 'MaKM';
+    public function getAll($limit = 10, $start = 0, $orderBy ="asc", $column = 'MaKM') {
+        $promotions = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
+        return $promotions;
     }
     public function findById($id) {
-        $category = DB::table($this->table)->where($this->ID, $id)->first();
-        return $category;
+        $protion = DB::table($this->table)->where($this->ID, $id)->first();
+        return $protion;
     }
     public function updateData($id, $data) {
         $catrgory = DB::table($this->table)->where($this->ID, $id)->update($data);
@@ -24,13 +25,13 @@ class CategoryModel extends Model
     }
 
     public function deleteData($id) {
-        $category = DB::table($this->table)->where($this->ID, $id)->delete();
-        return $category;
+        $protion = DB::table($this->table)->where($this->ID, $id)->delete();
+        return $protion;
     }
 
     public function store($data) {
-        $category = DB::table($this->table)->insertGetId($data);
-        return $category;
+        $promotion = DB::table($this->table)->insertGetId($data);
+        return $promotion;
     }
 
     public function getColumnName() {
@@ -42,5 +43,4 @@ class CategoryModel extends Model
         }
         return $arrName;
     }
-    
 }
