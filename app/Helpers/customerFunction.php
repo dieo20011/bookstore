@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
                 return "tác giả";
             case 'supplier':
                 return "nhà cung cấp";
+            case 'publisher':
+                return "nhà xuất bản";
         }
     }
     function Pagination($limit, $model, $pageMain, $title, $request) {

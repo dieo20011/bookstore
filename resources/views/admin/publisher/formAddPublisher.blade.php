@@ -1,10 +1,9 @@
 
 
-<?php
-    include_once('./Views/admin/includes/notification.php');
-?>
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="publisher_form">
-
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('publisher.store') }}" method="POST" enctype="multipart/form-data" id="publisher_form">
+@csrf
 <div class="modal-body">
 
     <div class="form-group">
@@ -21,11 +20,10 @@
             </select>
             <span class="errMassage"></span>
     </div>
-    <input type="text" hidden name="controller" value="publisher">
-    <input type="text" hidden name="action" value="store">
 </div>
 <div class="modal-footer">
-    <a class="btn btn-dark" href="?controller=publisher&action=index" role="button">Back</a>
-    <button type="submit" name="add-btn" class="btn btn-primary add-btn">Add</button>
+    <a class="btn btn-dark" href="{{ route('publisher.index') }}" role="button">Back</a>
+    <button type="submit"  class="btn btn-primary add-btn">Add</button>
 </div>
 </form>
+@endsection

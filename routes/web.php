@@ -9,6 +9,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PublisherController;
+
 
 
 
@@ -53,6 +55,18 @@ Route::middleware('checkLogin')->prefix('Admin/Supplier')->name('supplier.')->gr
         Route::match(['get', 'post'], '/store', [SupplierController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [SupplierController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [SupplierController::class, 'delete'])->name('delete');
+
+    }
+);
+Route::middleware('checkLogin')->prefix('Admin/Publisher')->name('publisher.')->group(
+    function() {
+        Route::match(['get', 'post'], '/', [PublisherController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/Pagination', [PublisherController::class, 'pagination'])->name('pagination');
+        Route::match(['get', 'post'], '/show/{id}', [PublisherController::class, 'show'])->name('show');
+        Route::match(['get', 'post'], '/edit', [PublisherController::class, 'update'])->name('update');
+        Route::match(['get', 'post'], '/store', [PublisherController::class, 'store'])->name('store');
+        Route::match(['get', 'post'], '/add', [PublisherController::class, 'add'])->name('add');
+        Route::match(['get', 'post'], '/delete', [PublisherController::class, 'delete'])->name('delete');
 
     }
 );

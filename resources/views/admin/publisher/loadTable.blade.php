@@ -1,8 +1,8 @@
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
   <thead>
     <tr>
-      <th>Mã nhà xuất bản </th>
-      <th>Tên nhà xuất bản</th>
+      <th class="sortKey" column="MaNXB" byOder="{{$data['byOrder']}}" >Mã nhà xuất bản </th>
+      <th class="sortKey" column="TenNXB" byOder="{{$data['byOrder']}}">Tên nhà xuất bản</th>
       <th>EDIT </th>
       <th>DELETE </th>
     </tr>
@@ -15,10 +15,8 @@
       <td id="ID">  <?php echo $value['MaNXB']?> </td>
       <td>  <?php echo $value['TenNXB']?></td>
       <td>
-          <form action="./index.php" method="POST">
-              <input type="hidden" name="controller" value="publisher">
-              <input type="hidden" name="action" value="show">
-              <input type="hidden" name="id" value="<?php echo $value['MaNXB']?>">
+          <form action="{{route('publisher.show', ['id'=> $value['MaNXB']]) }}" method="POST">
+            @csrf
               <input type="hidden" name="page"  value="<?php echo $data['pageCurrent']?>">
               <button  type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
           </form>
@@ -34,27 +32,5 @@
     ?>
   </tbody>
 </table>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-end">
-    <li class="page-item <?php if(isset($data['pageCurrent']) && (1 == $data['pageCurrent'])) { echo 'disabled';}?>">
-      <a class="page-link " href="" page="<?php echo ($data['pageCurrent'] - 1)?> ">Previous</a>
-    </li>
-    <?php 
-        for($i = 1; $i <= $data['totalPage']; $i++) {
-    ?>
-    <li class="page-item <?php if(isset($data['pageCurrent']) && ($i==$data['pageCurrent'])) { echo 'active';}?>">
-      <a class="page-link " href="" page=<?php echo $i?> ><?php echo $i?></a>
-    </li>
-    <?php
-    }
-    ?>
-    <li class="page-item <?php if(isset($data['pageCurrent']) && ($data['totalPage'] <= $data['pageCurrent'])) { echo 'disabled';}?>">
-      <a class="page-link" page="<?php echo ($data['pageCurrent'] + 1)?> " href="">Next</a>
-    </li>
-  </ul>
-</nav>
-<?php include_once('./Views/admin/includes/scripts.php');?>
-<script>
-  load("?controller=publisher&action=pagination");
-</script>
-<?php
+@include('admin.includes.formDelete')
+<script src="{{asset('js/main.js/admin.js')}}"></script>

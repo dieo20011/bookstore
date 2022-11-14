@@ -1,18 +1,15 @@
-<?php
-    include_once('./Views/admin/includes/notification.php');
-?>
-<form action="./index.php" method="POST">
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('publisher.index')}}" method="POST">
+    @csrf
     <div class="modal-body">
-            <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>">
-            <input type="text" hidden name="controller" value="publisher">
-            <input type="text" hidden name="action" value="index">
             <button type="submit" name="registerbtn" class="btn btn-dark">Back To List</button>
             <!-- <a class="btn btn-dark" href="?controller=publisher&action=index" role="button">Back</a> -->
     </div>
 </form>
 
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="publisher_form_show">
-
+<form action="{{ route('publisher.update') }}" method="POST" enctype="multipart/form-data" id="publisher_form_show">
+@csrf
     <div class="modal-body">
 
         <div class="form-group">
@@ -33,13 +30,10 @@
         </div>
 
         <!-- Group điều hướng  -->
-        <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>">
-        <input type="text" hidden name="controller" value="publisher">
-        <input type="text" hidden name="action" value="update">
-        <input type="text" hidden name="id" value="<?php echo $data['publisher']['MaNXB']?>">
     </div>
     <div class="modal-footer">
         
-        <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+        <button type="submit"  class="btn btn-primary">Save</button>
     </div>
 </form>
+@endsection

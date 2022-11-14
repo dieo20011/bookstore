@@ -172,7 +172,7 @@
            <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=Publisher&action=index">Danh sách nhà xuất bản</a>
+                   <a class="collapse-item" href="{{route('publisher.index')}}">Danh sách nhà xuất bản</a>
                </div>
            </div>
        </li>
