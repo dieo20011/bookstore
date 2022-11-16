@@ -55,8 +55,13 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('#selectMenu').change(function() {
         let idSelect = $(this).val()
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
-            url: "?controller=product&action=selectForMenu",
+            url: "http://127.0.0.1:8000/Admin/Product/select",
             method:"POST",
             data: {idSelect : idSelect},
             success : function(data){     

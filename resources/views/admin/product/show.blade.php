@@ -1,17 +1,14 @@
-<?php
-    include_once('./Views/admin/includes/notification.php');
-?>
-<form action="./index.php" method="POST">
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('product.index') }}" method="POST">
+    @csrf
     <div class="modal-body">
-            <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>">
-            <input type="text" hidden name="controller" value="product">
-            <input type="text" hidden name="action" value="index">
             <button type="submit" name="registerbtn" class="btn btn-dark">Back To List</button>
             <!-- <a class="btn btn-dark" href="?controller=publisher&action=index" role="button">Back</a> -->
     </div>
 </form>
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="product_form_show">
-
+<form action="{{ route('product.update') }}" method="POST" enctype="multipart/form-data" id="product_form_show">
+@csrf
     <div class="modal-body">
 
         <div class="form-group">
@@ -26,12 +23,12 @@
         </div>
         <div class="form-group">
             <label> Số lượng sách </label>
-            <input type="text" name="mount" class="form-control" rules="required" disabled placeholder="Số lượng sách" value="<?php echo $data['product']['SoLuong']?>">
+            <input type="text" name="mount" class="form-control" rules="required" readonly placeholder="Số lượng sách" value="<?php echo $data['product']['SoLuong']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
             <label> Đơn giá sách </label>
-            <input type="number" name="price" class="form-control" rules="required" placeholder="Tên sách" value="<?php echo $data['product']['DonGia']?>">
+            <input type="number" name="price" class="form-control" rules="required" placeholder="Đơn giá" value="<?php echo $data['product']['DonGia']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
@@ -66,7 +63,7 @@
             <span class="errMassage"></span>
         </div>
         <div id="selectGroup">
-            <?php include_once('./Views/admin/product/select.php')?>
+            @include('admin.product.select')
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Danh sách chương trình khuyến mãi</label>
@@ -81,12 +78,9 @@
             </select>
             <span class="errMassage"></span>
         </div>
-        <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>">
-        <input type="text" hidden name="controller" value="product">
-        <input type="text" hidden name="action" value="update">
-        <input type="text" hidden name="id" value="<?php echo $data['product']['MaSP']?>">
     </div>
     <div class="modal-footer">
-        <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>
+@endsection

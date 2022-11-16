@@ -8,17 +8,15 @@
                 </button>
             </div>
             <div class="modal-body">DELETE ?</div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                @php
-                @endphp
+               
                 <form action="{{ route($data['title'].'.delete') }}" method="POST">
                     @csrf
                     <input type="text" hidden id="delete_id" name='id'>
                     <input type="text" hidden name='column'>
                     <input type="text" hidden name='byOrder'>
                     <input type="text" hidden  id="pageNumber" name='page'>
-                    {{-- <input type="text" hidden name='controller' value="<?php if(isset($data['title'])){echo $data['title'];}?>"> --}}
                     <button type="submit" name="action" value="delete" class="btn btn-danger">DELETE</button>
                 </form>
             </div>

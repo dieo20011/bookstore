@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\DB;
                 return "nhà xuất bản";
             case 'promotion':
                 return "chương trình khuyến mãi";
+            case 'product':
+                return "sách";
         }
     }
     function Pagination($limit, $model, $pageMain, $title, $request) {
@@ -37,10 +39,14 @@ use Illuminate\Support\Facades\DB;
     }
 
     function getGroup($model) {
-        $modelGroup = DB::select('select * from '.$model);
+        // $modelGroup = DB::select('select * from '.$model);
+        $modelGroup = DB::table($model)->get();
         return $modelGroup;
     }
-
+    function getByCondition($model, $column, $value) {
+        $modelGroup = DB::table($model)->where($column, $value)->get();
+        return $modelGroup;
+    }
     function getGroupSecond($model) {
         return $model->getAll();
     }

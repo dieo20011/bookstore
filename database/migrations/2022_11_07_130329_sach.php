@@ -15,17 +15,17 @@ class Sach extends Migration
     {
         Schema::create('sach', function (Blueprint $table) {
             $table->increments('MaSP');
-            $table->string('TenSp');
-            $table->integer('Matg');
-            $table->integer('Matl');
-            $table->string('img');
-            $table->float('Dongia');
+            $table->string('TenSP');
             $table->integer('SoLuong');
+            $table->float('DonGia');
+            $table->string('MoTa');
+            $table->integer('MaTL');
+            $table->integer('MaTG');
             $table->integer('MaNXB');
+            $table->integer('MaKM');
             $table->integer('TTKM');
             $table->integer('TTSach');
-            $table->integer('MaKM');
-            $table->string('MoTa');
+            $table->string('img');
         });
     }
 

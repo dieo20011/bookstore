@@ -1,10 +1,8 @@
 
-
-<?php
-    include_once('./Views/admin/includes/notification.php');
-?>
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="product_form">
-
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" id="product_form">
+@csrf
 <div class="modal-body">
 
 <div class="form-group">
@@ -20,11 +18,11 @@
 
         <div class="form-group">
             <label> Số lượng sách </label>
-            <input type="text" name="mount" class="form-control" rules="required" placeholder="Số lượng sách" value="0" disabled>
+            <input type="text" name="mount" class="form-control" rules="required" placeholder="Số lượng sách" value="0" readonly>
         </div>
         <div class="form-group">
             <label> Đơn giá sách </label>
-            <input type="number" name="price" class="form-control" rules="required" placeholder="Tên sách" value="">
+            <input type="number" name="price" class="form-control" rules="required" placeholder="Đơn giá" value="">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
@@ -53,14 +51,24 @@
 
         </div>
         <div id="selectGroup">
-            <?php include_once('./Views/admin/product/select.php')?>
+            @include('admin.product.select')
         </div>
-       
-    <input type="text" hidden name="controller" value="product">
-    <input type="text" hidden name="action" value="store">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Danh sách chương trình khuyến mãi</label>
+            <select name="MaKM"  class="form-control" rules="required" id="exampleFormControlSelect1">
+                <?php foreach($data['promotion'] as $key => $value) {?>
+                <option value="<?php echo $value['MaKM'] ?>"> 
+                
+                <?php echo $value['TenCTKM'] ?></option>
+                <?php }?>
+            </select>
+            <span class="errMassage"></span>
+
+        </div>
 </div>
 <div class="modal-footer">
-    <a class="btn btn-dark" href="?controller=product&action=index" role="button">Back</a>
-    <button type="submit" name="add-btn" class="btn btn-primary add-btn">Add</button>
+    <a class="btn btn-dark" href="{{ route('product.index') }}" role="button">Back</a>
+    <button type="submit"  class="btn btn-primary add-btn">Add</button>
 </div>
 </form>
+@endsection

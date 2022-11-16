@@ -14,8 +14,8 @@ class Tacgia extends Migration
     public function up()
     {
         Schema::create('tacgia', function (Blueprint $table) {
-            $table->increments('MaTG');
             $table->String('TenTG');
+            $table->increments('MaTG');
             $table->integer('MaDM');
             $table->string('MoTa');
             $table->string('img');

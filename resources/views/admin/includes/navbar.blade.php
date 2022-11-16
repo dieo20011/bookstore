@@ -82,7 +82,7 @@
            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=product&action=index">Danh sách sách</a>
+                   <a class="collapse-item" href="{{ route('product.index') }}">Danh sách sách</a>
                </div>
            </div>
        </li>

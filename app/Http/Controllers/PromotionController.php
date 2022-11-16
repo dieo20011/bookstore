@@ -45,7 +45,6 @@ class PromotionController extends Controller
         if(!$request->has('status')) {
             $arrValues[] =  0;
         }
-        // dd($arrKeys, $arrValues);
         $this->promotion->updateData(session('id'),array_combine($arrKeys, $arrValues) );
 
         $promotion = $this->promotion->findById(session('id'));
