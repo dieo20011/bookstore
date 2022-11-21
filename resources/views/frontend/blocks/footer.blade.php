@@ -63,10 +63,10 @@
                                 </span>
                                 <div class="social-img">
                                     <div class="social-img-item">
-                                        <img src="./public/img/footerImg/icon-appstore.png" alt="">
+                                        <img src="{{ asset('img/footerImg/icon-appstore.png') }}" alt="">
                                     </div>
                                     <div class="social-img-item">
-                                        <img src="./public/img/footerImg/icon-googleplay.png" alt="">
+                                        <img src="{{ asset('img/footerImg/icon-googleplay.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -77,20 +77,20 @@
                                 <span>Chấn nhập thanh toán</span>
                                 <ul>
                                     <li>
-                                        <img src="./public/img/footerImg/visa.jpg" alt="">
-                                        <img src="./public/img/footerImg/master_card.jpg" alt="">
-                                        <img src="./public/img/footerImg/jcb.jpg" alt="">
-                                        <img src="./public/img/footerImg/atm.jpg" alt="">
-                                        <img src="./public/img/footerImg/cod.jpg" alt="">
-                                        <img src="./public/img/footerImg/payoo.jpg" alt="">
+                                        <img src="{{ asset('img/footerImg/visa.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/master_card.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/jcb.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/atm.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/cod.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/payoo.jpg') }}" alt="">
                                     </li>
                                 </ul>
                                 <span>Thanh toán an toàn</span>
                                 <ul>
                                     <li>
-                                        <img src="./public/img/footerImg/verify_visa.jpg" alt="">
-                                        <img src="./public/img/footerImg/mastercard_securecode.jpg" alt="">
-                                        <img src="./public/img/footerImg/onepay.jpg" alt="">
+                                        <img src="{{ asset('img/footerImg/verify_visa.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/mastercard_securecode.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/onepay.jpg') }}" alt="">
                                     </li>
                                 </ul>
                             </div>
@@ -98,9 +98,9 @@
                                 <span>Đối tác vận chuyển</span>
                                 <ul class="ul-img">
                                     <li class="columns-img">
-                                        <img src="./public/img/footerImg/logovnb.png" alt="">
-                                        <img src="./public/img/footerImg/vn-post.jpg" alt="">
-                                        <img src="./public/img/footerImg/dhl.jpg" alt="">
+                                        <img src="{{ asset('img/footerImg/logovnb.png') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/vn-post.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/dhl.jpg') }}" alt="">
                                     </li>
                                 </ul>
                             </div>
@@ -108,9 +108,9 @@
                                 <span>Đối tác bán hàng</span>
                                 <ul class="ul-img">
                                     <li class="columns-img1">
-                                        <img src="./public/img/footerImg/lazada.jpg" alt="">
-                                        <img src="./public/img/footerImg/shopee.jpg" alt="">
-                                        <img src="./public/img/footerImg/amazon.jpg" alt="">
+                                        <img src="{{ asset('img/footerImg/lazada.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/shopee.jpg') }}" alt="">
+                                        <img src="{{ asset('img/footerImg/amazon.jpg') }}" alt="">
                                     </li>
                                 </ul>
                             </div>
@@ -161,8 +161,8 @@
         </div>
    </div>
    
-   <script src="./public/js/vendor/jquery/jquery.min.js"></script>
-   <script src="./public/js/main.js/index.js"></script>
+   <script src="{{asset('/js/vendor/jquery/jquery.min.js')}}"></script>
+   <script src="{{asset('/js/main.js/index.js')}}"></script>
     <script> validateForm('#login');</script>
     <script> validateForm('#register-from');</script>
     

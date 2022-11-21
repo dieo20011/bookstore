@@ -13,7 +13,10 @@
                             ?>
                             </a>
                             <i class="fas fa-chevron-right"></i>
-                            <div class="sub-menu-content" style="background: url(./public/img/menu/<?php echo $val['img'] ?>) white no-repeat bottom right;">
+                            @php
+                                $img = "img/menu/".$val['img'];
+                            @endphp
+                            <div class="sub-menu-content" style="background: url({{asset($img)}}) white no-repeat bottom right;">
                                 <div class="sub-menu-wrap">
                                     <div class="sub-category">
                                         <h3>Danh mục sách</h3>
@@ -72,26 +75,26 @@
                     <div class="all-banner">
                             <div class="banner-top">
                                 <div class="big-banner">
-                                    <img src="./public/img/bannerImg/big-banner.jpg" alt="">
+                                    <img src="{{asset('img/bannerImg/big-b')}}anner.jpg" alt="">
                                 </div>
                                 <div class="smail-banner">
                                     <div class="smail-banner-item ">
-                                        <img src="./public/img/bannerImg/1.jpg" alt="">
+                                        <img src="{{asset('img/bannerImg/1.jpg')}}" alt="">
                                     </div>
                                     <div class="smail-banner-item ">
-                                        <img src="./public/img/bannerImg/2.jpg" alt="">
+                                        <img src="{{asset('img/bannerImg/2.jpg')}}" alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="banner-bottom">
                                 <div class="smail-banner-item ">
-                                    <img src="./public/img/bannerImg/1.jpg" alt="">
+                                    <img src="{{asset('img/bannerImg/1.jpg')}}" alt="">
                                 </div>
                                 <div class="smail-banner-item ">
-                                    <img src="./public/img/bannerImg/1.jpg" alt="">
+                                    <img src="{{asset('img/bannerImg/1.jpg')}}" alt="">
                                 </div>
                                 <div class="smail-banner-item ">
-                                    <img src="./public/img/bannerImg/1.jpg" alt="">
+                                    <img src="{{asset('img/bannerImg/1.jpg')}}" alt="">
                                 </div>
                             </div>
                     </div>

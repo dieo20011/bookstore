@@ -779,7 +779,7 @@ border-right:  1px solid #fff;
 }
 .app-containt-body .wrap .app-containt-body-left .advertisement-item .advertisement-containt{
     width: calc(887px - 76px);
-    height: calc(287px - 76px);
+    /* height: calc(287px - 76px); */
     padding: 38px;
     display: flex;
     background-color: #cf1133;
@@ -790,10 +790,14 @@ border-right:  1px solid #fff;
 .app-containt-body .wrap .app-containt-body-left .advertisement-item .advertisement-containt .advertisement-img {
     width: 212px;
     height: 212px;
+    /* max-width: 100%; */
+
 }
 .app-containt-body .wrap .app-containt-body-left .advertisement-item .advertisement-containt .advertisement-img img {
     object-fit: cover;
-    box-shadow: 0 0 15px #26545a;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 0 15px #26545a; 
 }
 .app-containt-body .wrap .app-containt-body-left .advertisement-item .advertisement-containt .advertisement-body {
     padding-left: 50px;

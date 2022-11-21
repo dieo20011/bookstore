@@ -43,4 +43,8 @@ class ProductModel extends Model
         }
         return $arrName;
     }
+
+    public function getByCategoryId($id, $limit = 6) {
+        return DB::select("SELECT * FROM ".$this->table." where MaTl = $id limit $limit");
+    }
 }

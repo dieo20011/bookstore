@@ -60,4 +60,16 @@ use Illuminate\Support\Facades\DB;
         $request->img->move(public_path('img/'.$path), $generateImg); 
         return $generateImg;
     }
+
+    function getByMenuId($ID, $table) {
+
+        $modelGroup = DB::select("SELECT * FROM $table where MaDM = $ID");
+        return $modelGroup;
+    }
+
+    function currency_format($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', '.');
+        }
+    }
 ?>

@@ -4,8 +4,9 @@
             <div class="advertisement-item background-color-banner">
                 <h3>Sách mới hay</h3>
                 <div class="advertisement-containt">
+                    
                     <div class="advertisement-img">
-                        <img src="./public/img/news.jpg" alt="">
+                        <img src="{{asset('img/news.jpg')}}" alt="">
                     </div>
                     <div class="advertisement-body">
                         <div class="advertisement-top">
@@ -48,7 +49,11 @@
                         <div class="product-item-top">
                             <div class="product-item-img">
                                 <a  href="?controller=home&action=loadDetailProduct&idsach=<?php echo $val['MaSP']?>">
-                                <img src="./public/img/product/<?php echo $value['MaTL']?>/<?php echo $val['img']?>" alt="">
+                                    @php
+                                        $img = "img/product/".$val['img'];
+                                    @endphp
+                                <img src="{{asset($img)}}" alt="">
+                                {{-- <?php echo $value['MaTL']?> --}}
                              </a>
                             </div>
                             <div class="product-item-decription">
@@ -108,7 +113,10 @@
                     <div class="product-item-v">
                         <div class="product-item-content">
                             <div class="product-item-v-img">
-                                <img src="./public/img/product/<?php echo $value['MaTL']?>/<?php echo $val['img']?>"  alt="">
+                                @php
+                                $img = "img/product/".$val['img'];
+                                @endphp
+                                <img src="{{asset($img)}}"  alt="">
                             </div>
                             <div class="product-item-v-body">
                                 <div class="product-name">
