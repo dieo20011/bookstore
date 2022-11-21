@@ -5,7 +5,7 @@
       ?>
     <tr>
       <td id="ID">  <?php echo $value['MaSP']?> </td>
-      <td>  <?php echo $value['TenSp']?></td>
+      <td>  <?php echo $value['TenSP']?></td>
       <td><?php echo $value['DonGia']?></td>
       <td><?php echo $value['SoLuong']?></td>
     </tr>

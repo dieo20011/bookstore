@@ -28,8 +28,8 @@ class ProductController extends Controller
         $product = $this->product->findById($id);
         // dd($product);
         $data['menu'] = getGroup('danhmuc');
-        $data['category'] = getByCondition('theloai', 'MaTL' , $product->Matl);
-        $data['author'] = getByCondition('tacgia', 'MaTG' , $product->Matg);
+        $data['category'] = getByCondition('theloai', 'MaTL' , $product->MaTL);
+        $data['author'] = getByCondition('tacgia', 'MaTG' , $product->MaTG);
         $data['publisher'] = getByCondition('nxb', 'MaNXB' , $product->MaNXB);
         $data['promotion'] = getByCondition('ctkm', 'MaKM' , $product->MaKM);
         $data['product'] = $product;

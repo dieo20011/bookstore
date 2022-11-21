@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label> Tên sách </label>
-            <input type="text" name="name" class="form-control" rules="required" placeholder="Tên sách" value="<?php echo $data['product']['TenSp']?>">
+            <input type="text" name="name" class="form-control" rules="required" placeholder="Tên sách" value="<?php echo $data['product']['TenSP']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">

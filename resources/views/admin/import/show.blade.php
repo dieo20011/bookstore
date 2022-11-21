@@ -1,5 +1,7 @@
-
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="import_form_show">
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('import.update') }}" method="POST" enctype="multipart/form-data" id="import_form_show">
+    @csrf
 <div class="modal-body">
         <div  class="form-group">
          <label for="myDate2">Từ </label>
@@ -19,6 +21,8 @@
         <div class="form-group">
             <label>Tổng tiền</label>
             <input type="number" id="price" disabled name="price" class="form-control"  placeholder="Đơn giá sách" value="<?php echo $data['import']['TongTien']?>" >
+            <input type="number" id="price" hidden name="price" class="form-control"  placeholder="Đơn giá sách" value="<?php echo $data['import']['TongTien']?>" >
+            
         </div>
         <div class="form-check form-switch">
             <input class="form-check-input" value="1" name="status" type="checkbox" id="flexSwitchCheckChecked"<?php if($data['import']['TinhTrang']==1) {
@@ -27,18 +31,13 @@
             <label class="form-check-label" for="flexSwitchCheckChecked">Đã nhập</label>
         </div>
 
-        <input type="text"  hidden name="page" value="<?php echo $data['pageCurrent']?>">
-        <input type="text" hidden name="controller" value="import">
-        <input type="text" hidden name="action" value="update">
-        <input type="text" hidden name="MaPN" value="<?php echo $data['import']['MaPN']?>">
-
 </div>
 <div class="modal-footer d-flex justify-content-between">
     <div>
-        <a class="btn btn-dark" href="?controller=import&action=index" role="button">Back To list</a>
+        <a class="btn btn-dark" href="{{ route('import.index') }}" role="button">Back To list</a>
     </div>
     <div class="modal-footer">
-        <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </div>
 </form>
@@ -52,10 +51,11 @@
       <th>Đơn giá</th>
       <th>Số lượng</th>
       <th>EDIT </th>
-      <th>DELETE </th>
+      {{-- <th>DELETE </th> --}}
     </tr>
   </thead>
   <tbody id="loadImportDetail">
-     <?php require_once("./Views/admin/import/formDetailImport.php")?>
+    @include('admin.import.formDetailImport')
     </tbody>
 </table>
+@endsection

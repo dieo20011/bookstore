@@ -1,6 +1,7 @@
-
-<form action="./index.php" method="POST" enctype="multipart/form-data" id="import_form">
-
+@extends('admin.home.master')
+@section('content')
+<form action="{{ route('import.store') }}" method="POST" enctype="multipart/form-data" id="import_form">
+    @csrf
 <div class="modal-body">
         <div  class="form-group">
          <label for="myDate2">Từ </label>
@@ -13,7 +14,7 @@
             <select name="MaSP" id="MaSP"  class="form-control" id="exampleFormControlSelect1">
                 <?php foreach($data['product'] as $key => $value) {?>
                 <option value="<?php echo $value['MaSP'] ?>"> 
-                <?php echo $value['TenSp'] ?></option>
+                <?php echo $value['TenSP'] ?></option>
                 <?php }?>
             </select>
         </div>
@@ -28,7 +29,7 @@
         </div>
         <div class="form-group">
             <label> Số lượng sách </label>
-            <input id="mount" type="number" name="mount" rules="required|numberCheck" class="form-control" placeholder="Số lượng sách" value="0" >
+            <input id="mount" type="number" name="mount" rules="required|numberCheck" class="form-control" placeholder="Số lượng sách" value="1" >
             <span class="errMassage"></span>
             
         </div>
@@ -41,16 +42,13 @@
             <input class="form-check-input" value="1" name="status" type="checkbox" id="flexSwitchCheckChecked">
             <label class="form-check-label" for="flexSwitchCheckChecked">Đã nhập</label>
         </div>
-
-    <input type="text" hidden name="controller" value="import">
-    <input type="text" hidden name="action" value="store">
 </div>
 <div class="modal-footer d-flex justify-content-between">
     <div>
         <div  name="add_temp" id="add_temp" class="btn btn-success">Import</div>
     </div>
     <div>
-        <a class="btn btn-dark" href="?controller=import&action=index" role="button">Back</a>
+        <a class="btn btn-dark" href="{{ route('import.index') }}" role="button">Back</a>
         <button type="submit" name="add-btn" class="btn btn-primary add-btn">Add</button>
     </div>
 </div>
@@ -66,6 +64,6 @@
     </tr>
   </thead>
   <tbody id="loadImportDetail">
-     <?php require_once("./Views/admin/import/addTempImportDetail.php")?>
     </tbody>
 </table>
+@endsection

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\PromotionController;
@@ -124,5 +125,25 @@ Route::middleware('checkLogin')->prefix('Admin/Menu')->name('menu.')->group(
         Route::match(['get', 'post'], '/add', [MenuController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [MenuController::class, 'delete'])->name('delete');
 
+    }
+);
+
+Route::middleware('checkLogin')->prefix('Admin/Import')->name('import.')->group(
+    function() {
+        Route::match(['get', 'post'], '/', [ImportController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/Pagination', [ImportController::class, 'pagination'])->name('pagination');
+        Route::match(['get', 'post'], '/show/{id}', [ImportController::class, 'show'])->name('show');
+        Route::match(['get', 'post'], '/edit', [ImportController::class, 'update'])->name('update');
+        Route::match(['get', 'post'], '/store', [ImportController::class, 'store'])->name('store');
+        Route::match(['get', 'post'], '/add', [ImportController::class, 'add'])->name('add');
+        Route::match(['get', 'post'], '/delete', [ImportController::class, 'delete'])->name('delete');
+        Route::match(['get', 'post'], '/addImportTemp', [ImportController::class, 'addImportTemp'])->name('addImportTemp');
+        Route::match(['get', 'post'], '/showFormImportDetail', [ImportController::class, 'showFormImportDetail'])->name('showFormImportDetail');
+        Route::match(['get', 'post'], '/updateDetailImport', [ImportController::class, 'updateDetailImport'])->name('updateDetailImport');
+        Route::match(['get', 'post'], '/showDetail', [ImportController::class, 'showDetail'])->name('showDetail');
+
+        
+        
+    
     }
 );

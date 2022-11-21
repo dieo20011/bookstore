@@ -16,8 +16,8 @@ class Chitietphieunhap extends Migration
         Schema::create('chitietphieunhap', function (Blueprint $table) {
             $table->integer('MaPN');
             $table->integer('MaSP');
-            $table->float('Dongia');
-            $table->integer('Soluong');
+            $table->float('DonGia');
+            $table->integer('SoLuong');
             $table->primary(['MaPN','MaSP']);
         });
     }

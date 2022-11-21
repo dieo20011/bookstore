@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\DB;
                 return "chương trình khuyến mãi";
             case 'product':
                 return "sách";
+            case 'import':
+                return "phiếu nhập";
         }
     }
     function Pagination($limit, $model, $pageMain, $title, $request) {

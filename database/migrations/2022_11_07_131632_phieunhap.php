@@ -16,7 +16,7 @@ class Phieunhap extends Migration
         Schema::create('phieunhap', function (Blueprint $table) {
             $table->increments('MaPN');
             $table->date('NgayNhap');
-            $table->integer('MaDM');
+            $table->integer('TinhTrang');
             $table->double('TongTien');
             $table->integer('MaNCC');
         });

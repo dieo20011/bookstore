@@ -95,10 +95,16 @@ $(document).ready(function(){
         let Mount = $('#mount').val();
         let Price = $('#price').val();
         let Name = $('#name').val();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
          $.ajax({
-            url: "?controller=Import&action=addImportTemp",
+            url: "http://127.0.0.1:8000/Admin/Import/addImportTemp",
             method:"POST",
-            data: {MaSP : MaSP,
+            data: {
+                MaSP : MaSP,
                 Mount: Mount,
                 Price: Price,
                 Name: Name
@@ -111,7 +117,33 @@ $(document).ready(function(){
             });
     });
 });
+$(document).ready(function () {
+    $('button.edit-btn-import').on('click', function() {
+        alert('ok')
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            
+        });
+        alert('ị');
+        $.ajax({
+            url: "http://127.0.0.1:8000/Admin/Import/updateDetailImport",
+            method:"POST",
+            data: {
+                MaSP : MaSP,
+                Mount: Mount,
+                Price: Price,
+                Name: Name
+            },
+            success : function(data){  
 
+                $('#loadImportDetail').html(data);
+            }
+    
+            });
+    })
+})
 $(document).ready(function(){
     $('div#importDetail').on('click' , function(){
         $tr = $(this).closest('tr');
@@ -119,8 +151,15 @@ $(document).ready(function(){
         var id = $tr.children("td#ID").map(function (){
             return $(this).text();
         }).get();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            
+        });
+        console.log('ok')
          $.ajax({
-            url: "?controller=Import&action=showDetail",
+            url: "http://127.0.0.1:8000/Admin/Import/showDetail",
             method:"POST",
             data: {id : id},
             success : function(data){  
@@ -160,8 +199,13 @@ $(document).ready(function(){
             return $(this).text();
         }).get();
         var MaPN = $('input#IDPN').val();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
          $.ajax({
-            url: "?controller=Import&action=showFormImportDetail",
+            url: "http://127.0.0.1:8000/Admin/Import/showFormImportDetail",
             method:"POST",
             data: {MaSP : id,
                 MaPN: MaPN    
