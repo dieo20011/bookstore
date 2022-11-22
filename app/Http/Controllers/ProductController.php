@@ -32,6 +32,7 @@ class ProductController extends Controller
         $data['author'] = getByCondition('tacgia', 'MaTG' , $product->MaTG);
         $data['publisher'] = getByCondition('nxb', 'MaNXB' , $product->MaNXB);
         $data['promotion'] = getByCondition('ctkm', 'MaKM' , $product->MaKM);
+        $data['promotion'] = getGroup('ctkm');
         $data['product'] = $product;
         $data = json_decode(json_encode($data), True);
         return view('admin.product.show', ['data' => $data]);
@@ -68,10 +69,11 @@ class ProductController extends Controller
         $product = $this->product->findById(session('id'));
         // get ALL Group
         $data['menu'] = getGroup('danhmuc');
-        $data['category'] = getByCondition('theloai', 'MaTL' , $product->Matl);
-        $data['author'] = getByCondition('tacgia', 'MaTG' , $product->Matg);
+        $data['category'] = getByCondition('theloai', 'MaTL' , $product->MaTL);
+        $data['author'] = getByCondition('tacgia', 'MaTG' , $product->MaTG);
         $data['publisher'] = getByCondition('nxb', 'MaNXB' , $product->MaNXB);
-        $data['promotion'] = getByCondition('ctkm', 'MaKM' , $product->MaKM);
+        // $data['promotion'] = getByCondition('ctkm', 'MaKM' , $product->MaKM);
+        $data['promotion'] = getGroup('ctkm');
         $data['product'] = $product;
 
         $data = json_decode(json_encode($data), True);

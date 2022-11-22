@@ -30,6 +30,11 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', [HomeController::class, 'index']);
 
+Route::prefix('/DetailBook')->name('detailbook')->group(
+    function() {
+        Route::get('/{id}', [HomeController::class, 'loadDetailProduct']);
+    }
+); 
 Route::middleware('checkLogin')->prefix('Admin')->name('admin')->group(
    function() {
     Route::get('/', [AdminController::class, 'index']);

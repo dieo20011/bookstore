@@ -779,7 +779,7 @@ border-right:  1px solid #fff;
 }
 .app-containt-body .wrap .app-containt-body-left .advertisement-item .advertisement-containt{
     width: calc(887px - 76px);
-    /* height: calc(287px - 76px); */
+    height: calc(287px - 76px);
     padding: 38px;
     display: flex;
     background-color: #cf1133;
@@ -1001,11 +1001,13 @@ border-right:  1px solid #fff;
 }
 .product-list .product-item .product-item-bottom .product-bottom-wrap  .pricres .prices-detail .prices-cost{
     font-size: 15px;
-    text-decoration: line-through;
     margin-right: 5px;
     color: #333;
 }
-
+.product-list .product-item .product-item-bottom .product-bottom-wrap  .pricres .prices-detail .prices-cost.line-through {
+    text-decoration: line-through;
+    
+}
 span.undertext {
     text-decoration: underline;
 }

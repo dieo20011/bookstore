@@ -48,7 +48,10 @@
                     <div class="product-item">
                         <div class="product-item-top">
                             <div class="product-item-img">
-                                <a  href="?controller=home&action=loadDetailProduct&idsach=<?php echo $val['MaSP']?>">
+                                <?php
+                                    $id = $val['MaSP']
+                                    ?>
+                                <a  href="{{ route('detailbook', ['id'=>$id]) }}">
                                     @php
                                         $img = "img/product/".$val['img'];
                                     @endphp
@@ -73,15 +76,21 @@
                         <div class="product-item-bottom">
                             <div class="product-bottom-wrap">
                                 <div class="pricres">
+                                    {{-- <?php
+                                        if($val['discount'] != 0) {
+                                    ?> --}}
                                     <div class="btn-price"> 
                                     <?php echo "-".$val['KhuyenMai']."%"?>
-                                    
                                     </div>
-                                    
+                                    {{-- <?php
+                }
+                                    ?> --}}
                                     <div class="prices-detail">
-                                        <span class="prices-cost"> <?php echo $val['DonGia']?><span class="undertext">đ</span></span>
+                                        <span class="prices-cost <?php if($val['discount'] != 0) echo  
+                                        'line-through'?> "> <?php echo $val['DonGia']?><span class="undertext">đ</span></span>
                                         <span class="promotion-price">
-                                        <?php echo $val['discount']."<span class='undertext'>đ</span>"?>
+                                        
+                                        <?php if($val['discount'] != 0) echo $val['discount']."<span class='undertext'>đ</span>"?>
                                          
                                         </span>
                                     </div>
@@ -114,7 +123,7 @@
                         <div class="product-item-content">
                             <div class="product-item-v-img">
                                 @php
-                                $img = "img/product/".$val['img'];
+                                $img = "img/product/".$val['img']
                                 @endphp
                                 <img src="{{asset($img)}}"  alt="">
                             </div>
@@ -127,10 +136,10 @@
                                 </div>
                                 <div class="product-item-prices">
                                     <div class="price-cost">
-                                        <span><?php echo $val['DonGia']?> <span class="undertext">đ</span></span>
+                                        <span><?php echo $val['DonGia']?><span class="undertext">đ</span></span>
                                     </div>
                                     <div class="prices-promotion">
-                                        <span><?php echo $val['DonGia']?> <span class="undertext">đ</span></span>
+                                        <span> <?php if($val['discount'] != 0) echo $val['discount']?><span class="undertext">đ</span></span>
                                     </div>
                                 </div>
                             </div>

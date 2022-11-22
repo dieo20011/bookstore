@@ -64,14 +64,26 @@ class HomeController extends Controller
                 //Lấy chi tiết sản phẩm 
 
                 foreach ($arrProduct as $k => $item) {
+                    if($item['TTSach'] == 0) {
+                        continue;
+                    }
                     $author = json_decode(json_encode($this->authorModel->findById($item['MaTG'])), True);
                     
                     $sale = json_decode(json_encode($this->promotionModel->findById($item['MaKM'])), True);
+                    $discount = 0;
+                    $today = date("Y-m-d");
+                    if (strtotime($today) >= strtotime($sale['NgayBatDau']) && strtotime($today) <= strtotime($sale['NgayKetThuc'])) {
+                        $discount = round($item['DonGia'] * ((100 - $sale['PhanTram'])/100), -3);
+                        $discount = currency_format($discount);
+                    }
 
                     $authorName = $author['TenTG'];
                     $salePercent = $sale['PhanTram'];
-                    $discount = round($item['DonGia'] * ((100 - $sale['PhanTram'])/100), -3);
-                    $discount = currency_format($discount);
+
+                    if($sale['PhanTram'] == 0 || $sale['TinhTrang'] == 0 || $item['TTKM'] == 0) {
+                        $discount = 0;
+                        $salePercent = 0;
+                    }
                     // $discount = $this->dicountModel->findById($item['MaKM']);
                     $arrProductDetail = [
                         'MaSP'      => $item['MaSP'],
@@ -93,6 +105,48 @@ class HomeController extends Controller
             } 
             return $arr;
         }
+        public function loadDetailProduct($id) {
+            session(['id' => $id]);
+           
+            $arrProduct =  json_decode(json_encode($this->productModel->findById($id)), True);
+            $category =  json_decode(json_encode($this->categoryModel->findById($arrProduct['MaTL'])), True); 
+            $author =  json_decode(json_encode($this->authorModel->findById($arrProduct['MaTG'])), True); 
+            $publisher =  json_decode(json_encode($this->publisherModel->findById($arrProduct['MaNXB'])), True); 
+            $sale =  json_decode(json_encode($this->promotionModel->findById($arrProduct['MaKM'])), True); 
+
+            $salePercent = $sale['PhanTram'];
+            $discount = 0;
+            $today = date("Y-m-d");
+            if (strtotime($today) >= strtotime($sale['NgayBatDau']) && strtotime($today) <= strtotime($sale['NgayKetThuc'])) {
+                $discount = round($arrProduct['DonGia'] * ((100 - $sale['PhanTram'])/100), -3);
+                $discount = currency_format($discount);
+            }
+            if($sale['PhanTram'] == 0 || $sale['TinhTrang'] == 0 || $arrProduct['TTKM'] == 0) {
+                $discount = $arrProduct['DonGia'];
+                $salePercent = 0;
+            }
+            // $discount = round($arrProduct['DonGia'] * ((100 - $salePercent)/100), -3);
+            // $discount = currency_format($discount);
+
+            $save = round($arrProduct['DonGia'] * (($salePercent)/100), -3);
+            $save = currency_format($save);
+
+            $contentPage = 'products/detail.php';
+                $dataNew = [
+               
+                    "products"     => $arrProduct,
+                    "page"         => $contentPage,
+                    "category"  => $category,
+                    "author"    => $author,
+                    "publisher" => $publisher,
+                    "khuyenmai" => $discount,
+                    "save"  => $save,
+                    "salePercent" => $salePercent,
+                ];
+            return view('frontend.products.detail', ['data' => $dataNew]);
+
+         }
+
 
         public function index() {
             $arrMenu =  $this->loadMenu();
