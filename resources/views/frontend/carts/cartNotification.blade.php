@@ -1,5 +1,3 @@
-
-
 <div class="modal-cart">
         <div class="overlay-cart"></div>
         <div class="containt-product">
@@ -11,8 +9,12 @@
                 <form  class="form-cart" action="">
                     <div class="form-group">
                         <div class="item-left">
-                            <img src="./public/img/product/<?php echo $data['products']['MaTl']?>/<?php echo $data['products']['img']?>" alt="">
-                            <span><?php echo $data['products']['TenSp']?></span>
+                            @php
+                            $img = "img/product/".$data['products']['img'];
+                            @endphp
+                            <img src="{{asset($img)}}" alt="">
+                            {{-- <img src="./public/img/product/<?php echo $data['products']['MaTl']?>/<?php echo $data['products']['img']?>" alt=""> --}}
+                            <span><?php echo $data['products']['TenSP']?></span>
                         </div>
                         <div class="item-right">
                             <span>1 x <?php echo $data['khuyenmai']?><span class="undertext">đ</span> </span>
@@ -25,7 +27,7 @@
                     </div>
                     <div class="btn">
                         <div class="btn-cancel">
-                            <a href="?controller=home&action=loadDetailProduct&idsach=<?php echo $data['products']['MaSP']?>">Tiếp tục mua</a>
+                            <a href="{{ route('detailbook', $data['products']['MaSP']) }}">Tiếp tục mua</a>
                         </div>
                         <div class="btn-payment btn btn-buy">
                             <a style="text-decoration: none; color: #fff" href="?controller=cart&action=index">Thanh toán</a>

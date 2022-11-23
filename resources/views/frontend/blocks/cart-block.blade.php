@@ -1,23 +1,27 @@
  <?php
-    if(isset($_SESSION['cart'])) { 
+    if(isset($data['cart'])) { 
     ?>
 <div class="cart-body">
     <?php
     $total = 0;
-    foreach($_SESSION['cart'] as $key => $val) {    
-        $total += $_SESSION['cart'][$key]['SoLuong'] * $_SESSION['cart'][$key]['khuyenmai'];
+    foreach($data['cart'] as $key => $val) {    
+        $total += $data['cart'][$key]['SoLuong'] * $data['cart'][$key]['khuyenmai'];
         ?>
     <div class="cart-product-item">
         <div class="cart-product-img">
-            <img src="./public/img/product/<?php echo $_SESSION['cart'][$key]['MaTl']?>/<?php echo $_SESSION['cart'][$key]['img']?>" alt="">
+            @php
+            $img = "img/product/".$data['cart'][$key]['img']
+            @endphp
+            <img src="{{asset($img)}}" alt="">
+            {{-- <img src="./public/img/product/<?php echo $data['cart'][$key]['MaTl']?>/<?php echo $data['cart'][$key]['img']?>" alt=""> --}}
         </div>
         <div class="cart-product-detail">
-            <span class="product-name"><?php echo $_SESSION['cart'][$key]['TenSp']?></span>
+            <span class="product-name"><?php echo $data['cart'][$key]['TenSP']?></span>
             <div class="cart-product-prices">
-                <span class="span-1"><?php echo $_SESSION['cart'][$key]['SoLuong']?> x</span>
-                <span><?php echo $_SESSION['cart'][$key]['khuyenmai']  ?> <span class="undertext">đ</span> </span>
+                <span class="span-1"><?php echo $data['cart'][$key]['SoLuong']?> x</span>
+                <span><?php echo $data['cart'][$key]['khuyenmai']  ?> <span class="undertext">đ</span> </span>
                 <span class="span-3" id="span-3">x</span>
-                <input type="text" hidden id="MaSP" value="<?php echo  $_SESSION['cart'][$key]['MaSP']?>">
+                <input type="text" hidden id="MaSP" value="<?php echo  $data['cart'][$key]['MaSP']?>">
             </div>
         </div>
     </div>

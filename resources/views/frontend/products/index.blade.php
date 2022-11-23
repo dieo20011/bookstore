@@ -61,7 +61,7 @@
                             </div>
                             <div class="product-item-decription">
                                 <div class="product-item-header">
-                                    <a class="product-item-name">
+                                    <a  class="product-item-name">
                                     <?php echo $val['TenSP']?>
                                     </a>
                                     <span class="product-item-author">
@@ -128,9 +128,11 @@
                                 <img src="{{asset($img)}}"  alt="">
                             </div>
                             <div class="product-item-v-body">
-                                <div class="product-name">
-                                     <?php echo $val['TenSP']?>
-                                </div>
+                                <a style="text-decoration: none" href="{{ route('detailbook', ['id'=>$id]) }}">
+                                    <div class="product-name">
+                                         <?php echo $val['TenSP']?>
+                                    </div>
+                                </a>
                                 <div class="product-author">
                                      <?php echo $val['TenTG']?>
                                 </div>

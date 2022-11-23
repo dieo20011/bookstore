@@ -8,12 +8,15 @@
 @include('frontend.blocks.header2')
 @endsection
 @section('content')
-
+    @if(isset($data['notification'])) 
+        @include("frontend.carts.cartNotification");
+    @endif
+  
 <div class="product-detail-containt">
     <div class="wrap">
         <div class="product-detail">
             <div class="product-detail-header">
-                <a href="" class="home">Trang chủ</a>
+                <a href="{{route('index')}}" class="home">Trang chủ</a>
                 <i class="fas fa-chevron-right"></i>
                 <!-- <a href="" class="product-portfolio">Trang chủ</a>
                 <i class="fas fa-chevron-right"></i> -->
@@ -110,7 +113,7 @@
                             </div>
                             <p>Sách này sẽ được Vinabook.com lấy từ NXB khi quý khách đặt mua. Thời gian gởi hàng từ 5-10 ngày làm việc.</p>
                             
-                            <a href="?controller=cart&action=loadDetailProduct&idsach=<?php echo $data['products']['MaSP']?>" class="btn btn-buy">
+                            <a href="{{ route('cart',  $data['products']['MaSP']) }}" class="btn btn-buy">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span>Mua ngay</span>
                             </a>

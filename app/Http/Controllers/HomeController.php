@@ -84,6 +84,7 @@ class HomeController extends Controller
                         $discount = 0;
                         $salePercent = 0;
                     }
+                    
                     // $discount = $this->dicountModel->findById($item['MaKM']);
                     $arrProductDetail = [
                         'MaSP'      => $item['MaSP'],
@@ -105,7 +106,7 @@ class HomeController extends Controller
             } 
             return $arr;
         }
-        public function loadDetailProduct($id) {
+        public function loadDetailProduct($id, Request $request) {
             session(['id' => $id]);
            
             $arrProduct =  json_decode(json_encode($this->productModel->findById($id)), True);
@@ -130,10 +131,15 @@ class HomeController extends Controller
 
             $save = round($arrProduct['DonGia'] * (($salePercent)/100), -3);
             $save = currency_format($save);
+            $cart = [];
+
+            if($request->session()->has('cart')) {
+                $cart = session('cart');
+            }
 
             $contentPage = 'products/detail.php';
                 $dataNew = [
-               
+                    "cart"        => $cart,
                     "products"     => $arrProduct,
                     "page"         => $contentPage,
                     "category"  => $category,
@@ -148,7 +154,7 @@ class HomeController extends Controller
          }
 
 
-        public function index() {
+        public function index(Request $request) {
             $arrMenu =  $this->loadMenu();
             $arrAuthor = $this->loadForMenu( 'tacgia');
             $arrCategoryForMenu = $this->loadForMenu( 'theloai');
@@ -158,9 +164,14 @@ class HomeController extends Controller
             // $arrProductselling = ?; Danh sách bán chạy
             // $mainPage = 'frontend.masterLayout';
             $contentPage = 'home/index.php';
+            $cart = [];
 
+            if($request->session()->has('cart')) {
+                $cart = session('cart');
+            }
             // $dataNew += ['pageNew' => 'form/login.php'];
             $dataNew = [
+                "cart"         => $cart, 
                 "menus"        => $arrMenu,
                 "categorys"    => $arrCategoryForMenu,
                 "categoryMain" => $arrCategory,

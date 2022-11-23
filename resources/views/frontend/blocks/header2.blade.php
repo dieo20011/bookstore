@@ -32,7 +32,7 @@
             <div class="app-header">
              <div class="app-header-wrap">
                  <div class="header-logo">
-                     <a href="index.php">Vina<span>book</span>.com</a>
+                     <a href="{{ route('index') }}">Vina<span>book</span>.com</a>
                  </div>
                  <div class="header-search">
                      <form action="index.php" class="header-form" method="POST">
@@ -46,14 +46,14 @@
                      </form>
                  </div>
                  <div class="header-cart-icon">
-                     <span class="number"><?php if(isset($_SESSION['cart']))echo count($_SESSION['cart']); else echo "0";?></span>
+                     <span class="number"><?php if(isset($data['cart']))echo count($data['cart']); else echo "0";?></span>
                      <label for="cart_list">
                          <i class="fas fa-cart-plus">
                              </i>
                          </label>
                          <input type="checkbox" hidden id="cart_list">
                          <div class="cart-list" id="cart">
-                             @include("frontend.blocks.cart-block");?>
+                             @include("frontend.blocks.cart-block")
                              
                          </div>
                      </div>

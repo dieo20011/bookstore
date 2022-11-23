@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\SupplierController;
@@ -28,11 +29,16 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::prefix('/DetailBook')->name('detailbook')->group(
     function() {
         Route::get('/{id}', [HomeController::class, 'loadDetailProduct']);
+    }
+); 
+Route::prefix('/Cart')->name('cart')->group(
+    function() {
+        Route::get('/{id}', [CartController::class, 'loadDetailProduct']);
     }
 ); 
 Route::middleware('checkLogin')->prefix('Admin')->name('admin')->group(
