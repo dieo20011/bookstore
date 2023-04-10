@@ -47,6 +47,7 @@ class UserController extends Controller
     {
 
         $dataNew = ['pageNew' => 'form.register'];
+        $cart = [];
         if ($request->session()->has('cart')) {
             $cart = session('cart');
         }
