@@ -87,39 +87,40 @@ class HomeController extends Controller
                 $authorName = $author['TenTG'];
                 $salePercent = $sale['PhanTram'];
 
-                    if($sale['PhanTram'] == 0 || $sale['TinhTrang'] == 0 || $item['TTKM'] == 0) {
-                        $discount = 0;
-                        $salePercent = 0;
-                    }
-                    // $discount = $this->dicountModel->findById($item['MaKM']);
-                    $arrProductDetail = [
-                        'MaSP'      => $item['MaSP'],
-                        'TenSP'     => $item['TenSP'],
-                        'DonGia'    => $item['DonGia'],
-                        'SoLuong'   => $item['SoLuong'],
-                        'TenTG'     => $authorName,
-                        'img'       => $item['img'],
-                        'MoTa'      => $item['MoTa'],
-                        'KhuyenMai' => $salePercent,
-                        'discount'  => $discount
-                        //customer
-                    ];
-                  
-                    array_push($arrProductNew, $arrProductDetail);
+                if ($sale['PhanTram'] == 0 || $sale['TinhTrang'] == 0 || $item['TTKM'] == 0) {
+                    $discount = 0;
+                    $salePercent = 0;
                 }
-                array_push($arr, $arrProductNew);
-                // array_push($arr, $this->productModel->getByCategoryId($val['MaTL']));
-            } 
-            return $arr;
+                // $discount = $this->dicountModel->findById($item['MaKM']);
+                $arrProductDetail = [
+                    'MaSP'      => $item['MaSP'],
+                    'TenSP'     => $item['TenSP'],
+                    'DonGia'    => $item['DonGia'],
+                    'SoLuong'   => $item['SoLuong'],
+                    'TenTG'     => $authorName,
+                    'img'       => $item['img'],
+                    'MoTa'      => $item['MoTa'],
+                    'KhuyenMai' => $salePercent,
+                    'discount'  => $discount
+                    //customer
+                ];
+
+                array_push($arrProductNew, $arrProductDetail);
+            }
+            array_push($arr, $arrProductNew);
+            // array_push($arr, $this->productModel->getByCategoryId($val['MaTL']));
         }
-        public function loadDetailProduct($id) {
-            session(['id' => $id]);
-           
-            $arrProduct =  json_decode(json_encode($this->productModel->findById($id)), True);
-            $category =  json_decode(json_encode($this->categoryModel->findById($arrProduct['MaTL'])), True); 
-            $author =  json_decode(json_encode($this->authorModel->findById($arrProduct['MaTG'])), True); 
-            $publisher =  json_decode(json_encode($this->publisherModel->findById($arrProduct['MaNXB'])), True); 
-            $sale =  json_decode(json_encode($this->promotionModel->findById($arrProduct['MaKM'])), True); 
+        return $arr;
+    }
+    public function loadDetailProduct($id, Request $request)
+    {
+        session(['id' => $id]);
+
+        $arrProduct =  json_decode(json_encode($this->productModel->findById($id)), True);
+        $category =  json_decode(json_encode($this->categoryModel->findById($arrProduct['MaTL'])), True);
+        $author =  json_decode(json_encode($this->authorModel->findById($arrProduct['MaTG'])), True);
+        $publisher =  json_decode(json_encode($this->publisherModel->findById($arrProduct['MaNXB'])), True);
+        $sale =  json_decode(json_encode($this->promotionModel->findById($arrProduct['MaKM'])), True);
 
         $salePercent = $sale['PhanTram'];
         $discount = 0;
@@ -135,53 +136,66 @@ class HomeController extends Controller
         // $discount = round($arrProduct['DonGia'] * ((100 - $salePercent)/100), -3);
         // $discount = currency_format($discount);
 
-            $save = round($arrProduct['DonGia'] * (($salePercent)/100), -3);
-            $save = currency_format($save);
+        $save = round($arrProduct['DonGia'] * (($salePercent) / 100), -3);
+        $save = currency_format($save);
 
-            $contentPage = 'products/detail.php';
-                $dataNew = [
-               
-                    "products"     => $arrProduct,
-                    "page"         => $contentPage,
-                    "category"  => $category,
-                    "author"    => $author,
-                    "publisher" => $publisher,
-                    "khuyenmai" => $discount,
-                    "save"  => $save,
-                    "salePercent" => $salePercent,
-                ];
-            return view('frontend.products.detail', ['data' => $dataNew]);
+        $cart = [];
 
-         }
+        if ($request->session()->has('cart')) {
+            $cart = session('cart');
+        }
+        $contentPage = 'products/detail.php';
+        $dataNew = [
+            "cart"        => $cart,
+            "products"     => $arrProduct,
+            "page"         => $contentPage,
+            "category"  => $category,
+            "author"    => $author,
+            "publisher" => $publisher,
+            "khuyenmai" => $discount,
+            "save"  => $save,
+            "salePercent" => $salePercent,
+        ];
+        return view('frontend.products.detail', ['data' => $dataNew]);
+    }
 
 
-        public function index() {
-            $arrMenu =  $this->loadMenu();
-            $arrAuthor = $this->loadForMenu( 'tacgia');
-            $arrCategoryForMenu = $this->loadForMenu( 'theloai');
-            $arrPublisher = $this->loadForMenu( 'nxb');
-            $arrProduct = $this->loadProductForCategory();
-            $arrCategory = json_decode(json_encode($this->categoryModel->getAll(4)), True);
-            // $arrProductselling = ?; Danh sách bán chạy
-            // $mainPage = 'frontend.masterLayout';
-            $contentPage = 'home/index.php';
+    public function index(Request $request)
+    {
+        $arrMenu =  $this->loadMenu();
+        $arrAuthor = $this->loadForMenu('tacgia');
+        $arrCategoryForMenu = $this->loadForMenu('theloai');
+        $arrPublisher = $this->loadForMenu('nxb');
+        $arrProduct = $this->loadProductForCategory();
+        $arrCategory = json_decode(json_encode($this->categoryModel->getAll(4)), True);
+        // $arrProductselling = ?; Danh sách bán chạy
+        // $mainPage = 'frontend.masterLayout';
+        $contentPage = 'home/index.php';
+        $cart = [];
+        if ($request->session()->has('cart')) {
+            $cart = session('cart');
+        }
+        // $dataNew += ['pageNew' => 'form/login.php'];
 
-            // $dataNew += ['pageNew' => 'form/login.php'];
-            $dataNew = [
-                "menus"        => $arrMenu,
-                "categorys"    => $arrCategoryForMenu,
-                "categoryMain" => $arrCategory,
-                "authors"      => $arrAuthor,
-                "publlisher"   => $arrPublisher,
-                "products"     => $arrProduct,
-                "page"         => $contentPage,
-            ];
-            //Nếu có đăng nhập trả về thêm userInfor
-            // if(isset($_SESSION['data'])) {
-            //     if(isset($_SESSION['data']['userInfo'])) {
-                    
-            //         $dataNew += ["userInfo"     => $_SESSION['data']['userInfo']];
-            //         return $this->view($mainPage, $dataNew);
+        $dataNew = [
+            "cart"         => $cart,
+            "menus"        => $arrMenu,
+            "categorys"    => $arrCategoryForMenu,
+            "categoryMain" => $arrCategory,
+            "authors"      => $arrAuthor,
+            "publlisher"   => $arrPublisher,
+            "products"     => $arrProduct,
+            "page"         => $contentPage,
+        ];
+        $data = $dataNew;
+        session()->put('data', $data);
+
+        //Nếu có đăng nhập trả về thêm userInfor
+        // if(isset($_SESSION['data'])) {
+        //     if(isset($_SESSION['data']['userInfo'])) {
+
+        //         $dataNew += ["userInfo"     => $_SESSION['data']['userInfo']];
+        //         return $this->view($mainPage, $dataNew);
 
         //     } else return $this->view($mainPage, $dataNew);
         //Nếu không đăng nhập trả về mới

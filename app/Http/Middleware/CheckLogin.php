@@ -16,7 +16,7 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        echo("checklogin");
+        echo "check login";
         return $next($request);
     }
 }

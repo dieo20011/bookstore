@@ -62,8 +62,8 @@
                      if(!isset($_SESSION['data']['userInfo'])) {
                          ?>
                  <div class="header-link">
-                     <a href="?controller=user&action=login" class="btn-login">Đăng nhập</a>
-                     <a href="?controller=user&action=register">Đăng ký</a>
+                     <a href="/login" class="btn-login">Đăng nhập</a>
+                     <a href="/register">Đăng ký</a>
                  </div>
                  <?php
                  } else {

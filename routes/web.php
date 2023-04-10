@@ -15,8 +15,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ProductController;
-
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,22 +31,28 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::prefix('/DetailBook')->name('detailbook')->group(
-    function() {
+    function () {
         Route::get('/{id}', [HomeController::class, 'loadDetailProduct']);
     }
-); 
+);
 Route::prefix('/Cart')->name('cart')->group(
-    function() {
+    function () {
         Route::get('/{id}', [CartController::class, 'loadDetailProduct']);
     }
-); 
+);
+
+//login
+Route::get('/login', [UserController::class, 'login'])->name('login');
+//register
+Route::get('/register', [UserController::class, 'register'])->name('register');
+
 Route::middleware('checkLogin')->prefix('Admin')->name('admin')->group(
-   function() {
-    Route::get('/', [AdminController::class, 'index']);
-   } 
+    function () {
+        Route::get('/', [AdminController::class, 'index']);
+    }
 );
 Route::middleware('checkLogin')->prefix('Admin/Author')->name('author.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [AuthorController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [AuthorController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [AuthorController::class, 'show'])->name('show');
@@ -55,11 +60,10 @@ Route::middleware('checkLogin')->prefix('Admin/Author')->name('author.')->group(
         Route::match(['get', 'post'], '/store', [AuthorController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [AuthorController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [AuthorController::class, 'delete'])->name('delete');
-
     }
 );
 Route::middleware('checkLogin')->prefix('Admin/Supplier')->name('supplier.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [SupplierController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [SupplierController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [SupplierController::class, 'show'])->name('show');
@@ -67,11 +71,10 @@ Route::middleware('checkLogin')->prefix('Admin/Supplier')->name('supplier.')->gr
         Route::match(['get', 'post'], '/store', [SupplierController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [SupplierController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [SupplierController::class, 'delete'])->name('delete');
-
     }
 );
 Route::middleware('checkLogin')->prefix('Admin/Publisher')->name('publisher.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [PublisherController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [PublisherController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [PublisherController::class, 'show'])->name('show');
@@ -79,11 +82,10 @@ Route::middleware('checkLogin')->prefix('Admin/Publisher')->name('publisher.')->
         Route::match(['get', 'post'], '/store', [PublisherController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [PublisherController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [PublisherController::class, 'delete'])->name('delete');
-
     }
 );
 Route::middleware('checkLogin')->prefix('Admin/Promotion')->name('promotion.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [PromotionController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [PromotionController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [PromotionController::class, 'show'])->name('show');
@@ -91,11 +93,10 @@ Route::middleware('checkLogin')->prefix('Admin/Promotion')->name('promotion.')->
         Route::match(['get', 'post'], '/store', [PromotionController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [PromotionController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [PromotionController::class, 'delete'])->name('delete');
-
     }
 );
 Route::middleware('checkLogin')->prefix('Admin/Product')->name('product.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [ProductController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [ProductController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [ProductController::class, 'show'])->name('show');
@@ -107,13 +108,13 @@ Route::middleware('checkLogin')->prefix('Admin/Product')->name('product.')->grou
     }
 );
 Route::prefix('Admin/Product')->name('product.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/select', [ProductController::class, 'selectForMenu'])->name('select');
     }
 );
 
 Route::middleware('checkLogin')->prefix('Admin/Category')->name('category.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [CategoryController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [CategoryController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [CategoryController::class, 'show'])->name('show');
@@ -121,12 +122,11 @@ Route::middleware('checkLogin')->prefix('Admin/Category')->name('category.')->gr
         Route::match(['get', 'post'], '/store', [CategoryController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [CategoryController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [CategoryController::class, 'delete'])->name('delete');
-
     }
 );
 
 Route::middleware('checkLogin')->prefix('Admin/Menu')->name('menu.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [MenuController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [MenuController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [MenuController::class, 'show'])->name('show');
@@ -134,12 +134,11 @@ Route::middleware('checkLogin')->prefix('Admin/Menu')->name('menu.')->group(
         Route::match(['get', 'post'], '/store', [MenuController::class, 'store'])->name('store');
         Route::match(['get', 'post'], '/add', [MenuController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/delete', [MenuController::class, 'delete'])->name('delete');
-
     }
 );
 
 Route::middleware('checkLogin')->prefix('Admin/Import')->name('import.')->group(
-    function() {
+    function () {
         Route::match(['get', 'post'], '/', [ImportController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/Pagination', [ImportController::class, 'pagination'])->name('pagination');
         Route::match(['get', 'post'], '/show/{id}', [ImportController::class, 'show'])->name('show');
@@ -151,9 +150,5 @@ Route::middleware('checkLogin')->prefix('Admin/Import')->name('import.')->group(
         Route::match(['get', 'post'], '/showFormImportDetail', [ImportController::class, 'showFormImportDetail'])->name('showFormImportDetail');
         Route::match(['get', 'post'], '/updateDetailImport', [ImportController::class, 'updateDetailImport'])->name('updateDetailImport');
         Route::match(['get', 'post'], '/showDetail', [ImportController::class, 'showDetail'])->name('showDetail');
-
-        
-        
-    
     }
 );
