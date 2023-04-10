@@ -14,7 +14,7 @@
 
         <div class="form-group">
             <label> Tên nhà xuất bản </label>
-            <input type="text" name="name" class="form-control" rules="required" placeholder="Tên nhà xuất bản" value="<?php echo $data['publisher']['TenNXB']?>">
+            <input type="text" name="TenNXB" class="form-control" rules="required" placeholder="Tên nhà xuất bản" value="<?php echo $data['publisher']['TenNXB']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">

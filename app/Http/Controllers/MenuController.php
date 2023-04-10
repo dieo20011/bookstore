@@ -4,84 +4,83 @@ namespace App\Http\Controllers;
 
 use App\Models\MenuModel;
 use Illuminate\Http\Request;
+
 class MenuController extends Controller
 {
     private $menu;
     private $limit = 3;
-    public function __construct() {
+    public function __construct()
+    {
         $this->menu = new MenuModel();
     }
-    
-    public function index(Request $request) {
+
+    public function index(Request $request)
+    {
 
         return Pagination($this->limit, $this->menu, 'home', 'menu', $request);
     }
-      
-    public function pagination(Request $request) {
-  
+
+    public function pagination(Request $request)
+    {
+
         return Pagination($this->limit, $this->menu, 'loadTable', 'menu', $request);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         session(['id' => $id]);
         $menu = $this->menu->findById($id);
         $data['menu'] = json_decode(json_encode($menu), True);
         return view('admin.menu.show', ['data' => $data]);
     }
 
-    public function update(Request $request) {
-        
-        if(is_null($request->img)) {
+    public function update(Request $request)
+    {
+        $arrInput = $request->all();
+        if (is_null($request->img)) {
 
             $menu = $this->menu->findById(session('id'));
             $generateImg = $menu->img;
-
-            $arrInput = $request->all();
-            $arrInput[] = $generateImg;
+            $arrInput['img'] = $generateImg;
         } else {
-            $generateImg = 'image'.time().'-img'.'.'
-            .$request->img->extension();
-    
+            $generateImg = 'image' . time() . '-img' . '.'
+                . $request->img->extension();
+
             $request->img->move(public_path('img/menu'), $generateImg);
-            
-            $arrInput = $request->all();
-            unset($arrInput['img']);
-            $arrInput[] = $generateImg;
+
+            $arrInput['img'] = $generateImg;
         }
         unset($arrInput['_token']);
-        $arrKeys = array_values($this->menu->getColumnName());
-        $arrValues = array_values($arrInput);
-        
-        $this->menu->updateData(session('id'),array_combine($arrKeys, $arrValues) );
+
+        $this->menu->updateData(session('id'), $arrInput);
 
 
         $menu = $this->menu->findById(session('id'));
-        
+
         $data['menu'] = json_decode(json_encode($menu), True);
-       
+
         return view('admin.menu.show', ['data' => $data]);
     }
-    public function add(Request $request) {
+    public function add(Request $request)
+    {
         return view('admin.menu.formAddMenu');
     }
-    public function store(Request $request) {
-        $generateImg = 'image'.time().'-img'.'.'
-                            .$request->img->extension();
+    public function store(Request $request)
+    {
+        $generateImg = 'image' . time() . '-img' . '.'
+            . $request->img->extension();
         $request->img->move(public_path('img/menu'), $generateImg);
 
-        $arrInput = $request->all();    
+        $arrInput = $request->all();
         unset($arrInput['_token']);
-        unset($arrInput['img']);
-        $arrInput[] = $generateImg;
-        $arrKeys = array_values($this->menu->getColumnName());
-        $arrValues = array_values($arrInput);
-        $this->menu->store(array_combine($arrKeys, $arrValues));        
+        $arrInput['img'] = $generateImg;
+        $this->menu->store($arrInput);
         return redirect(route('menu.add'));
     }
 
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         $this->menu->deleteData($request->id);
         return redirect(route('menu.index'));
     }
-
 }

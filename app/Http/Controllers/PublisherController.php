@@ -10,23 +10,27 @@ class PublisherController extends Controller
     private $publisher;
     private $limit = 3;
     // private $menu;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->publisher = new PublisherModel();
         // $this->menu = new MenuModel();
     }
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         return Pagination($this->limit, $this->publisher, 'home', 'publisher', $request);
     }
 
-    public function pagination(Request $request) {
-  
+    public function pagination(Request $request)
+    {
+
         return Pagination($this->limit, $this->publisher, 'loadTable', 'publisher', $request);
     }
 
     // $data['menu'] = getGroupSecond($this->menu);
-    public function show($id) {
+    public function show($id)
+    {
 
         session(['id' => $id]);
         $publisher = $this->publisher->findById($id);
@@ -41,38 +45,35 @@ class PublisherController extends Controller
         $arrInput = $request->all();
         unset($arrInput['_token']);
 
-        $arrKeys = array_values($this->publisher->getColumnName());
-        $arrValues = array_values($arrInput);
-
-        $this->publisher->updateData(session('id'),array_combine($arrKeys, $arrValues) );
+        $this->publisher->updateData(session('id'), $arrInput);
 
         $publisher = $this->publisher->findById(session('id'));
-        
+
         $data['publisher'] = $publisher;
 
         $data['menu'] = getGroup('danhmuc');
-        
+
         $data = json_decode(json_encode($data), True);
 
         return view('admin.publisher.show', ['data' => $data]);
-
     }
-    public function add(Request $request) {
+    public function add(Request $request)
+    {
         $data['menu'] = getGroup('danhmuc');
         $data = json_decode(json_encode($data), True);
         return view('admin.publisher.formAddpublisher', ['data' => $data]);
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
-        $arrInput = $request->all();    
+        $arrInput = $request->all();
         unset($arrInput['_token']);
-        $arrKeys = array_values($this->publisher->getColumnName());
-        $arrValues = array_values($arrInput);
-        $this->publisher->store(array_combine($arrKeys, $arrValues)); 
+        $this->publisher->store($arrInput);
         return redirect(route('publisher.add'));
     }
 
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         $this->publisher->deleteData($request->id);
         return redirect(route('publisher.index'));
     }

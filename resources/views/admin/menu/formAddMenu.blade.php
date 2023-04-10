@@ -6,7 +6,7 @@
 
     <div class="form-group">
         <label> Tên danh mục </label>
-        <input type="text" name="name" class="form-control" rules="required" placeholder="Tên danh mục" value="">
+        <input type="text" name="TenDM" class="form-control" rules="required" placeholder="Tên danh mục" value="">
         <span class="errMassage"></span>
     </div>
     <div class="form-group">

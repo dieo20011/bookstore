@@ -11,7 +11,7 @@
     <div class="modal-body">
         <div class="form-group">
             <label> Tên tác giả </label>
-            <input type="text" name="name" class="form-control" rules="required" placeholder="Tên tác giả" value="<?php echo $data['author']['TenTG']?>">
+            <input type="text" name="TenTG" class="form-control" rules="required" placeholder="Tên tác giả" value="<?php echo $data['author']['TenTG']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Mô tả tác giả</label>
-            <textarea class="form-control" name="des" rules="required"  id="exampleFormControlTextarea1" rows="3"><?php echo $data['author']['MoTa']?></textarea>
+            <textarea class="form-control" name="MoTa" rules="required"  id="exampleFormControlTextarea1" rows="3"><?php echo $data['author']['MoTa']?></textarea>
             <span class="errMassage"></span>
         </div>
     </div>

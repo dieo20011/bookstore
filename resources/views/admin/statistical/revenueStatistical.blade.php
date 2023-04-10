@@ -8,8 +8,7 @@
   </div>
   <div class="card-body">
     <div class="table-responsive ">
-        <h7 class="m-0 font-weight-bold text-primary">Thống kê theo khoảng thời gian
-        </h7>
+        <h6 class="m-0 font-weight-bold text-primary">Thống kê theo khoảng thời gian</h6>
         <form action="./index.php" method="POST" enctype="multipart/form-data" id="statistical-two">
         <div class="modal-body">
             <div  class="form-group">

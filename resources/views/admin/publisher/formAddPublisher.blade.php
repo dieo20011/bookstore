@@ -8,7 +8,7 @@
 
     <div class="form-group">
         <label> Tên nhà xuất bản</label>
-        <input type="text" name="name" rules="required" class="form-control" placeholder="Tên nhà xuất bản" value="">
+        <input type="text" name="TenNXB" rules="required" class="form-control" placeholder="Tên nhà xuất bản" value="">
         <span class="errMassage"></span>
     </div>
     <div class="form-group">

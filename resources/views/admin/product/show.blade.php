@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label> Tên sách </label>
-            <input type="text" name="name" class="form-control" rules="required" placeholder="Tên sách" value="<?php echo $data['product']['TenSP']?>">
+            <input type="text" name="TenSP" class="form-control" rules="required" placeholder="Tên sách" value="<?php echo $data['product']['TenSP']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
@@ -23,28 +23,28 @@
         </div>
         <div class="form-group">
             <label> Số lượng sách </label>
-            <input type="text" name="mount" class="form-control" rules="required" readonly placeholder="Số lượng sách" value="<?php echo $data['product']['SoLuong']?>">
+            <input type="text" name="SoLuong" class="form-control" rules="required" readonly placeholder="Số lượng sách" value="<?php echo $data['product']['SoLuong']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
             <label> Đơn giá sách </label>
-            <input type="number" name="price" class="form-control" rules="required" placeholder="Đơn giá" value="<?php echo $data['product']['DonGia']?>">
+            <input type="number" name="DonGia" class="form-control" rules="required" placeholder="Đơn giá" value="<?php echo $data['product']['DonGia']?>">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Mô tả sách</label>
-            <textarea class="form-control" rules="required" name="des"  id="exampleFormControlTextarea1" rows="3"><?php echo $data['product']['MoTa']?></textarea>
+            <textarea class="form-control" rules="required" name="MoTa"  id="exampleFormControlTextarea1" rows="3"><?php echo $data['product']['MoTa']?></textarea>
             <span class="errMassage"></span>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" name="statusPromotion" value="1" type="checkbox" id="flexSwitchCheckChecked" <?php if($data['product']['TTKM']==1) {
+            <input class="form-check-input" name="TTKM" value="1" type="checkbox" id="flexSwitchCheckChecked" <?php if($data['product']['TTKM']==1) {
                 echo 'checked';
             } ?>>
             <label class="form-check-label" for="flexSwitchCheckChecked">Kích hoạt CTKM</label>
             <span class="errMassage"></span>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" name="status" value="1" type="checkbox" id="flexSwitchCheckChecked" <?php if($data['product']['TTSach']==1) {
+            <input class="form-check-input" name="TTSach" value="1" type="checkbox" id="flexSwitchCheckChecked" <?php if($data['product']['TTSach']==1) {
                 echo 'checked';
             } ?>>
             <label class="form-check-label" for="flexSwitchCheckChecked">Kích hoạt tình trạng sách</label>

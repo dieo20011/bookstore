@@ -14,7 +14,7 @@
 
         <div class="form-group">
             <label> Tên thể loại </label>
-            <input type="text" name="name" class="form-control" rules="required" placeholder="Tên thể loại" value="<?php echo $data['category']['TenTheLoai']?>">
+            <input type="text" name="TenTheLoai" class="form-control" rules="required" placeholder="Tên thể loại" value="<?php echo $data['category']['TenTheLoai']?>">
             <span class="errMassage"></span>
 
         </div>

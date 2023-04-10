@@ -6,7 +6,7 @@
         <div  class="form-group">
          <label for="myDate2">Từ </label>
          <input type="date" id="myDate2" class="form-control col-md-6"
-             min="2018-05-01" max="2050-12-31" value="" rules="required" name="Date">
+             min="2018-05-01" max="2050-12-31" value="" rules="required" name="NgayNhap">
         <span class="errMassage"></span>
         </div>
         <div class="form-group">
@@ -29,13 +29,13 @@
         </div>
         <div class="form-group">
             <label> Số lượng sách </label>
-            <input id="mount" type="number" name="mount" rules="required|numberCheck" class="form-control" placeholder="Số lượng sách" value="1" >
+            <input id="mount" type="number" name="SoLuong" rules="required|numberCheck" class="form-control" placeholder="Số lượng sách" value="1" >
             <span class="errMassage"></span>
             
         </div>
         <div class="form-group">
             <label> Đơn giá sách</label>
-            <input type="number" id="price" name="price" rules="required|numberCheck" class="form-control" placeholder="Đơn giá sách" value="0" >
+            <input type="number" id="price" name="DonGia" rules="required|numberCheck" class="form-control" placeholder="Đơn giá sách" value="0" >
             <span class="errMassage"></span>
         </div>
         <div class="form-check form-switch">

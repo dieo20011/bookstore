@@ -9,7 +9,7 @@
 
     <div class="form-group">
         <label> Tên thể loại</label>
-        <input type="text" name="name" class="form-control" rules="required" placeholder="Tên thể loại" value="">
+        <input type="text" name="TenTheLoai" class="form-control" rules="required" placeholder="Tên thể loại" value="">
         <span class="errMassage"></span>
     </div>
     <div class="form-group">

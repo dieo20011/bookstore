@@ -38,6 +38,8 @@
             </div>
             <?php
             foreach($data['categoryMain'] as $key => $value) {
+                if(count($data['products'][$key]) == 0) 
+                        continue;
             ?>
             <div class="product-containt">
                 <h3><?php echo $value['TenTheLoai']?></h3>
@@ -56,12 +58,11 @@
                                         $img = "img/product/".$val['img'];
                                     @endphp
                                 <img src="{{asset($img)}}" alt="">
-                                {{-- <?php echo $value['MaTL']?> --}}
                              </a>
                             </div>
                             <div class="product-item-decription">
                                 <div class="product-item-header">
-                                    <a class="product-item-name">
+                                    <a  class="product-item-name">
                                     <?php echo $val['TenSP']?>
                                     </a>
                                     <span class="product-item-author">
@@ -110,6 +111,8 @@
         <div class="app-containt-body-right">
             <?php
             foreach($data['categoryMain'] as $key => $value) {
+                if(count($data['products'][$key]) == 0) 
+                        continue;
             ?>
             <div class="product-list-mainbox">
                 <h3 class="product-list-title">
@@ -128,18 +131,22 @@
                                 <img src="{{asset($img)}}"  alt="">
                             </div>
                             <div class="product-item-v-body">
-                                <div class="product-name">
-                                     <?php echo $val['TenSP']?>
-                                </div>
+                                <a style="text-decoration: none" href="{{ route('detailbook', ['id'=>$id]) }}">
+                                    <div class="product-name">
+                                         <?php echo $val['TenSP']?>
+                                    </div>
+                                </a>
                                 <div class="product-author">
                                      <?php echo $val['TenTG']?>
                                 </div>
                                 <div class="product-item-prices">
-                                    <div class="price-cost">
+                                    {{-- <div class="price-cost">
                                         <span><?php echo $val['DonGia']?><span class="undertext">đ</span></span>
-                                    </div>
+                                    </div> --}}
+                                    <span class="prices-cost <?php if($val['discount'] != 0) echo  
+                                        'line-through'?> "> <?php echo $val['DonGia']?><span class="undertext">đ</span></span>
                                     <div class="prices-promotion">
-                                        <span> <?php if($val['discount'] != 0) echo $val['discount']?><span class="undertext">đ</span></span>
+                                        <span> <?php if($val['discount'] != 0) echo $val['discount']."<span class='undertext'>đ</span>"?>
                                     </div>
                                 </div>
                             </div>

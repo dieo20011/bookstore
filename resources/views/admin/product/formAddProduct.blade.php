@@ -7,7 +7,7 @@
 
 <div class="form-group">
             <label> Tên sách </label>
-            <input type="text" name="name" class="form-control" rules="required" placeholder="Tên sách" value="">
+            <input type="text" name="TenSP" class="form-control" rules="required" placeholder="Tên sách" value="">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
@@ -18,24 +18,24 @@
 
         <div class="form-group">
             <label> Số lượng sách </label>
-            <input type="text" name="mount" class="form-control" rules="required" placeholder="Số lượng sách" value="0" readonly>
+            <input type="text" name="SoLuong" class="form-control" rules="required" placeholder="Số lượng sách" value="0" readonly>
         </div>
         <div class="form-group">
             <label> Đơn giá sách </label>
-            <input type="number" name="price" class="form-control" rules="required" placeholder="Đơn giá" value="">
+            <input type="number" name="DonGia" class="form-control" rules="required" placeholder="Đơn giá" value="">
             <span class="errMassage"></span>
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Mô tả sách</label>
-            <textarea class="form-control" rules="required" name="des"  id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" rules="required" name="MoTa"  id="exampleFormControlTextarea1" rows="3"></textarea>
             <span class="errMassage"></span>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" name="statusPromotion" value="1" type="checkbox" id="flexSwitchCheckChecked" >
+            <input class="form-check-input" name="TTKM" value="1" type="checkbox" id="flexSwitchCheckChecked" >
             <label class="form-check-label" for="flexSwitchCheckChecked">Kích hoạt CTKM</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" name="status" value="1" type="checkbox" id="flexSwitchCheckChecked">
+            <input class="form-check-input" name="TTSach" value="1" type="checkbox" id="flexSwitchCheckChecked">
             <label class="form-check-label" for="flexSwitchCheckChecked">Kích hoạt tình trạng sách</label>
         </div>
         <div class="form-group">

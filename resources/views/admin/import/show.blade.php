@@ -6,7 +6,7 @@
         <div  class="form-group">
          <label for="myDate2">Từ </label>
          <input type="date" id="myDate2" class="form-control col-md-6"
-             min="2018-05-01" max="2050-12-31" value="<?php echo $data['import']['NgayNhap']?>" rules="required" name="Date">
+             min="2018-05-01" max="2050-12-31" value="<?php echo $data['import']['NgayNhap']?>" rules="required" name="NgayNhap">
         <span class="errMassage"></span>
         </div>
         <div class="form-group">
@@ -20,12 +20,12 @@
         </div>
         <div class="form-group">
             <label>Tổng tiền</label>
-            <input type="number" id="price" disabled name="price" class="form-control"  placeholder="Đơn giá sách" value="<?php echo $data['import']['TongTien']?>" >
-            <input type="number" id="price" hidden name="price" class="form-control"  placeholder="Đơn giá sách" value="<?php echo $data['import']['TongTien']?>" >
+            <input type="number" id="price" disabled name="TongTien" class="form-control"  placeholder="Đơn giá sách" value="<?php echo $data['import']['TongTien']?>" >
+            <input type="number" id="price" hidden name="TongTien" class="form-control"  placeholder="Đơn giá sách" value="<?php echo $data['import']['TongTien']?>" >
             
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" value="1" name="status" type="checkbox" id="flexSwitchCheckChecked"<?php if($data['import']['TinhTrang']==1) {
+            <input class="form-check-input" value="1" name="TinhTrang" type="checkbox" id="flexSwitchCheckChecked"<?php if($data['import']['TinhTrang']==1) {
                 echo 'checked';
             } ?>>
             <label class="form-check-label" for="flexSwitchCheckChecked">Đã nhập</label>

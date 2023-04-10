@@ -5,7 +5,7 @@
     <div class="modal-body">
     <div class="form-group">
         <label> Tên tác giả</label>
-        <input type="text" name="name" rules="required" class="form-control" placeholder="Tên tác giả" value="">
+        <input type="text" name="TenTG" rules="required" class="form-control" placeholder="Tên tác giả" value="">
         <span class="errMassage"></span>
     </div>
     <div class="form-group">
@@ -24,7 +24,7 @@
     </div>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Mô tả tác giả</label>
-        <textarea class="form-control" name="des" rules="required" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" name="MoTa" rules="required" id="exampleFormControlTextarea1" rows="3"></textarea>
         <span class="errMassage"></span>
     </div>
 </div>

@@ -8,8 +8,8 @@
   </div>
   <div class="card-body">
     <div class="table-responsive ">
-        <h7 class="m-0 font-weight-bold text-primary">Thống kê theo khoảng thời gian
-        </h7>
+        <h6 class="m-0 font-weight-bold text-primary">Thống kê theo khoảng thời gian
+        </h6>
         <form action="./index.php" method="POST" enctype="multipart/form-data" id="statistical">
         <div class="modal-body">
             <div  class="form-group">
@@ -29,7 +29,7 @@
             <input type="text" hidden name="controller" value="admin">
          <input type="text" hidden name="action" value="statisticalForTime">
         </form>
-        <h7 class="m-0 font-weight-bold text-primary">Thống kê theo Mốc </h7>
+        <h6 class="m-0 font-weight-bold text-primary">Thống kê theo Mốc </h6>
         <form action="./index.php" method="POST" enctype="multipart/form-data"  id="statistical-one">
             <div class="modal-body">
                 <div  class="form-group">
@@ -60,10 +60,10 @@
     ?>
     </div>    
 
-    <h7 class="m-0 font-weight-bold text-primary">Tổng tiền:
-        </h7>
-    <h7 class="m-0 font-weight-bold text-danger"><?php echo number_format($total) ?>đ
-    </h7>
+    <h6 class="m-0 font-weight-bold text-primary">Tổng tiền:
+        </h6>
+    <h6 class="m-0 font-weight-bold text-danger"><?php echo number_format($total) ?>đ
+    </h6>
     </div>
     </div>
 </div>

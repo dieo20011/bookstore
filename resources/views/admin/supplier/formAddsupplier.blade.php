@@ -6,7 +6,7 @@
 
     <div class="form-group">
         <label> Tên nhà cung cấp</label>
-        <input type="text" name="name" class="form-control" rules="required" placeholder="Tên nhà cung cấp" value="">
+        <input type="text" name="TenNCC" class="form-control" rules="required" placeholder="Tên nhà cung cấp" value="">
         <span class="errMassage"></span>
     </div>
     

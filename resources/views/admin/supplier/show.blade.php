@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label> Tên nhà xuất bản </label>
-            <input type="text" name="name" class="form-control" placeholder="Tên nhà xuất bản" value="<?php echo $data['supplier']['TenNCC']?>">
+            <input type="text" name="TenNCC" class="form-control" placeholder="Tên nhà xuất bản" value="<?php echo $data['supplier']['TenNCC']?>">
         </div>
 
         <!-- Group điều hướng  -->

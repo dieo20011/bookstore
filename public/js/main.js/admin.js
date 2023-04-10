@@ -1,384 +1,374 @@
 function loadNotification() {
-    $(document).ready(function(){
-            $('.toast').toast('show')
-    }); 
+    $(document).ready(function () {
+        $(".toast").toast("show");
+    });
 }
 
-$(document).ready(function(){
-    function load_data(url, page, column="ID", byOrder="asc"){
+$(document).ready(function () {
+    function load_data(url, page, column = "ID", byOrder = "asc") {
         $.ajaxSetup({
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
         });
         $.ajax({
-        url: url,
-        method:"POST",
-        data:{
-            page: page,
-            column: column,
-            byOrder: byOrder
-        },
-        success : function(data){     
-            $('.table-responsive').html(data);
-        }
-
+            url: url,
+            method: "POST",
+            data: {
+                page: page,
+                column: column,
+                byOrder: byOrder,
+            },
+            success: function (data) {
+                $(".table-responsive").html(data);
+            },
         });
-    }  
+    }
 
-    $('.deleteBtn').on('click' , function(){
-        $('#deletemodal').modal('show');
-        $tr = $(this).closest('tr');
-        
-        var data = $tr.children("td#ID").map(function (){
-            return $(this).text();
-        }).get();
+    $(".deleteBtn").on("click", function () {
+        $("#deletemodal").modal("show");
+        $tr = $(this).closest("tr");
 
-        var pageN = $("li.page-item.active").children().attr( "page");
-        console.log(pageN)
+        var data = $tr
+            .children("td#ID")
+            .map(function () {
+                return $(this).text();
+            })
+            .get();
 
-        var column = $('th.sortKey').attr('column');
+        var pageN = $("li.page-item.active").children().attr("page");
+        console.log(pageN);
 
-        var byOder = $('th.sortKey').attr('byOder');
+        var column = $("th.sortKey").attr("column");
+
+        var byOder = $("th.sortKey").attr("byOder");
         console.log(column);
-        console.log(byOder)
+        console.log(byOder);
         $("input[name='column']").val(column);
         $('input[name="byOrder"]').val(byOder);
-        $('#delete_id').val(data[0]);
+        $("#delete_id").val(data[0]);
 
-        $('#pageNumber').val(pageN);
-        
+        $("#pageNumber").val(pageN);
     });
 });
 
-
-$(document).ready(function(){
-    $('#selectMenu').change(function() {
-        let idSelect = $(this).val()
+$(document).ready(function () {
+    $("#selectMenu").change(function () {
+        let idSelect = $(this).val();
         $.ajaxSetup({
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
         });
         $.ajax({
             url: "http://127.0.0.1:8000/Admin/Product/select",
-            method:"POST",
-            data: {idSelect : idSelect},
-            success : function(data){     
-                $('#selectGroup').html(data);
-            }
-    
-            });
-    })
+            method: "POST",
+            data: { idSelect: idSelect },
+            success: function (data) {
+                $("#selectGroup").html(data);
+            },
+        });
+    });
 });
 
-
-$(document).ready(function(){
-    $('#category_statistical').change(function() {
-        let idSelect = $(this).val()
+$(document).ready(function () {
+    $("#category_statistical").change(function () {
+        let idSelect = $(this).val();
         $.ajax({
             url: "?controller=admin&action=statistical",
-            method:"POST",
-            data: {idSelect : idSelect},
-            success : function(data){     
-                $('#table_statistical').html(data);
-            }
-    
-            });
-    })
+            method: "POST",
+            data: { idSelect: idSelect },
+            success: function (data) {
+                $("#table_statistical").html(data);
+            },
+        });
+    });
 });
 
-
-$(document).ready(function(){
-    $('#add_temp').on('click' , function(){
-        let MaSP = $('#MaSP').val();
-        let Mount = $('#mount').val();
-        let Price = $('#price').val();
-        let Name = $('#name').val();
+$(document).ready(function () {
+    $("#add_temp").on("click", function () {
+        let MaSP = $("#MaSP").val();
+        let Mount = $("#mount").val();
+        let Price = $("#price").val();
+        let Name = $("#name").val();
         $.ajaxSetup({
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
         });
-         $.ajax({
+        $.ajax({
             url: "http://127.0.0.1:8000/Admin/Import/addImportTemp",
-            method:"POST",
+            method: "POST",
             data: {
-                MaSP : MaSP,
+                MaSP: MaSP,
                 Mount: Mount,
                 Price: Price,
-                Name: Name
+                Name: Name,
             },
-            success : function(data){  
-
-                $('#loadImportDetail').html(data);
-            }
-    
-            });
+            success: function (data) {
+                $("#loadImportDetail").html(data);
+            },
+        });
     });
 });
 $(document).ready(function () {
-    $('button.edit-btn-import').on('click', function() {
-        alert('ok')
+    $("button.edit-btn-import").on("click", function () {
+        alert("ok");
         $.ajaxSetup({
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
         });
-        alert('ị');
+        alert("ị");
         $.ajax({
             url: "http://127.0.0.1:8000/Admin/Import/updateDetailImport",
-            method:"POST",
+            method: "POST",
             data: {
-                MaSP : MaSP,
+                MaSP: MaSP,
                 Mount: Mount,
                 Price: Price,
-                Name: Name
+                Name: Name,
             },
-            success : function(data){  
+            success: function (data) {
+                $("#loadImportDetail").html(data);
+            },
+        });
+    });
+});
+$(document).ready(function () {
+    $("div#importDetail").on("click", function () {
+        $tr = $(this).closest("tr");
 
-                $('#loadImportDetail').html(data);
-            }
-    
-            });
-    })
-})
-$(document).ready(function(){
-    $('div#importDetail').on('click' , function(){
-        $tr = $(this).closest('tr');
-        
-        var id = $tr.children("td#ID").map(function (){
-            return $(this).text();
-        }).get();
+        var id = $tr
+            .children("td#ID")
+            .map(function () {
+                return $(this).text();
+            })
+            .get();
         $.ajaxSetup({
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
         });
-        console.log('ok')
-         $.ajax({
+        console.log("ok");
+        $.ajax({
             url: "http://127.0.0.1:8000/Admin/Import/showDetail",
-            method:"POST",
-            data: {id : id},
-            success : function(data){  
-
-                $('.card.shadow.mb-4').html(data);
-            }
-    
-            });
+            method: "POST",
+            data: { id: id },
+            success: function (data) {
+                $(".card.shadow.mb-4").html(data);
+            },
+        });
     });
 });
 
-$(document).ready(function(){
-    $('div#billDetail').on('click' , function(){
-        $tr = $(this).closest('tr');
-        
-        var id = $tr.children("td#ID").map(function (){
-            return $(this).text();
-        }).get();
-         $.ajax({
+$(document).ready(function () {
+    $("div#billDetail").on("click", function () {
+        $tr = $(this).closest("tr");
+
+        var id = $tr
+            .children("td#ID")
+            .map(function () {
+                return $(this).text();
+            })
+            .get();
+        $.ajax({
             url: "?controller=bill&action=showDetail",
-            method:"POST",
-            data: {id : id},
-            success : function(data){  
-
-                $('.card.shadow.mb-4').html(data);
-            }
-    
-            });
+            method: "POST",
+            data: { id: id },
+            success: function (data) {
+                $(".card.shadow.mb-4").html(data);
+            },
+        });
     });
 });
 
-$(document).ready(function(){
-    $('div#edit_btn').on('click' , function(){
-        $tr = $(this).closest('tr');
-        
-        var id = $tr.children("td#ID").map(function (){
-            return $(this).text();
-        }).get();
-        var MaPN = $('input#IDPN').val();
+$(document).ready(function () {
+    $("div#edit_btn").on("click", function () {
+        $tr = $(this).closest("tr");
+
+        var id = $tr
+            .children("td#ID")
+            .map(function () {
+                return $(this).text();
+            })
+            .get();
+        var MaPN = $("input#IDPN").val();
         $.ajaxSetup({
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
         });
-         $.ajax({
+        $.ajax({
             url: "http://127.0.0.1:8000/Admin/Import/showFormImportDetail",
-            method:"POST",
-            data: {MaSP : id,
-                MaPN: MaPN    
+            method: "POST",
+            data: { MaSP: id, MaPN: MaPN },
+            success: function (data) {
+                $("#formEditDetailImport").html(data);
             },
-            success : function(data){  
-
-                $('#formEditDetailImport').html(data);
-            }
-    
-            });
+        });
     });
 
-    $('#edit_btn_bill').on('click' , function(){
-        $tr = $(this).closest('tr');
-        
-        var id = $tr.children("td#ID").map(function (){
-            return $(this).text();
-        }).get();
-        var MaHD = $('input#IDHD').val();
-         $.ajax({
+    $("#edit_btn_bill").on("click", function () {
+        $tr = $(this).closest("tr");
+
+        var id = $tr
+            .children("td#ID")
+            .map(function () {
+                return $(this).text();
+            })
+            .get();
+        var MaHD = $("input#IDHD").val();
+        $.ajax({
             url: "?controller=Bill&action=showFormBillDetail",
-            method:"POST",
-            data: {MaSP : id,
-                MaHD: MaHD    
+            method: "POST",
+            data: { MaSP: id, MaHD: MaHD },
+            success: function (data) {
+                $("#formEditDetailBill").html(data);
             },
-            success : function(data){  
-
-                $('#formEditDetailBill').html(data);
-            }
-    
-            });
+        });
     });
-    
 });
-
-
 
 // Validate
 
 function validateForm(formSelecter) {
-    let formRules = {}
+    let formRules = {};
     function getParentElement(element, selector) {
-        while(element.parentElement) {
-            if(element.parentElement.matches(selector)) {
-                return element.parentElement
+        while (element.parentElement) {
+            if (element.parentElement.matches(selector)) {
+                return element.parentElement;
             }
-            element = element.parentElement
+            element = element.parentElement;
         }
     }
     let validateRules = {
-        required: function(value) {
-            return value ? undefined : 'Vui lòng nhập trường này'
+        required: function (value) {
+            return value ? undefined : "Vui lòng nhập trường này";
         },
-        email: function(value) {
+        email: function (value) {
             let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            return regex.test(value) ? undefined : 'Trường này phải là email'
+            return regex.test(value) ? undefined : "Trường này phải là email";
         },
-        min: function(min) {
-            return function(value) {
-                return value.length >= min ? undefined : `Vui lòng nhập ít nhất ${min}`
-            }
+        min: function (min) {
+            return function (value) {
+                return value.length >= min
+                    ? undefined
+                    : `Vui lòng nhập ít nhất ${min}`;
+            };
         },
-        numberCheck: function(value) {
-            return value >= 0 ? undefined : 'Vui lòng nhập số dương'
-        }
-    }
+        numberCheck: function (value) {
+            return value >= 0 ? undefined : "Vui lòng nhập số dương";
+        },
+    };
     let form = document.querySelector(formSelecter);
-    if(form) {
-        var inputs = document.querySelectorAll('[name][rules]');
-        for(var input of inputs) {
-            var rules = input.getAttribute('rules').split("|")
-            for(var rule of rules) {
-
-                var ruleInfo; 
+    if (form) {
+        var inputs = document.querySelectorAll("[name][rules]");
+        for (var input of inputs) {
+            var rules = input.getAttribute("rules").split("|");
+            for (var rule of rules) {
+                var ruleInfo;
                 var isRuleHasValue = rule.includes(":");
 
-                if(isRuleHasValue) {
-
+                if (isRuleHasValue) {
                     ruleInfo = rule.split(":");
                     rule = ruleInfo[0];
                 }
                 var ruleFunc = validateRules[rule];
 
-                if(isRuleHasValue) {
-                    ruleFunc = ruleFunc(ruleInfo[1])
+                if (isRuleHasValue) {
+                    ruleFunc = ruleFunc(ruleInfo[1]);
                 }
 
-                if(Array.isArray(formRules[input.name])) {
-                    formRules[input.name].push(ruleFunc)
+                if (Array.isArray(formRules[input.name])) {
+                    formRules[input.name].push(ruleFunc);
                 } else {
-                    formRules[input.name] = [ruleFunc]   
+                    formRules[input.name] = [ruleFunc];
                 }
             }
-            input.onblur = handelValidate; 
+            input.onblur = handelValidate;
             input.oninput = handelClear;
         }
         function handelValidate(event) {
-
-            var rules = formRules[event.target.name]
-            var errorMessage
-            for(var rule of rules) {
-
-                errorMessage = rule(event.target.value)
-                if(errorMessage) {
-                    break
+            var rules = formRules[event.target.name];
+            var errorMessage;
+            for (var rule of rules) {
+                errorMessage = rule(event.target.value);
+                if (errorMessage) {
+                    break;
                 }
             }
-            if(errorMessage) {
-              var parentElement = getParentElement( event.target, '.form-group')
-              if(parentElement) {
-
-                  var formMessage = parentElement.querySelector('.errMassage');
-                  formMessage.innerText = errorMessage
-              }
+            if (errorMessage) {
+                var parentElement = getParentElement(
+                    event.target,
+                    ".form-group"
+                );
+                if (parentElement) {
+                    var formMessage =
+                        parentElement.querySelector(".errMassage");
+                    formMessage.innerText = errorMessage;
+                }
             }
-            return !errorMessage
+            return !errorMessage;
         }
         function handelClear(event) {
-              var parentElement = getParentElement( event.target, '.form-group')
-              if(parentElement) {
-
-                  var formMessage = parentElement.querySelector('.errMassage');
-                  formMessage.innerText = ""
-              }
+            var parentElement = getParentElement(event.target, ".form-group");
+            if (parentElement) {
+                var formMessage = parentElement.querySelector(".errMassage");
+                formMessage.innerText = "";
+            }
         }
         form.onsubmit = function (event) {
             event.preventDefault();
-            var inputs = document.querySelectorAll('[name][rules]');
+            var inputs = document.querySelectorAll("[name][rules]");
             var isValid = true;
-        for(var input of inputs) {
-            if(!handelValidate({target: input})) {
-                isValid = false
+            for (var input of inputs) {
+                if (!handelValidate({ target: input })) {
+                    isValid = false;
+                }
             }
-         }
-         if(isValid) {
-             form.submit();
-         }
-        }
+            if (isValid) {
+                form.submit();
+            }
+        };
     }
 }
+const arrayIDForm = ["#menu_form", "#menu_form_show"];
+arrayIDForm.map((form, index) => {
+    return validateForm(form);
+});
+// validateForm("#menu_form")
 
-validateForm("#menu_form")
+// validateForm("#menu_form_show")
 
-validateForm("#menu_form_show")
+validateForm("#author_form");
 
-validateForm("#author_form")
+validateForm("#author_form_show");
 
-validateForm("#author_form_show")
+validateForm("#category_form");
 
-validateForm("#category_form")
+validateForm("#category_form_show");
 
-validateForm("#category_form_show")
+validateForm("#product_form");
 
-validateForm("#product_form")
+validateForm("#product_form_show");
 
-validateForm("#product_form_show")
+validateForm("#promotion_form");
 
-validateForm("#promotion_form")
+validateForm("#promotion_form_show");
 
-validateForm("#promotion_form_show")
+validateForm("#publisher_form");
 
-validateForm("#publisher_form")
+validateForm("#publisher_form_show");
 
-validateForm("#publisher_form_show")
+validateForm("#supplisher_form");
 
-validateForm("#supplisher_form")
+validateForm("#supplisher_form_show");
 
-validateForm("#supplisher_form_show")
+validateForm("#import_form");
 
-validateForm("#import_form")
+validateForm("#import_form_show");
 
-validateForm("#import_form_show")
+validateForm("#detail_import_form");
 
-validateForm("#detail_import_form")
-
-validateForm("#statistical-two")
+validateForm("#statistical-two");
