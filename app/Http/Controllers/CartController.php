@@ -109,8 +109,8 @@ class CartController extends Controller
             "notification"  => 1,
             "soluongsp" => $total_products,
             "tongtien"  => $total_prices,
-            "cart"      => json_decode(json_encode(session('cart')), true)
-            // "userInfo" => $_SESSION['data']['userInfo']
+            "cart"      => json_decode(json_encode(session('cart')), true),
+            "userInfo" => !is_null(session('data.userInfo')) ? session('data.userInfo') : null,
         ];
         return view('frontend.products.detail', ['data' => $dataNew]);
     }

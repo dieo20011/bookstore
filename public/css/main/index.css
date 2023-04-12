@@ -1488,6 +1488,7 @@ span.undertext {
     padding-left: 15px;
     width: 76%;
     overflow: hidden;
+    justify-content: space-evenly;
 }
 .product-list-mainbox
     .list-product-vertical
@@ -1530,6 +1531,7 @@ span.undertext {
     font-size: 14px;
     color: #777;
     width: 100%;
+
 }
 .product-item-v
     .product-item-content
@@ -1539,6 +1541,10 @@ span.undertext {
     text-decoration: line-through;
     margin-right: 12px;
 }
+.prices-cost.line-through {
+    margin-right: 10px;
+    display: inline-block;
+} 
 .product-item-v
     .product-item-content
     .product-item-v-body
@@ -1845,4 +1851,37 @@ span.undertext {
     font-size: 14px;
     display: inline-block;
     max-height: 10px;
+}
+
+/* notification css */
+@keyframes notificationSlide{
+    from{left: -200px;}
+    to{left: 0;}
+}
+@keyframes turnOffNotifi{
+    from{display: 0;}
+    to{opacity: 1;}
+}
+.Notification {
+    position: absolute;
+    top: 50px; 
+    left: 100; 
+    background-color: #000; 
+    color: #0a6f3c;
+    max-width: 350px; 
+    height: 50px; 
+    text-align: center; 
+    line-height: 50px;
+    z-index: 100; 
+    opacity: 0; 
+    padding: 0 10px;
+    animation:  turnOffNotifi linear 2s, notificationSlide linear 1s;
+}
+.Notification.success {
+    color: #fff;
+    background-color: #0a6f3c;
+}
+.Notification.error {
+    color: rgb(222, 27, 27);
+    background-color: #e6e6e6;
 }

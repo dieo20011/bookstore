@@ -41,10 +41,17 @@ Route::prefix('/Cart')->name('cart')->group(
     }
 );
 
-//login
-Route::get('/login', [UserController::class, 'login'])->name('login');
-//register
-Route::get('/register', [UserController::class, 'register'])->name('register');
+//login  & register
+Route::prefix('User/')->name('user.')->group(
+    function () {
+        Route::get('/login', [UserController::class, 'login'])->name('login');
+        Route::post('/checkLogin', [UserController::class, 'checkLogin'])->name('checkLogin');
+        Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+        Route::get('/register', [UserController::class, 'register'])->name('register');
+        Route::post('/checkRegister', [UserController::class, 'checkRegister'])->name('checkRegister');
+    }
+);
+
 
 Route::middleware('checkLogin')->prefix('Admin')->name('admin')->group(
     function () {

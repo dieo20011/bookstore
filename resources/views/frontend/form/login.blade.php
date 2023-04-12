@@ -1,7 +1,8 @@
 <div class="modal" id="login-form">
             <div class="overlay"></div>
             <div class="form">
-                <form action="./index.php" method="POST" id="login">
+                <form action="{{ route('user.checkLogin') }}"  method="POST" id="login">
+                @csrf
                         <div id="close">x</div>
                         <div class="login-form-header">
                             <h3 class="form-header">
@@ -26,12 +27,12 @@
                                 Ghi nhớ thông tin</label>
                             <a href="" class="forget-password">Quên mật khẩu?</a>
                         </div>        
-                        <input type="text" hidden name="action" value="checkLogin">
-                        <input type="text" hidden name="controller" value="User">
+                        <!-- <input type="text" hidden name="action" value="checkLogin">
+                        <input type="text" hidden name="controller" value="User"> -->
                         <button type = "submit">Đăng nhập</button>
                         <div class="register-form">
                             <span>Chưa có tài khoản vui lòng</span>
-                            <a href="?controller=user&action=register" class="register-link">
+                            <a href="/User/register" class="register-link">
                                 ĐĂNG KÝ
                             </a>
                         </div>    

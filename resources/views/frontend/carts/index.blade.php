@@ -10,9 +10,9 @@
             <div class="cart-body-header">
                 <span>Giỏ hàng</span>
             </div>
-                        <?php
-                         if(isset($_SESSION['cart'])) { 
-                            ?>
+            <?php
+            if(isset($_SESSION['cart'])) { 
+            ?>
             <div class="cart-body-contain">
                 <div class="cart-body-left">
                     <form action="" id="cart">

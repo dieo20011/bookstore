@@ -1,4 +1,12 @@
 <body>
+    <?php
+        if(isset($data['result'])) { ?>
+            <div class="Notification <?php echo $data['typeMessage']?>" >
+                    <span><?php echo $data['result'] ; unset($data['result'])?></span>
+            </div>
+    <?php
+        }
+    ?> 
     <div class="wrap-app">
     <div class="app">
         <header>
@@ -59,15 +67,15 @@
                          </div>
                      </div>
                  <?php
-                     if(!isset($_SESSION['data']['userInfo'])) {
+                     if(!isset($data['userInfo'])) {
                          ?>
                  <div class="header-link">
-                     <a href="/login" class="btn-login">Đăng nhập</a>
-                     <a href="/register">Đăng ký</a>
+                     <a href="/User/login" class="btn-login">Đăng nhập</a>
+                     <a href="/User/register">Đăng ký</a>
                  </div>
                  <?php
                  } else {
-                     $info = $_SESSION['data']['userInfo'];
+                     $info = $data['userInfo'];
                      ?>
                  <div class="header-link">
                      <a  id="info-user" class="btn-login"> <?php echo $info['TenKH']?> </a>
@@ -75,7 +83,7 @@
                          <li><a class="submenu" href="?controller=user&action=showInfo">Thông tin cá nhân</a></li>
                          <li><a class="submenu" href="?controller=user&action=showBill">Đơn hàng</a></li>
                      </ul>
-                     <a href="?controller=user&action=logout">Logout</a>
+                     <a href="/User/logout">Logout</a>
                  </div>
                  <?php 
                  }

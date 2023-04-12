@@ -1,6 +1,6 @@
  <?php
     if(isset($data['cart'])) { 
-    ?>
+ ?>
 <div class="cart-body">
     <?php
     $total = 0;

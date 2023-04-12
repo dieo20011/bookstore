@@ -13,7 +13,8 @@
                     </div>
                     <div class="register-body">
                         <div class="register-left">
-                           <form action="./index.php" method="POST" id="register-from">
+                           <form action="{{ route('user.checkRegister') }}" method="POST" id="register-from">
+                           @csrf
                                 <div class="register-form-header">
                                     Đăng ký tài khoản
                                 </div>
@@ -57,8 +58,6 @@
                                         <i class="fas fa-sync-alt"></i>
                                     </div>
                                     <p>Vui lòng nhập các chữ số ở hình bên cạnh.</p>
-                                    <input type="text" hidden name="controller"  value="user" placeholder="">
-                                    <input type="text" hidden name="action" value="checkRegister" placeholder="">
                                     <div >
                                         <button class="btn btn-register" type="submit">Đăng ký</button>
                                     </div>

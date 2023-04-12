@@ -12,10 +12,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index1()
-    {
-        return view('frontend.home.master');
-    }
+  
     private $menuModel;
     private $categoryModel;
     private $productModel;
@@ -138,12 +135,7 @@ class HomeController extends Controller
 
         $save = round($arrProduct['DonGia'] * (($salePercent) / 100), -3);
         $save = currency_format($save);
-
-        $cart = [];
-
-        if ($request->session()->has('cart')) {
-            $cart = session('cart');
-        }
+        $cart = $request->session()->has('cart') ? session('cart'): [];
         $contentPage = 'products/detail.php';
         $dataNew = [
             "cart"        => $cart,
@@ -156,6 +148,9 @@ class HomeController extends Controller
             "save"  => $save,
             "salePercent" => $salePercent,
         ];
+
+        $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
+        session()->put('data.cart', $cart);
         return view('frontend.products.detail', ['data' => $dataNew]);
     }
 
@@ -170,15 +165,10 @@ class HomeController extends Controller
         $arrCategory = json_decode(json_encode($this->categoryModel->getAll(4)), True);
         // $arrProductselling = ?; Danh sách bán chạy
         // $mainPage = 'frontend.masterLayout';
-        $contentPage = 'home/index.php';
-        $cart = [];
-        if ($request->session()->has('cart')) {
-            $cart = session('cart');
-        }
+        $contentPage = 'home/index';
         // $dataNew += ['pageNew' => 'form/login.php'];
 
         $dataNew = [
-            "cart"         => $cart,
             "menus"        => $arrMenu,
             "categorys"    => $arrCategoryForMenu,
             "categoryMain" => $arrCategory,
@@ -187,20 +177,10 @@ class HomeController extends Controller
             "products"     => $arrProduct,
             "page"         => $contentPage,
         ];
-        $data = $dataNew;
-        session()->put('data', $data);
-
-        //Nếu có đăng nhập trả về thêm userInfor
-        // if(isset($_SESSION['data'])) {
-        //     if(isset($_SESSION['data']['userInfo'])) {
-
-        //         $dataNew += ["userInfo"     => $_SESSION['data']['userInfo']];
-        //         return $this->view($mainPage, $dataNew);
-
-        //     } else return $this->view($mainPage, $dataNew);
-        //Nếu không đăng nhập trả về mới
-
-        // }
+        $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
+        $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+        session()->put('data', $dataNew);
+ 
         return view('frontend.home.master', ['data' => $dataNew]);
     }
 }

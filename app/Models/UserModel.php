@@ -9,32 +9,47 @@ class UserModel extends Model
     use HasFactory;
     protected $table = 'khachhang';
     protected $ID = 'MaKH';
-    public function getAll($limit = 10, $start = 0, $orderBy = "asc", $column = 'MaTL')
+    public function getAll($limit = 100, $start = 0, $orderBy = "asc", $column = 'MaKH')
     {
-        $categories = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
-        return $categories;
+        $users = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
+        return $users;
     }
     public function findById($id)
     {
-        $category = DB::table($this->table)->where($this->ID, $id)->first();
-        return $category;
+        $user = DB::table($this->table)->where($this->ID, $id)->first();
+        return $user;
     }
     public function updateData($id, $data)
     {
-        $catrgory = DB::table($this->table)->where($this->ID, $id)->update($data);
-        return $catrgory;
+        $user = DB::table($this->table)->where($this->ID, $id)->update($data);
+        return $user;
     }
-
+    public function getUserByAcount($name, $pass) {
+        $pass = md5($pass);
+        $user = DB::table($this->table)->where( [
+            ['Email', '=', $name],
+            ['MatKhau', '=', $pass],
+        ])->first();
+        return $user;
+       
+    }
+    public function getUserByUserName($name) {
+        $user = DB::table($this->table)->where( [
+            ['Email', '=', $name],
+        ])->first();
+        return $user;
+       
+    }
     public function deleteData($id)
     {
-        $category = DB::table($this->table)->where($this->ID, $id)->delete();
-        return $category;
+        $user = DB::table($this->table)->where($this->ID, $id)->delete();
+        return $user;
     }
 
     public function store($data)
     {
-        $category = DB::table($this->table)->insertGetId($data);
-        return $category;
+        $user = DB::table($this->table)->insertGetId($data);
+        return $user;
     }
 
     public function getColumnName()
