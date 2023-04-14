@@ -46,6 +46,10 @@
         flex-direction: column;
         width: 100%;
     }
+    .app-containt-body .wrap .app-containt-body-left .product-containt .product-list .product-item {
+        border-radius: 10px;
+        /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+    }
     .header-search {
         max-width: var(--width-config);
         width: 100%;
@@ -435,6 +439,60 @@
     .btn:not(.btn:first-child) {
         margin: auto;
     }
+    .cart .wrap  {
+        width: var(--width-config);
+    }
+    .cart .wrap .cart-body .cart-body-contain {
+        flex-direction: column;
+    }
+    .cart .wrap .cart-body .cart-body-contain .cart-body-left {
+        width: var(--width-config);
+    }
+    .cart-body-right {
+        width: var(--width-config);
+        margin: 20px 0 0;
+
+    }
+    .cart-btn-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center
+    }
+    .btn:not(.btn:last-child) {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    /* detail product */
+   
+    .modal-cart .containt-product .form .header-form-cart {
+        width: calc(100% - 20px);
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    .modal-cart .containt-product .form {
+        width: 100%;
+    }
+    .modal-cart .containt-product {
+        width: var(--width-config);
+        margin-left: -10px;
+    }
+    
+    .btn:not(.btn:first-child) {
+        flex-direction: column;
+        /* display: flex; */
+        height: auto;
+    }
+    .form-cart  {
+        padding: 0;
+    }
+    .btn-payment.btn.btn-buy {
+        padding: 0; 
+    }
+    .btn-cancel {
+        padding: 0;
+    }
 }
 @media  (min-width: 375px) {
     :root {
@@ -467,10 +525,22 @@
     :root {
         --width-config: 900px;
     }
+    .btn:not(.btn:first-child) {
+        flex-direction: row;
+    }
+    .btn-cancel {
+        padding: 0 20px 0 0;
+    }
 }
 
 @media (min-width: 1100px) and (max-width: 1200px) {
     :root {
         --width-config: 1100px;
+    }
+    .btn:not(.btn:first-child) {
+        flex-direction: row;
+    }
+    .btn-cancel {
+        padding: 0 20px 0 0;
     }
 }

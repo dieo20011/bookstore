@@ -40,12 +40,11 @@
                                     </div>
                                     <div class="address-body">
                                         <div class="address">
-                                            <?php 
-                                                if(count($data['address-infor']) < 2) {
-                                                    include_once("./Views/frontend/payment/formAddress.php");
-                                                } else {
-                                             include_once("./Views/frontend/payment/infoAddress.php");
-                                             }?>
+                                            @if(count($data['address-infor']) < 2)
+                                                @include("frontend.payment.formAddress")
+                                            @else 
+                                                @include("frontend.payment.infoAddress")
+                                             @endif
                                         </div>
                                        
                                     </div>
@@ -58,8 +57,9 @@
             <div class="cart-btn">
                 <div class="cart-btn-body">
                     <button class="btn btn-back disiable">Quay lại</button>
-                    <button class="btn btn-continue normal" <?php if(isset($data['emtyInfoA'])) {
-                        if(!$data['emtyInfoA']) echo "disabled";
+                    <button class="btn btn-continue normal" <?php 
+                    if(count($data['address-infor']) < 2) {
+                      echo "disabled";
                     }?> id="<?php echo $data['nextPage']?>">Tiếp tục</button>
                 </div>
             </div>

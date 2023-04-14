@@ -50,8 +50,10 @@ class ProductModel extends Model
         return $arrName;
     }
 
-    public function getByCategoryId($id, $limit = 10)
+    public function getByCategoryId($id, $limit = 15, $start = 0, $orderBy = "DESC", $column = 'SoLuong')
     {
-        return DB::select("SELECT * FROM " . $this->table . " where MaTl = $id limit $limit");
+        $products = DB::table($this->table)->where("MaTL", $id)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
+        // return DB::select("SELECT * FROM " . $this->table . " where MaTl = $id limit $limit");
+        return $products;
     }
 }

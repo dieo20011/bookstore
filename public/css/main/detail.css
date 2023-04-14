@@ -53,10 +53,14 @@
 }
 .product-detail-body .prdouct-img .product-main img:not(.see-first) {
     width: 240px;
-    object-fit: cover;
+    object-fit: cover;  
     padding-bottom: 40px;
+    transform-style: preserve-3d; /* Bảo toàn tính nhất quán của các phần tử con */
+    transition: transform 0.5s; /* Thêm hiệu ứng chuyển động mượt mà */
 }
-
+.product-detail-body .prdouct-img .product-main img:not(.see-first):hover{
+    transform: rotateY(45deg);
+}
 .product-detail-body .prdouct-img .product-add {
     width: 100%;
 }
@@ -293,7 +297,8 @@
     background-color: #0a6f3c;
     justify-content: space-between;
     position: relative;
-    border-top-left-radius: 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     /* background-color: #fff; */
 
 }

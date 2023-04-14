@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-
+Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::prefix('/DetailBook')->name('detailbook')->group(
     function () {
         Route::get('/{id}', [HomeController::class, 'loadDetailProduct']);
@@ -37,10 +38,24 @@ Route::prefix('/DetailBook')->name('detailbook')->group(
 );
 Route::prefix('/Cart')->name('cart')->group(
     function () {
+        Route::get('/', [CartController::class, 'index']);
+        Route::post('/delete', [CartController::class, 'delete']);
+        Route::post('/update', [CartController::class, 'update']);
         Route::get('/{id}', [CartController::class, 'loadDetailProduct']);
     }
 );
-
+Route::prefix('/Order')->name('order.')->group(
+    function () {
+        Route::get('/confirmAddrress', [OrderController::class, 'confirmAddrress']);
+        Route::post('/discountPage', [OrderController::class, 'discountPage']);
+        Route::post('/confirmPage', [OrderController::class, 'confirmPage']);
+    }
+);
+Route::prefix('/Bill')->name('bill.')->group(
+    function () {
+        Route::post('/store', [BillController::class, 'store']);
+    }
+);
 //login  & register
 Route::prefix('User/')->name('user.')->group(
     function () {

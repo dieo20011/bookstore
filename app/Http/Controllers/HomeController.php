@@ -56,19 +56,19 @@ class HomeController extends Controller
         return $arr;
     }
 
-    public function loadProductForCategory()
+    public function loadProductForCategory( &$arrCategory, $count = 0)
     {
-        $arrCategory = json_decode(json_encode($this->categoryModel->getAll()), True);
-
         $arr = [];
         foreach ($arrCategory as $key => $val) {
             //Lấy sản phẩm theo thể loại
             $arrProduct = json_decode(json_encode($this->productModel->getByCategoryId($val['MaTL'])), True);
             $arrProductNew = [];
             //Lấy chi tiết sản phẩm 
-
             foreach ($arrProduct as $k => $item) {
                 if ($item['TTSach'] == 0) {
+                    continue;
+                }
+                if($item['SoLuong'] <= $count) {
                     continue;
                 }
                 $author = json_decode(json_encode($this->authorModel->findById($item['MaTG'])), True);
@@ -101,10 +101,13 @@ class HomeController extends Controller
                     'discount'  => $discount
                     //customer
                 ];
-
+            
                 array_push($arrProductNew, $arrProductDetail);
             }
-            array_push($arr, $arrProductNew);
+            if(count($arrProductNew) > 0)
+                $arr[$key] = $arrProductNew;
+            else 
+                unset($arrCategory[$key]);
             // array_push($arr, $this->productModel->getByCategoryId($val['MaTL']));
         }
         return $arr;
@@ -135,7 +138,7 @@ class HomeController extends Controller
 
         $save = round($arrProduct['DonGia'] * (($salePercent) / 100), -3);
         $save = currency_format($save);
-        $cart = $request->session()->has('cart') ? session('cart'): [];
+        $cart = $request->session()->has('data.cart') ? session('data.cart'): [];
         $contentPage = 'products/detail.php';
         $dataNew = [
             "cart"        => $cart,
@@ -161,21 +164,26 @@ class HomeController extends Controller
         $arrAuthor = $this->loadForMenu('tacgia');
         $arrCategoryForMenu = $this->loadForMenu('theloai');
         $arrPublisher = $this->loadForMenu('nxb');
-        $arrProduct = $this->loadProductForCategory();
-        $arrCategory = json_decode(json_encode($this->categoryModel->getAll(4)), True);
-        // $arrProductselling = ?; Danh sách bán chạy
-        // $mainPage = 'frontend.masterLayout';
+        $arrCategory = json_decode(json_encode($this->categoryModel->getAll()), True);
+        //referent
+        $arrProduct = $this->loadProductForCategory($arrCategory);
+
+        $arrCategoryForProductCellings = json_decode(json_encode($this->categoryModel->getAll(100, 0, 'desc')), True);
+        $arrProductselling = $this->loadProductForCategory($arrCategoryForProductCellings, 40);
+        // $mainPage = 'frontend.masterLayout';, 
         $contentPage = 'home/index';
         // $dataNew += ['pageNew' => 'form/login.php'];
 
         $dataNew = [
             "menus"        => $arrMenu,
             "categorys"    => $arrCategoryForMenu,
+            "categorysForProductsSellig" => $arrCategoryForProductCellings,
             "categoryMain" => $arrCategory,
             "authors"      => $arrAuthor,
             "publlisher"   => $arrPublisher,
             "products"     => $arrProduct,
             "page"         => $contentPage,
+            "productsSelling" => $arrProductselling 
         ];
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
@@ -183,4 +191,6 @@ class HomeController extends Controller
  
         return view('frontend.home.master', ['data' => $dataNew]);
     }
+
 }
+

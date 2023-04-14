@@ -9,15 +9,18 @@
                             <?php 
                             $total = 0;
                             $count = 0;
-                            foreach($_SESSION['cart'] as $key => $val) {    
-                                $total += $_SESSION['cart'][$key]['SoLuong'] * $_SESSION['cart'][$key]['khuyenmai'];
-                                if($_SESSION['cart'][$key]['SoLuong'] == 0) continue;
-                                $count +=$_SESSION['cart'][$key]['SoLuong'];
+                            foreach($data['cart'] as $key => $val) {    
+                                $total += $data['cart'][$key]['SoLuong'] * $data['cart'][$key]['khuyenmai'];
+                                if($data['cart'][$key]['SoLuong'] == 0) continue;
+                                $count +=$data['cart'][$key]['SoLuong'];
                                 ?>
                             <div class="product-item">
-                                <img src="./public/img/product/<?php echo $_SESSION['cart'][$key]['MaTl']?>/<?php echo $_SESSION['cart'][$key]['img']?>" width="50px" height="50px" alt="">
-                                <span>  <?php echo $_SESSION['cart'][$key]['TenSp']?></span>
-                                <span><?php echo $_SESSION['cart'][$key]['SoLuong']?> x <?php echo $_SESSION['cart'][$key]['khuyenmai']?></span>
+                                @php
+                                $img = "img/product/".$val['img'];
+                                @endphp
+                                <img src={{asset($img)}} width="50px" height="50px" alt="">
+                                <span>  <?php echo $data['cart'][$key]['TenSP']?></span>
+                                <span><?php echo $data['cart'][$key]['SoLuong']?> x <?php echo currency_format($data['cart'][$key]['khuyenmai'])?> đ</span>
                             </div>
                             <?php }?>
                         </div>
@@ -39,7 +42,7 @@
                         <div class="bill-temp">
                             <div class="bill-item">
                                 <span>Tổng tiền</span>
-                                <span><?php echo $total?> <span class="undertext">đ</span></span>
+                                <span><?php echo currency_format($total)?> <span class="undertext">đ</span></span>
                             </div>
                             <div class="bill-item">
                                 <span>Mã giảm giá</span>
@@ -47,12 +50,12 @@
                             </div>
                             <div class="bill-item">
                                 <span>Tạm tính</span>
-                                <span><?php echo $total?> <span class="undertext">đ</span></span>
+                                <span><?php echo currency_format($total)?> <span class="undertext">đ</span></span>
                             </div>
                             <hr>
                             <div class="bill-item">
                                 <span>Tổng cộng</span>
-                                <span><?php echo $total?><span class="undertext">đ</span></span>
+                                <span><?php echo currency_format($total)?><span class="undertext">đ</span></span>
                             </div>
                         </div>
                     </div>

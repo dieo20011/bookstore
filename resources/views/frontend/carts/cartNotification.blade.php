@@ -30,7 +30,7 @@
                             <a href="{{ route('detailbook', $data['products']['MaSP']) }}">Tiếp tục mua</a>
                         </div>
                         <div class="btn-payment btn btn-buy">
-                            <a style="text-decoration: none; color: #fff" href="?controller=cart&action=index">Thanh toán</a>
+                            <a style="text-decoration: none; color: #fff" href="/Cart">Thanh toán</a>
                             
                         </div>
                     </div>

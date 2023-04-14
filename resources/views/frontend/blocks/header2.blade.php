@@ -44,10 +44,9 @@
                      <a href="{{ route('index') }}">Vina<span>book</span>.com</a>
                  </div>
                  <div class="header-search">
-                     <form action="index.php" class="header-form" method="POST">
+                     <form action="{{ route('search') }}"" class="header-form" method="POST">
+                        @csrf
                          <div class="group-input">
-                             <input type="hidden" name="controller" value="home">
-                             <input type="hidden" name="action" value="search">
                              <input type="text" name="values" placeholder="Tìm kiếm tựa sách, tác giả">
                              <i class="fas fa-search header-form-icon"></i>
                              <button class="header-form-btn">Tìm sách</button>
