@@ -1,13 +1,9 @@
-@extends('frontend.masterLayout')
-@section('header')
-@include('frontend.blocks.header2')
-@endsection
 
-@section('content')
-
-
-@if(count($books) > 0)
-<div style="margin-top:40px; padding-left:30px">
+@if(count($data['books']) > 0)
+@php 
+    $books = $data['books'];
+@endphp
+<div class="header-search-title" >
     <h1>Kết quả tìm kiếm cho "{{ request('search') }}":</h1>
 </div>
 <div class="product-container">
@@ -73,4 +69,3 @@
     nào.
 </p>
 @endif
-@endsection

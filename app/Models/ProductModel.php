@@ -57,7 +57,7 @@ class ProductModel extends Model
         return $products;
     }
     public function search($search){
-        $arr= DB::table('sach as s')
+        $products= DB::table('sach as s')
         ->join('tacgia as tg', 's.MaTG', '=', 'tg.MaTG')
         ->join('theloai as tl', 's.MaTL', '=', 'tl.MaTL')
         ->select('s.*', 'tg.TenTG', 'tl.TenTheLoai')
@@ -65,6 +65,6 @@ class ProductModel extends Model
         ->orWhere('tg.TenTG', 'like', '%'.$search.'%')
         ->orWhere('tl.TenTheLoai', 'like', '%'.$search.'%')
         ->get();
-        return $arr;
+        return $products;
     }
 }

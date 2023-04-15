@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-  
+
     private $menuModel;
     private $categoryModel;
     private $productModel;
@@ -56,7 +56,7 @@ class HomeController extends Controller
         return $arr;
     }
 
-    public function loadProductForCategory( &$arrCategory, $count = 0)
+    public function loadProductForCategory(&$arrCategory, $count = 0)
     {
         $arr = [];
         foreach ($arrCategory as $key => $val) {
@@ -68,7 +68,7 @@ class HomeController extends Controller
                 if ($item['TTSach'] == 0) {
                     continue;
                 }
-                if($item['SoLuong'] <= $count) {
+                if ($item['SoLuong'] <= $count) {
                     continue;
                 }
                 $author = json_decode(json_encode($this->authorModel->findById($item['MaTG'])), True);
@@ -101,12 +101,12 @@ class HomeController extends Controller
                     'discount'  => $discount
                     //customer
                 ];
-            
+
                 array_push($arrProductNew, $arrProductDetail);
             }
-            if(count($arrProductNew) > 0)
+            if (count($arrProductNew) > 0)
                 $arr[$key] = $arrProductNew;
-            else 
+            else
                 unset($arrCategory[$key]);
             // array_push($arr, $this->productModel->getByCategoryId($val['MaTL']));
         }
@@ -138,7 +138,7 @@ class HomeController extends Controller
 
         $save = round($arrProduct['DonGia'] * (($salePercent) / 100), -3);
         $save = currency_format($save);
-        $cart = $request->session()->has('data.cart') ? session('data.cart'): [];
+        $cart = $request->session()->has('data.cart') ? session('data.cart') : [];
         $contentPage = 'products/detail.php';
         $dataNew = [
             "cart"        => $cart,
@@ -183,22 +183,29 @@ class HomeController extends Controller
             "publlisher"   => $arrPublisher,
             "products"     => $arrProduct,
             "page"         => $contentPage,
-            "productsSelling" => $arrProductselling 
+            "productsSelling" => $arrProductselling
         ];
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
         session()->put('data', $dataNew);
- 
+
         return view('frontend.home.master', ['data' => $dataNew]);
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $search = $request->input('search');
-        if(empty($search)){
-             return view('frontend.home.search', ['books' => []]);
+        if (empty($search)) {
+            $dataNew = [
+                'books' => [],
+                'pageNew' => 'frontend.products.search'
+            ];
+            $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
+            $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+            return view('frontend.home.master', ['data' => $dataNew]);
         }
-        $booksArray =$this->productModel->search($search);
-        $books=[];
+        $booksArray = $this->productModel->search($search);
+        $books = [];
         foreach ($booksArray as $k => $book) {
             $author = json_decode(json_encode($this->authorModel->findById($book->MaTG)), True);
 
@@ -232,6 +239,12 @@ class HomeController extends Controller
 
             array_push($books, $bookSearchArr);
         }
-        return view('frontend.home.search', ['books' => $books]);
+        $dataNew = [
+            'books' => $books,
+            'pageNew' => 'frontend.products.search'
+        ];
+        $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
+        $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+        return view('frontend.home.master', ['data' => $dataNew]);
     }
 }
