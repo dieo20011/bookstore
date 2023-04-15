@@ -10,7 +10,7 @@ class CategoryModel extends Model
     use HasFactory;
     protected $table = 'theloai';
     protected $ID = 'MaTL';
-    public function getAll($limit = 10, $start = 0, $orderBy ="asc", $column = 'MaTL') {
+    public function getAll($limit = 100, $start = 0, $orderBy ="asc", $column = 'MaTL') {
         $categories = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
         return $categories;
     }

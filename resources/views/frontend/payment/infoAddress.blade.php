@@ -4,5 +4,4 @@
     <span><?php echo $data['address-infor'][3].","; echo $data['address-infor'][4].",";?></span>
     <span><?php echo $data['address-infor'][5].",";?></span>
     <span>giao hàng tận nơi(<?php echo $data['address-infor'][3]?>)</span>
-
 </div>

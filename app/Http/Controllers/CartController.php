@@ -39,7 +39,7 @@ class CartController extends Controller
     {
         $product = json_decode(json_encode($this->productModel->findById($id)), True);
 
-        if (!$request->session()->has('cart')) {
+        if (!$request->session()->has('data.cart')) {
             $listProduct = [];
             if ($product['SoLuong'] <= 0) {
                 $product['SoLuong'] = 0;
@@ -47,9 +47,9 @@ class CartController extends Controller
                 $product['SoLuong'] = 1;
             }
             $listProduct[$id] = $product;
-            session()->put('cart', $listProduct);
+            session()->put('data.cart', $listProduct);
         } else {
-            $products = session()->get('cart');
+            $products = session()->get('data.cart');
             $products = json_decode(json_encode($products), true);
             if ($product['SoLuong'] <= 0) {
                 $product['SoLuong'] = 0;
@@ -63,9 +63,9 @@ class CartController extends Controller
                 $product['SoLuong'] = $product['SoLuong'];
                 $products[$id] = $product;
             }
-            session()->put('cart', $products);
+            session()->put('data.cart', $products);
         }
-        $products = session('cart');
+        $products = session('data.cart');
         $total_products = 0;
         $total_prices = 0;
         foreach ($products as $key => $val) {
@@ -78,7 +78,7 @@ class CartController extends Controller
             $products[$key]['khuyenmai'] =  round($products[$key]['DonGia'] * ((100 - $salePercent) / 100), -3);
             $total_prices += $discount;
         }
-        session()->put('cart', $products);
+        session()->put('data.cart', $products);
         // unset($products);
         $category = json_decode(json_encode(($this->categoryModel->findById($product['MaTL']))), True);
 
@@ -91,10 +91,8 @@ class CartController extends Controller
         $salePercent = $sale['PhanTram'];
         $discount = round($product['DonGia'] * ((100 - $salePercent) / 100), -3);
         $discount = currency_format($discount);
-
         $save = round($product['DonGia'] * (($salePercent) / 100), -3);
         $save = currency_format($save);
-        $mainPage = 'frontend.masterLayout';
         $contentPage = 'cart.cartNotification';
         $dataNew = [
 
@@ -109,7 +107,7 @@ class CartController extends Controller
             "notification"  => 1,
             "soluongsp" => $total_products,
             "tongtien"  => $total_prices,
-            "cart"      => json_decode(json_encode(session('cart')), true),
+            "cart"      => json_decode(json_encode(session('data.cart')), true),
             "userInfo" => !is_null(session('data.userInfo')) ? session('data.userInfo') : null,
         ];
         return view('frontend.products.detail', ['data' => $dataNew]);
@@ -117,63 +115,53 @@ class CartController extends Controller
 
     public function index()
     {
-        $dataNew = $_SESSION['data'];
+        $dataNew = session('data');
 
-
-        $dataNew['page'] = 'carts/index.php';
-
-        $mainPage = 'frontend.masterLayout';
-        return $this->view($mainPage, $dataNew);
+        $dataNew['pageNew'] = 'frontend.carts.index';
+        $MAIN_PAGE = 'frontend.home.master';
+        return view($MAIN_PAGE, ['data' => $dataNew]);
     }
 
     public function update()
     {
+        $dataNew = session()->get('data.cart');
         $message = "";
         if (isset($_POST['option'])) {
             if ($_POST['option'] == "des") {
-                if ($_SESSION[$_POST['MaSP']]['SoLuong'] > 0) {
-                    $_SESSION[$_POST['MaSP']]['SoLuong'] -= 1;
+                if ($dataNew[$_POST['MaSP']]['SoLuong'] > 0) {
+                    $dataNew[$_POST['MaSP']]['SoLuong'] -= 1;
                 }
             } else {
-                $condition = [
-                    'column'    => 'MaSP',
-                    'value'     => $_POST['MaSP']
-                ];
-
-                $arrProduct = $this->productModel->findById($condition);
-                if ($_SESSION[$_POST['MaSP']]['SoLuong'] >= $arrProduct['SoLuong']) {
+                $arrProduct = $this->productModel->findById($_POST['MaSP']);
+                if ($dataNew[$_POST['MaSP']]['SoLuong'] >= $arrProduct->SoLuong) {
                     $message = "Sản phẩm không đủ";
                 } else {
-
-                    $_SESSION[$_POST['MaSP']]['SoLuong'] += 1;
+                    $dataNew[$_POST['MaSP']]['SoLuong'] += 1;
                 }
             }
         }
-
+        session()->put('data.cart', $dataNew);
         $mainPage = 'frontend.carts.cart-form';
-
-
         // result 
-        return $this->view($mainPage, [
+        return view($mainPage,['data' => [
+            'cart' => $dataNew,
             "message" => $message
-        ]);
+            ]
+        ] );
     }
 
     public function delete()
     {
+        $dataNew = session()->get('data.cart');
+        $mainPage = '';
         if (!isset($_POST['option'])) {
-
-            if (isset($_POST['MaSP'])) {
-                unset($products[$_POST['MaSP']]);
-                $mainPage = 'frontend.blocks.cart-block';
-                return $this->view($mainPage, []);
-            }
+            $mainPage = 'frontend.blocks.cart-block';
         } else {
-            if (isset($_POST['MaSP'])) {
-                unset($products[$_POST['MaSP']]);
-                $mainPage = 'frontend.carts.cart-form';
-                return $this->view($mainPage, []);
-            }
+            $mainPage = 'frontend.carts.cart-form';
         }
+        
+        unset($dataNew[$_POST['MaSP']]);
+        session()->put('data.cart', $dataNew);
+        return view($mainPage, ['data' => ['cart' => $dataNew]]);
     }
 }

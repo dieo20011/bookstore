@@ -47,6 +47,7 @@
     font-size: 20px;
     text-transform: uppercase;
 }
+
 .cart .wrap .cart-body .cart-body-contain {
     width: 100%;
     display: flex;
@@ -149,6 +150,7 @@ form .product-list .group-item  .product-right i {
     border: 0.5px solid #e6e6e6;
     padding-bottom: 10px;
     overflow: hidden;
+    border-radius: inherit;
 
 }
 .cart-body-right .receipt-contain .receipt-header {
@@ -182,6 +184,11 @@ form .product-list .group-item  .product-right i {
     padding-bottom: 20px;
     border-bottom: 1px solid #999;
 }
+.cart-body-right{
+    border-radius: 20px;
+    overflow: hidden;
+}
+
 
 .re-total {
     padding: 10px 20px 10px 20px;

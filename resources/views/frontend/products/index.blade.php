@@ -38,8 +38,8 @@
             </div>
             <?php
             foreach($data['categoryMain'] as $key => $value) {
-                if(count($data['products'][$key]) == 0) 
-                        continue;
+                // if(count($data['products'][$key]) == 0) 
+                //         continue;
             ?>
             <div class="product-containt">
                 <h3><?php echo $value['TenTheLoai']?></h3>
@@ -88,7 +88,7 @@
                                     ?> --}}
                                     <div class="prices-detail">
                                         <span class="prices-cost <?php if($val['discount'] != 0) echo  
-                                        'line-through'?> "> <?php echo $val['DonGia']?><span class="undertext">đ</span></span>
+                                        'line-through'?> "> <?php echo currency_format($val['DonGia'])?><span class="undertext">đ</span></span>
                                         <span class="promotion-price">
                                         
                                         <?php if($val['discount'] != 0) echo $val['discount']."<span class='undertext'>đ</span>"?>
@@ -110,9 +110,7 @@
         </div>
         <div class="app-containt-body-right">
             <?php
-            foreach($data['categoryMain'] as $key => $value) {
-                if(count($data['products'][$key]) == 0) 
-                        continue;
+            foreach($data['categorysForProductsSellig'] as $key => $value) {
             ?>
             <div class="product-list-mainbox">
                 <h3 class="product-list-title">
@@ -120,7 +118,10 @@
                 </h3>
                 <div class="list-product-vertical">
                     <?php
-                    foreach($data['products'][$key] as $k => $val) {
+                    foreach($data['productsSelling'][$key] as $k => $val) {
+                        // if(count($data['productsSelling'][$key]) == 0) {
+                        //     continue;
+                        // }
                     ?>
                     <div class="product-item-v">
                         <div class="product-item-content">
@@ -144,7 +145,7 @@
                                         <span><?php echo $val['DonGia']?><span class="undertext">đ</span></span>
                                     </div> --}}
                                     <span class="prices-cost <?php if($val['discount'] != 0) echo  
-                                        'line-through'?> "> <?php echo $val['DonGia']?><span class="undertext">đ</span></span>
+                                        'line-through'?> "> <?php echo currency_format($val['DonGia'])?><span class="undertext">đ</span></span>
                                     <div class="prices-promotion">
                                         <span> <?php if($val['discount'] != 0) echo $val['discount']."<span class='undertext'>đ</span>"?>
                                     </div>

@@ -1249,6 +1249,10 @@ input#cart_list:checked + .cart-list {
     position: absolute;
     top: -12px;
     left: 9px;
+    transition: transform 0.1s linear;
+}
+.product-item-img:hover{
+    transform: translateY(-10px)  scale(1.1, 1.15);
 }
 .app-containt-body
     .wrap

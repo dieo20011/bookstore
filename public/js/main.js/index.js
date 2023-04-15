@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
     $("span#span-3").on("click", function () {
         $parent = $(this).closest(".cart-product-prices");
         $id = $parent
@@ -9,7 +14,7 @@ $(document).ready(function () {
             .get();
 
         $.ajax({
-            url: "?controller=cart&action=delete",
+            url: "/Cart/delete",
             method: "POST",
             data: { MaSP: $id[0] },
             success: function (data) {
@@ -24,7 +29,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#voucher").on("click", function () {
         $.ajax({
-            url: "?controller=order&action=discountPage",
+            url: "/Order/discountPage",
             method: "POST",
             success: function (data) {
                 if (data == false) {
@@ -37,7 +42,7 @@ $(document).ready(function () {
 
                 $("#confirm").on("click", function () {
                     $.ajax({
-                        url: "?controller=order&action=confirmPage",
+                        url: "/Order/confirmPage",
                         method: "POST",
                         success: function (data) {
                             $(".serviec-body").html(data);
@@ -47,7 +52,7 @@ $(document).ready(function () {
 
                             $("#order").on("click", function () {
                                 $.ajax({
-                                    url: "?controller=bill&action=store",
+                                    url: "Bill/store",
                                     method: "POST",
                                     success: function (data) {
                                         $(".serviec-body").html(
@@ -289,6 +294,11 @@ $(document).ready(function () {
         $(".modal").css("display", "none");
     });
     $(".des.btn-id").on("click", function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
         $parent = $(this).closest(".product-edit");
         $id = $parent
             .children("input")
@@ -298,16 +308,21 @@ $(document).ready(function () {
             .get();
 
         $.ajax({
-            url: "?controller=cart&action=update",
+            url: "/Cart/update",
             method: "POST",
             data: { MaSP: $id[0], option: "des" },
             success: function (data) {
                 location.reload();
-                $(".product-list").html(data);
+                $(".cart-body-contain").html(data);
             },
         });
     });
     $(".inc.btn-id").on("click", function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
         $parent = $(this).closest(".product-edit");
         $id = $parent
             .children("input")
@@ -317,18 +332,23 @@ $(document).ready(function () {
             .get();
 
         $.ajax({
-            url: "?controller=cart&action=update",
+            url: "/Cart/update",
             method: "POST",
             data: { MaSP: $id[0], option: "inc" },
             success: function (data) {
                 location.reload();
 
-                $(".product-list").html(data);
+                $(".cart-body-contain").html(data);
             },
         });
     });
 
     $("i.fas.fa-trash-alt").on("click", function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
         $parent = $(this).closest(".product-right");
         $id = $parent
             .children("input")
@@ -337,12 +357,12 @@ $(document).ready(function () {
             })
             .get();
         $.ajax({
-            url: "?controller=cart&action=delete",
+            url: "/Cart/delete",
             method: "POST",
             data: { MaSP: $id[0], option: "car-form" },
             success: function (data) {
                 location.reload();
-                $("#cart").html(data);
+                $(".cart-body-contain").html(data);
             },
         });
     });

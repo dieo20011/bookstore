@@ -12,8 +12,8 @@ class UserController extends Controller
     private $func;
     private $limit;
     private $MAIN_PAGE = 'frontend.home.master';
-    private $REGISTER_FORM ='form.register';
-    private $LOGIN_FORM ='form.login';
+    private $REGISTER_FORM ='frontend.form.register';
+    private $LOGIN_FORM ='frontend.form.login';
     private $TYPE_MESSAGE_SUCESS = "success";
     private $TYPE_MESSAGE_ERROR = "error";
 
@@ -66,8 +66,8 @@ class UserController extends Controller
             $dataNew = session()->get('data');
             $dataNew['result'] = "Đăng nhập để mua nhiều sách hơn";
             $dataNew['typeMessage'] = "error";
-            $dataNew += ['page' => 'home.index'];
             unset($dataNew['userInfo']);
+            unset($dataNew['pageNew']);
             session()->put('data', $dataNew);
 
             return view($this->MAIN_PAGE, ['data' => $dataNew]);
