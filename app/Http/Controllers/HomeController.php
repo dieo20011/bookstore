@@ -183,4 +183,46 @@ class HomeController extends Controller
  
         return view('frontend.home.master', ['data' => $dataNew]);
     }
+    public function search(Request $request){
+        $search = $request->input('search');
+        if(empty($search)){
+             return view('frontend.home.search', ['books' => []]);
+        }
+        $booksArray =$this->productModel->search($search);
+        $books=[];
+        foreach ($booksArray as $k => $book) {
+            $author = json_decode(json_encode($this->authorModel->findById($book->MaTG)), True);
+
+            $sale = json_decode(json_encode($this->promotionModel->findById($book->MaKM)), True);
+            $discount = 0;
+            $today = date("Y-m-d");
+            if (strtotime($today) >= strtotime($sale['NgayBatDau']) && strtotime($today) <= strtotime($sale['NgayKetThuc'])) {
+                $discount = round($book->DonGia * ((100 - $sale['PhanTram']) / 100), -3);
+                $discount = currency_format($discount);
+            }
+            $authorName = $author['TenTG'];
+            $salePercent = $sale['PhanTram'];
+
+            if ($sale['PhanTram'] == 0 || $sale['TinhTrang'] == 0 || $book->TTKM == 0) {
+                $discount = 0;
+                $salePercent = 0;
+            }
+            // $discount = $this->dicountModel->findById($item['MaKM']);
+            $bookSearchArr = [
+                'MaSP'      => $book->MaSP,
+                'TenSP'     => $book->TenSP,
+                'DonGia'    => $book->DonGia,
+                'SoLuong'   => $book->SoLuong,
+                'TenTG'     => $authorName,
+                'img'       => $book->img,
+                'MoTa'      => $book->MoTa,
+                'KhuyenMai' => $salePercent,
+                'discount'  => $discount
+                //customer
+            ];
+
+            array_push($books, $bookSearchArr);
+        }
+        return view('frontend.home.search', ['books' => $books]);
+    }
 }

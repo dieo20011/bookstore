@@ -54,4 +54,15 @@ class ProductModel extends Model
     {
         return DB::select("SELECT * FROM " . $this->table . " where MaTl = $id limit $limit");
     }
+    public function search($search){
+        $arr= DB::table('sach as s')
+        ->join('tacgia as tg', 's.MaTG', '=', 'tg.MaTG')
+        ->join('theloai as tl', 's.MaTL', '=', 'tl.MaTL')
+        ->select('s.*', 'tg.TenTG', 'tl.TenTheLoai')
+        ->where('s.TenSP', 'like', '%'.$search.'%')
+        ->orWhere('tg.TenTG', 'like', '%'.$search.'%')
+        ->orWhere('tl.TenTheLoai', 'like', '%'.$search.'%')
+        ->get();
+        return $arr;
+    }
 }
