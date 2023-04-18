@@ -128,7 +128,7 @@ class CartController extends Controller
         $message = "";
         if (isset($_POST['option'])) {
             if ($_POST['option'] == "des") {
-                if ($dataNew[$_POST['MaSP']]['SoLuong'] > 0) {
+                if ($dataNew[$_POST['MaSP']]['SoLuong'] > 1) {
                     $dataNew[$_POST['MaSP']]['SoLuong'] -= 1;
                 }
             } else {

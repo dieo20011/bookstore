@@ -21,7 +21,10 @@ class OrderController extends Controller {
             // dd(session('data'));
 
             if(is_null(session('data.cart')) || count(session('data.cart')) == 0){
-               echo "Giỏ hàng rỗng";
+                $dataNew = session()->get('data');
+                $dataNew['result'] = "Giỏ hàng rỗng, bạn hãy tham khảo sách ở đây";
+                $dataNew['typeMessage'] = "error";
+                return view('frontend.home.master', ['data' => $dataNew]);
             } else {
                 $total_products = 0;
                 foreach(session('data.cart') as $key => $value) {
@@ -70,6 +73,6 @@ class OrderController extends Controller {
         unset($dataNew["nextPage"]);
         $dataNew["nextPage"]  = "confirm";
         session()->put('data', $dataNew);
-        return view($mainPage, ['data' => $dataNew]); return view($mainPage, $dataNew);
+        return view($mainPage, ['data' => $dataNew]);
       }
 }

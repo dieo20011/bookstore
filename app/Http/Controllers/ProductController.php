@@ -87,7 +87,6 @@ class ProductController extends Controller
         $data['publisher'] = getByCondition('nxb', 'MaDM', $data['menu']->first()->MaDM);
         $data['promotion'] = getGroup('ctkm');
         header('Content-Type: application/json');
-        return (json_encode($data));
         $data = json_decode(json_encode($data), True);
         return view('admin.product.formAddProduct', ['data' => $data]);
     }

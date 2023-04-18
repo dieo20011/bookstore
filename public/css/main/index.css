@@ -1110,17 +1110,11 @@ input#cart_list:checked + .cart-list {
     /* epeat(auto-fit, minmax(calc(var(--width-config / 2)), 1fr)); */
     grid-template-rows: auto;
 }
-    .product-container {
-        /* width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        grid-gap: 20px;
-        justify-items: center;*/
+    .product-container.product-container-search {
         max-width: 1200px;
         margin: auto;
         box-sizing: border-box;
         margin-top: 40px;
-        width: 100%;
         background-color: #f2f5f7;
         display: grid;
         row-gap: 20px;
@@ -1128,7 +1122,7 @@ input#cart_list:checked + .cart-list {
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         grid-template-rows: auto;
     }
-.product-container .product-item {
+.product-container.product-container-search .product-item {
     cursor: pointer;
     background-color: #fff;
     padding-bottom: 10px;

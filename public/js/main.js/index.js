@@ -1,30 +1,3 @@
-$(document).ready(function () {
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    $("span#span-3").on("click", function () {
-        $parent = $(this).closest(".cart-product-prices");
-        $id = $parent
-            .children("input")
-            .map(function () {
-                return $(this).val();
-            })
-            .get();
-
-        $.ajax({
-            url: "/Cart/delete",
-            method: "POST",
-            data: { MaSP: $id[0] },
-            success: function (data) {
-                location.reload();
-                $("#cart").html(data);
-            },
-        });
-    });
-});
-
 // order
 $(document).ready(function () {
     $("#voucher").on("click", function () {
@@ -71,8 +44,6 @@ $(document).ready(function () {
     });
 
     $(window).resize(function () {
-        console.log("ok");
-
         var windowWidth = $(window).width();
         if (windowWidth <= 1100) {
             $(window).scroll(function () {
@@ -284,94 +255,20 @@ $(document).ready(function () {
         });
     });
 });
-// const btn_close = document.querySelector('#close');
-// btn_close.onclick = function () {
-//     document.querySelector('.modal').style.display = "none";
-// }
-
-$(document).ready(function () {
-    $("#close").on("click", function () {
-        $(".modal").css("display", "none");
-    });
-    $(".des.btn-id").on("click", function () {
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-        });
-        $parent = $(this).closest(".product-edit");
-        $id = $parent
-            .children("input")
-            .map(function () {
-                return $(this).val();
-            })
-            .get();
-
-        $.ajax({
-            url: "/Cart/update",
-            method: "POST",
-            data: { MaSP: $id[0], option: "des" },
-            success: function (data) {
-                location.reload();
-                $(".cart-body-contain").html(data);
-            },
-        });
-    });
-    $(".inc.btn-id").on("click", function () {
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-        });
-        $parent = $(this).closest(".product-edit");
-        $id = $parent
-            .children("input")
-            .map(function () {
-                return $(this).val();
-            })
-            .get();
-
-        $.ajax({
-            url: "/Cart/update",
-            method: "POST",
-            data: { MaSP: $id[0], option: "inc" },
-            success: function (data) {
-                location.reload();
-
-                $(".cart-body-contain").html(data);
-            },
-        });
-    });
-
-    $("i.fas.fa-trash-alt").on("click", function () {
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-        });
-        $parent = $(this).closest(".product-right");
-        $id = $parent
-            .children("input")
-            .map(function () {
-                return $(this).val();
-            })
-            .get();
-        $.ajax({
-            url: "/Cart/delete",
-            method: "POST",
-            data: { MaSP: $id[0], option: "car-form" },
-            success: function (data) {
-                location.reload();
-                $(".cart-body-contain").html(data);
-            },
-        });
-    });
-});
 
 const btn_submenu = document.querySelector("#info-user");
-btn_submenu.onclick = function () {
-    document.querySelector("#submenu-info").classList.toggle("turnOn");
-};
+if(btn_submenu != null) {
+    btn_submenu.onclick = function () {
+        document.querySelector("#submenu-info").classList.toggle("turnOn");
+    };
+}
+const btn_close = document.querySelector('#close');
+if(btn_close != null) {
+    btn_close.onclick = function () {
+        document.querySelector('.modal').style.display = "none";
+    }    
+}
+
 
 function validateForm(formSelecter) {
     let formRules = {};

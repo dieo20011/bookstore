@@ -6,7 +6,7 @@
 <div class="header-search-title" >
     <h1>Kết quả tìm kiếm cho "{{ request('search') }}":</h1>
 </div>
-<div class="product-container">
+<div class="product-container product-container-search ">
     @foreach($books as $book)
 
     <div class="product-item">

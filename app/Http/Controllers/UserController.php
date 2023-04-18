@@ -47,8 +47,8 @@ class UserController extends Controller
             if(!empty($userInfo)) {
                 $dataNew['userInfo'] = $userInfo;
                 if($userInfo->Quyen == 1) {
-                    dd("admin");    
-                    header("location:./index.php?controller=admin&action=index");
+                    session()->put('data.userInfo', $userInfo);
+                    return redirect(route('admin'));  
                 }
             }
             $errString = "Mật khẩu hoặc tài khoản không đúng";

@@ -457,7 +457,6 @@
         margin-top: 10px;
         width: calc(var(--width-config) - 20px);
         margin-left: 0;
-        padding: 10px;
     }
     .btn:not(.btn:first-child) {
         margin: auto;
@@ -504,8 +503,8 @@
     
     .btn:not(.btn:first-child) {
         flex-direction: column;
-        /* display: flex; */
-        height: auto;
+        display: inline-block;
+        height: max-content
     }
     .form-cart  {
         padding: 0;
@@ -578,5 +577,8 @@
     .product-container {
         grid-template-columns: 1fr;
         padding: 10px 20px;
+    }
+    .product-container.product-container-search {
+        grid-template-columns: 1fr;
     }
 }

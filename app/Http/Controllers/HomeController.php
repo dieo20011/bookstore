@@ -187,6 +187,12 @@ class HomeController extends Controller
         ];
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+        if(!is_null(session('isAdmin'))) {
+            $dataNew['result'] = "Xin lỗi bạn không có quyền truy cập admin";
+            $dataNew['typeMessage'] = "error";
+            $request->session()->forget('isAdmin');
+        }
+
         session()->put('data', $dataNew);
 
         return view('frontend.home.master', ['data' => $dataNew]);

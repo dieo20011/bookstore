@@ -161,8 +161,9 @@
         </div>
    </div>
 </div>
-   <script src="{{asset('/js/vendor/jquery/jquery.min.js')}}"></script>
+   <!-- <script src="{{asset('/js/vendor/jquery/jquery.min.js')}}"></script> -->
    <script src="{{asset('/js/main.js/index.js')}}"></script>
+
     <script> validateForm('#login');</script>
     <script> validateForm('#register-from');</script>
     

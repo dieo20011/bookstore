@@ -48,3 +48,81 @@
     </form>
 </div>
 @include('frontend.carts.cart-info-bill')
+
+<!-- Script for cart -->
+<script>
+    $(document).ready(function () {
+    $("#close").on("click", function () {
+        $(".modal").css("display", "none");
+    });
+    $(".des.btn-id").on("click", function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $parent = $(this).closest(".product-edit");
+        $id = $parent
+            .children("input")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+
+        $.ajax({
+            url: "/Cart/update",
+            method: "POST",
+            data: { MaSP: $id[0], option: "des" },
+            success: function (data) {
+                $(".cart-body-contain").html(data);
+            },
+        });
+    });
+    $(".inc.btn-id").on("click", function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $parent = $(this).closest(".product-edit");
+        $id = $parent
+            .children("input")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+
+        $.ajax({
+            url: "/Cart/update",
+            method: "POST",
+            data: { MaSP: $id[0], option: "inc" },
+            success: function (data) {
+                $(".cart-body-contain").html(data);
+            },
+        });
+    });
+
+    $("i.fas.fa-trash-alt").on("click", function () {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $parent = $(this).closest(".product-right");
+        $id = $parent
+            .children("input")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        $.ajax({
+            url: "/Cart/delete",
+            method: "POST",
+            data: { MaSP: $id[0], option: "car-form" },
+            success: function (data) {
+                $(".cart-body-contain").html(data);
+            },
+        });
+    });
+});
+</script>
