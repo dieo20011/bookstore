@@ -53,18 +53,24 @@ class ProductModel extends Model
     public function getByCategoryId($id, $limit = 15, $start = 0, $orderBy = "DESC", $column = 'SoLuong')
     {
         $products = DB::table($this->table)->where("MaTL", $id)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
-        // return DB::select("SELECT * FROM " . $this->table . " where MaTl = $id limit $limit");
         return $products;
     }
-    public function search($search){
-        $products= DB::table('sach as s')
-        ->join('tacgia as tg', 's.MaTG', '=', 'tg.MaTG')
-        ->join('theloai as tl', 's.MaTL', '=', 'tl.MaTL')
-        ->select('s.*', 'tg.TenTG', 'tl.TenTheLoai')
-        ->where('s.TenSP', 'like', '%'.$search.'%')
-        ->orWhere('tg.TenTG', 'like', '%'.$search.'%')
-        ->orWhere('tl.TenTheLoai', 'like', '%'.$search.'%')
-        ->get();
+    public function getByItemChildMenu($condition, $limit = 15, $start = 0, $orderBy = "DESC", $column = 'SoLuong')
+    {
+        $products = DB::table($this->table)->where($condition)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
+        return $products;
+    }
+
+    public function search($search)
+    {
+        $products = DB::table('sach as s')
+            ->join('tacgia as tg', 's.MaTG', '=', 'tg.MaTG')
+            ->join('theloai as tl', 's.MaTL', '=', 'tl.MaTL')
+            ->select('s.*', 'tg.TenTG', 'tl.TenTheLoai')
+            ->where('s.TenSP', 'like', '%' . $search . '%')
+            ->orWhere('tg.TenTG', 'like', '%' . $search . '%')
+            ->orWhere('tl.TenTheLoai', 'like', '%' . $search . '%')
+            ->get();
         return $products;
     }
 }

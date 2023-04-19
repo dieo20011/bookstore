@@ -133,8 +133,6 @@ class HomeController extends Controller
             $discount = $arrProduct['DonGia'];
             $salePercent = 0;
         }
-        // $discount = round($arrProduct['DonGia'] * ((100 - $salePercent)/100), -3);
-        // $discount = currency_format($discount);
 
         $save = round($arrProduct['DonGia'] * (($salePercent) / 100), -3);
         $save = currency_format($save);
@@ -151,7 +149,6 @@ class HomeController extends Controller
             "save"  => $save,
             "salePercent" => $salePercent,
         ];
-
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         session()->put('data.cart', $cart);
         return view('frontend.products.detail', ['data' => $dataNew]);
@@ -187,7 +184,7 @@ class HomeController extends Controller
         ];
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
-        if(!is_null(session('isAdmin'))) {
+        if (!is_null(session('isAdmin'))) {
             $dataNew['result'] = "Xin lỗi bạn không có quyền truy cập admin";
             $dataNew['typeMessage'] = "error";
             $request->session()->forget('isAdmin');
@@ -197,20 +194,8 @@ class HomeController extends Controller
 
         return view('frontend.home.master', ['data' => $dataNew]);
     }
-
-    public function search(Request $request)
+    private function loadDeatailForProductSearch($booksArray)
     {
-        $search = $request->input('search');
-        if (empty($search)) {
-            $dataNew = [
-                'books' => [],
-                'pageNew' => 'frontend.products.search'
-            ];
-            $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
-            $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
-            return view('frontend.home.master', ['data' => $dataNew]);
-        }
-        $booksArray = $this->productModel->search($search);
         $books = [];
         foreach ($booksArray as $k => $book) {
             $author = json_decode(json_encode($this->authorModel->findById($book->MaTG)), True);
@@ -229,7 +214,6 @@ class HomeController extends Controller
                 $discount = 0;
                 $salePercent = 0;
             }
-            // $discount = $this->dicountModel->findById($item['MaKM']);
             $bookSearchArr = [
                 'MaSP'      => $book->MaSP,
                 'TenSP'     => $book->TenSP,
@@ -240,11 +224,40 @@ class HomeController extends Controller
                 'MoTa'      => $book->MoTa,
                 'KhuyenMai' => $salePercent,
                 'discount'  => $discount
-                //customer
             ];
 
             array_push($books, $bookSearchArr);
         }
+        return $books;
+    }
+    public function searchByMenu(Request $request)
+    {
+        $condition = $request->all();
+        $booksArray = $this->productModel->getByItemChildMenu($condition);
+        $books = $this->loadDeatailForProductSearch($booksArray);
+        $dataNew = session('data');
+        $dataNew['books'] = $books;
+        $dataNew['pageNew'] = 'frontend.products.search';
+        $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
+        $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+        return view('frontend.home.master', ['data' => $dataNew]);
+    }
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $dataNew = session('data');
+        if (empty($search)) {
+            $dataNew = [
+                'books' => [],
+                'pageNew' => 'frontend.products.search'
+            ];
+            $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
+            $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+            return view('frontend.home.master', ['data' => $dataNew]);
+        }
+        $booksArray = $this->productModel->search($search);
+
+        $books = $this->loadDeatailForProductSearch($booksArray);
         $dataNew = [
             'books' => $books,
             'pageNew' => 'frontend.products.search'

@@ -1121,6 +1121,8 @@ input#cart_list:checked + .cart-list {
         column-gap: 18px;
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         grid-template-rows: auto;
+        position: relative;
+        z-index: 5;
     }
 .product-container.product-container-search .product-item {
     cursor: pointer;
@@ -2017,4 +2019,32 @@ span.undertext {
 .Notification.error {
     color: rgb(222, 27, 27);
     background-color: #e6e6e6;
+}
+
+/* search */
+.app-containt-top-search {
+    width: 100%;
+    height: 564px;
+    background-color: #f2f5f7;
+    position: absolute;
+}
+.app-containt-top-search .wrap-search {
+    width: 1200px;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 6;
+}
+.app-containt-top-search .wrap-search .app-containt-top-category {
+    width: 270px;
+    height: 100%;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    margin-top: 2px;
+    border-bottom: none;
+    position: absolute;
+    z-index: 7;
 }

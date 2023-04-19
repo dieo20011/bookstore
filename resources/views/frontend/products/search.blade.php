@@ -1,10 +1,14 @@
-
+<div class="app-containt-top">
+    <div class="wrap">
+        @include('frontend.categorys.CategoryList')
+    </div>
+</div>
 @if(count($data['books']) > 0)
 @php 
     $books = $data['books'];
 @endphp
 <div class="header-search-title" >
-    <h1>Kết quả tìm kiếm cho "{{ request('search') }}":</h1>
+    <h1>Kết quả tìm kiếm cho "{{ request('search') }} ":</h1>
 </div>
 <div class="product-container product-container-search ">
     @foreach($books as $book)
@@ -39,15 +43,9 @@
         <div class="product-item-bottom">
             <div class="product-bottom-wrap">
                 <div class="pricres">
-                    {{-- <?php
-                                        if($book['discount'] != 0) {
-                                    ?> --}}
                     <div class="btn-price">
                         <?php echo "-".$book['KhuyenMai']."%"?>
                     </div>
-                    {{-- <?php
-                }
-                                    ?> --}}
                     <div class="prices-detail">
                         <span class="prices-cost <?php if($book['discount'] != 0) echo  
                                         'line-through'?> "> <?php echo $book['DonGia']?><span

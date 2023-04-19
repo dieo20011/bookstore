@@ -31,6 +31,7 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/searchByMenu', [HomeController::class, 'searchByMenu'])->name('searchByMenu');
 Route::prefix('/DetailBook')->name('detailbook')->group(
     function () {
         Route::get('/{id}', [HomeController::class, 'loadDetailProduct']);
