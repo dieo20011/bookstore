@@ -1,69 +1,43 @@
-<div class="app-containt-top">
-    <div class="wrap">
+<input type="checkbox" hidden id="menu-to-search">
+<div class="app-containt-top search">
+    <div class="wrap search">
         @include('frontend.categorys.CategoryList')
     </div>
 </div>
-@if(count($data['books']) > 0)
-@php 
-    $books = $data['books'];
-@endphp
 <div class="header-search-title" >
-    <h1>Kết quả tìm kiếm cho "{{ request('search') }} ":</h1>
+    <div style="display: flex; justify-content: space-between; width: 100%; padding-bottom: 20px">
+        <h1>Kết quả tìm kiếm cho "{{ request('search') }} ":</h1>
+        <select name="priceSort" id="priceSort" style="outline: none; padding: 5px 10px">
+            <option value="asc">Thấp đến cao</option>
+            <option value="desc">Cao đến thấp</option>
+        </select>
+    </div>
+    @if(count($data['books']) <= 0)
+    <p style="display:flex; justify-content:center; width:100%; align-items: center; height: 60px;">Không tìm thấy kết quả nào nhưng bạn hãy tham khảo sách dưới đây nhé!
+    </p>
+    @endif
 </div>
 <div class="product-container product-container-search ">
-    @foreach($books as $book)
-
-    <div class="product-item">
-        <div class="product-item-top">
-            <div class="product-item-img">
-                <?php
-                    $id = $book['MaSP']
-                ?>
-                <a href="{{ route('detailbook', ['id'=>$id]) }}">
-                    @php
-                    $img = "img/product/".$book['img'];
-                    @endphp
-                    <img src="{{asset($img)}}" alt="">
-                </a>
-            </div>
-            <div class="product-item-decription">
-                <div class="product-item-header">
-                    <a class="product-item-name">
-                        <?php echo $book['TenSP']?>
-                    </a>
-                    <span class="product-item-author">
-                        <?php echo $book['TenTG']?>
-                    </span>
-                </div>
-                <div class="product-item-des-detail">
-                    <?php echo $book['MoTa']?>
-                </div>
-            </div>
-        </div>
-        <div class="product-item-bottom">
-            <div class="product-bottom-wrap">
-                <div class="pricres">
-                    <div class="btn-price">
-                        <?php echo "-".$book['KhuyenMai']."%"?>
-                    </div>
-                    <div class="prices-detail">
-                        <span class="prices-cost <?php if($book['discount'] != 0) echo  
-                                        'line-through'?> "> <?php echo $book['DonGia']?><span
-                                class="undertext">đ</span></span>
-                        <span class="promotion-price">
-
-                            <?php if($book['discount'] != 0) echo $book['discount']."<span class='undertext'>đ</span>"?>
-
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
+  @include('frontend.products.listProductForSearch')
 </div>
-@else
-<p style="display:flex; justify-content:center; width:100%; align-items: center; height: 200px;">Không tìm thấy kết quả
-    nào.
-</p>
-@endif
+
+
+<script>
+     $("#priceSort").change(function () {
+        let price = $(this).val();
+        console.log(price);
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $.ajax({
+            url: "/searchByPrice",
+            method: "POST",
+            data: { price: price },
+            success: function (data) {
+                $(".product-container.product-container-search").html(data);
+            },
+        });
+    });
+</script>

@@ -99,7 +99,9 @@
                     <div class="app-title-list">
                         <i class="fas fa-bars"></i>
                         <span>Danh Mục Sách</span>
-                        <i class="fas fa-chevron-down"></i>
+                        <label for="menu-to-search">
+                            <i class="fas fa-chevron-down"></i>
+                        </label>
                     </div>
                     <div class="app-title-list">
                         <div class="app-tile-contact">

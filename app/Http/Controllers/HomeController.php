@@ -151,6 +151,9 @@ class HomeController extends Controller
         ];
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         session()->put('data.cart', $cart);
+        //get old data
+        $dataNew += session('data');
+
         return view('frontend.products.detail', ['data' => $dataNew]);
     }
 
@@ -230,6 +233,23 @@ class HomeController extends Controller
         }
         return $books;
     }
+    public function searchByPrice(Request $request)
+    {
+        if ($request->session()->has('data.booksNew')) {
+            $books = session('data.booksNew');
+        } else {
+            $books = $request->session()->has('data.books') ? session('data.books') : [];
+        }
+        if (isset($_POST['price']) && $_POST['price'] == 'asc') {
+            usort($books, "compareByDonGia");
+        } else {
+            $books = array_reverse($books);
+        }
+        $dataNew = session('data');
+        $dataNew['books'] = $books;
+        session()->put('data.books', $books);
+        return view('frontend.products.listProductForSearch', ['books' => $books]);
+    }
     public function searchByMenu(Request $request)
     {
         $condition = $request->all();
@@ -240,10 +260,15 @@ class HomeController extends Controller
         $dataNew['pageNew'] = 'frontend.products.search';
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+        unset($dataNew['result']);
+        unset($dataNew['typeMessage']);
+        session()->put('data.books', $books);
         return view('frontend.home.master', ['data' => $dataNew]);
     }
     public function search(Request $request)
     {
+        session()->forget('data.books');
+        session()->forget('data.booksNew');
         $search = $request->input('search');
         $dataNew = session('data');
         if (empty($search)) {
@@ -264,6 +289,15 @@ class HomeController extends Controller
         ];
         $dataNew['userInfo'] = !is_null(session('data.userInfo')) ? session('data.userInfo') : null;
         $dataNew['cart'] = !is_null(session('data.cart')) ? session('data.cart') : [];
+        session()->put('data.books', $books);
+
+        if (count($booksArray) <= 0) {
+            $booksNew = $this->productModel->getAll();
+            $booksNew = $this->loadDeatailForProductSearch($booksNew);
+            $dataNew['booksNew'] = $booksNew;
+            session()->put('data.booksNew', $booksNew);
+        }
+        $dataNew += session('data');
         return view('frontend.home.master', ['data' => $dataNew]);
     }
 }

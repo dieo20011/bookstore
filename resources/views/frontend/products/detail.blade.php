@@ -1,8 +1,4 @@
-{{-- <?php 
-    if(isset($data['notification'])) {
-        include_once("./Views/frontend/carts/cartNotification.php");
-    }
-?> --}}
+
 @extends('frontend.masterLayout')
 @section('header')
 @include('frontend.blocks.header2')
@@ -11,7 +7,12 @@
     @if(isset($data['notification'])) 
         @include("frontend.carts.cartNotification");
     @endif
-  
+<input type="checkbox" hidden id="menu-to-search">
+<div class="app-containt-top search">
+    <div class="wrap search">
+        @include('frontend.categorys.CategoryList')
+    </div>
+</div>
 <div class="product-detail-containt">
     <div class="wrap">
         <div class="product-detail">
