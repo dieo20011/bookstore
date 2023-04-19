@@ -55,13 +55,13 @@ class ProductModel extends Model
         $products = DB::table($this->table)->where("MaTL", $id)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
         return $products;
     }
-    public function getByItemChildMenu($condition, $limit = 15, $start = 0, $orderBy = "DESC", $column = 'SoLuong')
+    public function getByItemChildMenu($condition, $limit = 15, $start = 0, $orderBy = "DESC", $column = 'DonGia')
     {
         $products = DB::table($this->table)->where($condition)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
         return $products;
     }
 
-    public function search($search)
+    public function search($search, $limit = 15, $start = 0, $orderBy = "DESC", $column = 'DonGia')
     {
         $products = DB::table('sach as s')
             ->join('tacgia as tg', 's.MaTG', '=', 'tg.MaTG')
@@ -70,6 +70,9 @@ class ProductModel extends Model
             ->where('s.TenSP', 'like', '%' . $search . '%')
             ->orWhere('tg.TenTG', 'like', '%' . $search . '%')
             ->orWhere('tl.TenTheLoai', 'like', '%' . $search . '%')
+            ->orderBy($column, $orderBy)
+            ->offset($start)
+            ->limit($limit)
             ->get();
         return $products;
     }

@@ -8,8 +8,8 @@
     <div style="display: flex; justify-content: space-between; width: 100%; padding-bottom: 20px">
         <h1>Kết quả tìm kiếm cho "{{ request('search') }} ":</h1>
         <select name="priceSort" id="priceSort" style="outline: none; padding: 5px 10px">
-            <option value="asc">Thấp đến cao</option>
             <option value="desc">Cao đến thấp</option>
+            <option value="asc">Thấp đến cao</option>
         </select>
     </div>
     @if(count($data['books']) <= 0)

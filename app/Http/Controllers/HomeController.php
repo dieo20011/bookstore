@@ -240,12 +240,9 @@ class HomeController extends Controller
         } else {
             $books = $request->session()->has('data.books') ? session('data.books') : [];
         }
-        if (isset($_POST['price']) && $_POST['price'] == 'asc') {
-            usort($books, "compareByDonGia");
-        } else {
-            $books = array_reverse($books);
-        }
+        $books = array_reverse($books);
         $dataNew = session('data');
+        unset($dataNew['books']);
         $dataNew['books'] = $books;
         session()->put('data.books', $books);
         return view('frontend.products.listProductForSearch', ['books' => $books]);
