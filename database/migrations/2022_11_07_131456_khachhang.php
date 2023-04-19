@@ -17,11 +17,11 @@ class Khachhang extends Migration
             $table->increments('MaKH');
             $table->string('TenKH');
             $table->date('NgaySinh');
-            $table->integer('GioiTinh');
+            $table->boolean('GioiTinh');
             $table->string('Matkhau');
             $table->string('Email');
             $table->integer('Quyen');
-            $table->string('ThongTinGiaoHang');
+            $table->string('ThongTinGiaoHang')->nullable();;
         });
     }
 

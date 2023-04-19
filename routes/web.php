@@ -64,6 +64,7 @@ Route::prefix('User/')->name('user.')->group(
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
         Route::get('/register', [UserController::class, 'register'])->name('register');
         Route::post('/checkRegister', [UserController::class, 'checkRegister'])->name('checkRegister');
+        Route::post('/update', [UserController::class, 'update'])->name('update');
     }
 );
 

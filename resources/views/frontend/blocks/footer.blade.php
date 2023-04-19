@@ -166,6 +166,7 @@
 
     <script> validateForm('#login');</script>
     <script> validateForm('#register-from');</script>
+    <script> validateForm('#address-form');</script>
     
 </body>
 </html>

@@ -25,11 +25,11 @@ $(document).ready(function () {
 
                             $("#order").on("click", function () {
                                 $.ajax({
-                                    url: "Bill/store",
+                                    url: "/Bill/store",
                                     method: "POST",
                                     success: function (data) {
                                         $(".serviec-body").html(
-                                            "<a href='index.php'>Quay lại trang chủ </a>"
+                                            "<a href='/'>Quay lại trang chủ </a>"
                                         );
                                         $(".cart-btn").html(data);
                                         $("#address-num-3").addClass("active");
@@ -43,57 +43,10 @@ $(document).ready(function () {
         });
     });
 
-    $(window).resize(function () {
-        var windowWidth = $(window).width();
-        if (windowWidth <= 1100) {
-            $(window).scroll(function () {
-                $(".header-search").css("top", "0");
-                if ($(window).scrollTop() == 0) {
-                    $(".header-search").css("top", "50px");
-                }
-            });
-        }
-    });
-    $(window).scroll(function () {
-        $(".app-header").css("top", "0");
-        if ($(window).scrollTop() == 0) {
-            $(".app-header").css("top", "30px");
-        }
-    });
     $(".btn.btn-back.disiable").on("click", function () {
         history.back();
     });
 
-    //update address
-    $("#btn-address").on("click", function () {
-        $phone = $("input[name='phone']").val();
-        $nation = $("input[name='nation']").val();
-        $province = $("input[name='province']").val();
-        $district = $("input[name='district']").val();
-        $Wards = $("input[name='Wards']").val();
-        $houseName = $("input[name='houseName']").val();
-        $houseNumber = $("input[name='hosueNumber']").val();
-        $way = $("input[name='way']").val();
-        $id = $("input[name='id']").val();
-        $.ajax({
-            url: "?controller=user&action=update",
-            method: "POST",
-            data: {
-                phone: $phone,
-                nation: $nation,
-                province: $province,
-                district: $district,
-                Wards: $Wards,
-                houseName: $houseName,
-                hosueNumber: $houseNumber,
-                way: $way,
-                id: $id,
-            },
-            success: function (data) {
-                $(".address").html(data);
-            },
-        });
-    });
     // show form edit
     $("button#showformedit").on("click", function () {
         $.ajax({
@@ -115,7 +68,7 @@ $(document).ready(function () {
                     $way = $("input[name='way']").val();
                     $id = $("input[name='id']").val();
                     $.ajax({
-                        url: "?controller=user&action=update",
+                        url: "/User/update",
                         method: "POST",
                         data: {
                             phone: $phone,
@@ -129,7 +82,6 @@ $(document).ready(function () {
                             id: $id,
                         },
                         success: function (data) {
-                            location.reload();
                             $(".address").html(data);
                         },
                     });
@@ -257,18 +209,17 @@ $(document).ready(function () {
 });
 
 const btn_submenu = document.querySelector("#info-user");
-if(btn_submenu != null) {
+if (btn_submenu != null) {
     btn_submenu.onclick = function () {
         document.querySelector("#submenu-info").classList.toggle("turnOn");
     };
 }
-const btn_close = document.querySelector('#close');
-if(btn_close != null) {
+const btn_close = document.querySelector("#close");
+if (btn_close != null) {
     btn_close.onclick = function () {
-        document.querySelector('.modal').style.display = "none";
-    }    
+        document.querySelector(".modal").style.display = "none";
+    };
 }
-
 
 function validateForm(formSelecter) {
     let formRules = {};
@@ -368,3 +319,22 @@ function validateForm(formSelecter) {
         };
     }
 }
+
+//window Listener
+$(window).resize(function () {
+    var windowWidth = $(window).width();
+    if (windowWidth <= 1100) {
+        $(window).scroll(function () {
+            $(".header-search").css("top", "0");
+            if ($(window).scrollTop() == 0) {
+                $(".header-search").css("top", "50px");
+            }
+        });
+    }
+});
+$(window).scroll(function () {
+    $(".app-header").css("top", "0");
+    if ($(window).scrollTop() == 0) {
+        $(".app-header").css("top", "30px");
+    }
+});

@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+
 class UserModel extends Model
 {
     use HasFactory;
@@ -24,21 +26,21 @@ class UserModel extends Model
         $user = DB::table($this->table)->where($this->ID, $id)->update($data);
         return $user;
     }
-    public function getUserByAcount($name, $pass) {
+    public function getUserByAcount($name, $pass)
+    {
         $pass = md5($pass);
-        $user = DB::table($this->table)->where( [
+        $user = DB::table($this->table)->where([
             ['Email', '=', $name],
             ['MatKhau', '=', $pass],
         ])->first();
         return $user;
-       
     }
-    public function getUserByUserName($name) {
-        $user = DB::table($this->table)->where( [
+    public function getUserByUserName($name)
+    {
+        $user = DB::table($this->table)->where([
             ['Email', '=', $name],
         ])->first();
         return $user;
-       
     }
     public function deleteData($id)
     {
