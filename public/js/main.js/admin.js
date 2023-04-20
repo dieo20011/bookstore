@@ -1,9 +1,3 @@
-function loadNotification() {
-    $(document).ready(function () {
-        $(".toast").toast("show");
-    });
-}
-
 $(document).ready(function () {
     function load_data(url, page, column = "ID", byOrder = "asc") {
         $.ajaxSetup({
@@ -172,8 +166,13 @@ $(document).ready(function () {
                 return $(this).text();
             })
             .get();
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
         $.ajax({
-            url: "?controller=bill&action=showDetail",
+            url: "/Bill/showDetail",
             method: "POST",
             data: { id: id },
             success: function (data) {
@@ -219,11 +218,17 @@ $(document).ready(function () {
             })
             .get();
         var MaHD = $("input#IDHD").val();
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
         $.ajax({
-            url: "?controller=Bill&action=showFormBillDetail",
+            url: "/Admin/Bill/showFormBillDetail",
             method: "POST",
             data: { MaSP: id, MaHD: MaHD },
             success: function (data) {
+                console.log(data);
                 $("#formEditDetailBill").html(data);
             },
         });
@@ -333,13 +338,10 @@ function validateForm(formSelecter) {
         };
     }
 }
-const arrayIDForm = ["#menu_form", "#menu_form_show"];
-arrayIDForm.map((form, index) => {
-    return validateForm(form);
-});
-// validateForm("#menu_form")
 
-// validateForm("#menu_form_show")
+validateForm("#menu_form");
+
+validateForm("#menu_form_show");
 
 validateForm("#author_form");
 
@@ -372,3 +374,13 @@ validateForm("#import_form_show");
 validateForm("#detail_import_form");
 
 validateForm("#statistical-two");
+
+// arrayIDForm.map((form, index) => {
+//     return validateForm(form);
+// });
+
+function loadNotification() {
+    $(document).ready(function () {
+        $(".toast").toast("show");
+    });
+}

@@ -33,10 +33,8 @@
     </td>
       <td> <div name="billDetail" id="billDetail" class="btn btn-link"> Xem chi tiết</div></td>
       <td>
-          <form action="./index.php" method="POST">
-              <input type="hidden" name="controller" value="bill">
-              <input type="hidden" name="action" value="show">
-              <input type="hidden" name="id" value="<?php echo $value['MaHD']?>">
+          <form action="{{route('bill.show', ['id'=> $value['MaHD']]) }}" method="POST">
+            @csrf
               <input type="hidden" name="page"  value="<?php echo $data['pageCurrent']?>">
               <button  type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
           </form>
@@ -55,27 +53,5 @@
     ?>
   </tbody>
 </table>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-end">
-    <li class="page-item <?php if(isset($data['pageCurrent']) && (1 == $data['pageCurrent'])) { echo 'disabled';}?>">
-      <a class="page-link " href="" page="<?php echo ($data['pageCurrent'] - 1)?> ">Previous</a>
-    </li>
-    <?php 
-        for($i = 1; $i <= $data['totalPage']; $i++) {
-    ?>
-    <li class="page-item <?php if(isset($data['pageCurrent']) && ($i==$data['pageCurrent'])) { echo 'active';}?>">
-      <a class="page-link " href="" page=<?php echo $i?> ><?php echo $i?></a>
-    </li>
-    <?php
-    }
-    ?>
-    <li class="page-item <?php if(isset($data['pageCurrent']) && ($data['totalPage'] <= $data['pageCurrent'])) { echo 'disabled';}?>">
-      <a class="page-link" page="<?php echo ($data['pageCurrent'] + 1)?> " href="">Next</a>
-    </li>
-  </ul>
-</nav>
-<?php include_once('./Views/admin/includes/scripts.php');?>
-<script>
-  load("?controller=bill&action=pagination");
-</script>
-<?php
+@include('admin.includes.formDelete')
+<script src="{{asset('js/main.js/admin.js')}}"></script>

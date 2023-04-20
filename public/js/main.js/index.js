@@ -47,10 +47,10 @@ $(document).ready(function () {
         history.back();
     });
 
-    // show form edit
+    // show form edit address user
     $("button#showformedit").on("click", function () {
         $.ajax({
-            url: "?controller=user&action=update",
+            url: "/User/update",
             method: "POST",
             data: {
                 option: "show",

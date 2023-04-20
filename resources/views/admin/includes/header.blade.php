@@ -19,7 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/css/sb-admin-2.css') }}" rel="stylesheet">
-
+  
   <script src="{{ asset('js/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{asset('/js/main.js/pagination.js')}}"></script>
 

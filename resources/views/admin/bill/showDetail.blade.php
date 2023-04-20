@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             <label> Khách hàng </label>
-            <input id="user" type="text" disabled name="user" class="form-control" placeholder="Nhà cung cấp" value="<?php echo $data['user']['TenKH']?>" >
+            <input id="user" type="text" disabled name="user" class="form-control" placeholder="Nhà cung cấp" value="<?php echo $data['userInfo']['TenKH']?>" >
         </div>
         <div class="form-group">
             <label>Tổng tiền</label>
@@ -30,7 +30,7 @@
 </div>
 <div class="modal-footer d-flex justify-content-between">
     <div>
-        <a class="btn btn-dark" href="?controller=bill&action=index" role="button">Back To list</a>
+        <a class="btn btn-dark" href="{{ route('bill.index') }}" role="button">Back To list</a>
     </div>
 </div>
 </form>

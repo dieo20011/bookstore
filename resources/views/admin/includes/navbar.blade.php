@@ -55,7 +55,7 @@
            <div id="collapseONE" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=bill&action=index">Danh sách đơn hàng</a>
+                   <a class="collapse-item" href="{{ route('bill.index') }}">Danh sách đơn hàng</a>
                </div>
            </div>
        </li>
@@ -69,7 +69,7 @@
            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
 
-                   <a class="collapse-item" href="?controller=user&action=index">Danh sách khách hàng</a>
+                   <a class="collapse-item" href="{{ route('user.index') }}">Danh sách khách hàng</a>
                </div>
            </div>
        </li>

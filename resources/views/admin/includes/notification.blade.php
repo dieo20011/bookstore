@@ -17,8 +17,7 @@
   </div>
 </div>
 
-<?php include_once('./Views/admin/includes/scripts.php'); ?> 
-<script>
+<script>  
 <?php if(isset($data['result'])) { ?>
      loadNotification()
 <?php unset($data['result']); } ?>

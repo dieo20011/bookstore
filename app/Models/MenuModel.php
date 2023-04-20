@@ -31,7 +31,6 @@ class MenuModel extends Model
         $menu = DB::table($this->table)->insertGetId($data);
         return $menu;
     }
-    
     public function getColumnName() {
         $arrName = DB::getSchemaBuilder()->getColumnListing($this->table);
         for($i = 0; $i < count($arrName); $i++) {

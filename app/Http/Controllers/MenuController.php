@@ -80,6 +80,14 @@ class MenuController extends Controller
 
     public function delete(Request $request)
     {
+        // $isCheckForeigKey = checkForeignKey(['tacgia'], $request->id, "MaDM");
+        // if (!$isCheckForeigKey) {
+        //     $message = "Danh mục đang tồn tại ở bảng khác không thể xóa được vui lòng không xóa";
+        // } else {
+        //     $message = "Xóa thành công";
+        // }
+        // $data['message'] = $message;
+        // $data['request'] = $isCheckForeigKey;
         $this->menu->deleteData($request->id);
         return redirect(route('menu.index'));
     }

@@ -36,4 +36,5 @@
 </table>
 
 @include('admin.includes.formDelete')
+@include('admin.includes.notification')
 <script src="{{asset('js/main.js/admin.js')}}"></script>

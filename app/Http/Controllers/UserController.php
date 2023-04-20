@@ -13,13 +13,12 @@ class UserController extends Controller
     private $userModel;
     private $billModel;
     private $func;
-    private $limit;
     private $MAIN_PAGE = 'frontend.home.master';
     private $REGISTER_FORM = 'frontend.form.register';
     private $LOGIN_FORM = 'frontend.form.login';
     private $TYPE_MESSAGE_SUCESS = "success";
     private $TYPE_MESSAGE_ERROR = "error";
-
+    private $limit = 5;
     public function __construct()
     {
         $this->userModel = new UserModel();
@@ -144,14 +143,14 @@ class UserController extends Controller
     public function update()
     {
         if (isset($_POST['option'])) {
-            $arrInfo = explode(', ', implode(', ', $_SESSION['data']['address-infor']));
+            $arrInfo = explode(', ', implode(', ', session('data.address-infor')));
             $arrInfoItem = (explode(' ', $arrInfo[0]));
             unset($arrInfo[0]);
             $arrInfo = array_merge($arrInfoItem, $arrInfo);
-            $dataNew = $_SESSION['data'];
+            $dataNew = session('data');
             $dataNew["arr-info"] = $arrInfo;
             $mainPage = 'frontend.payment.formAddress';
-            return $this->view($mainPage, $dataNew);
+            return view($mainPage,  ['data' => $dataNew]);
         }
 
         $arrAddress = [
@@ -188,6 +187,14 @@ class UserController extends Controller
         return view($mainPage, ['data' => $dataNew]);
     }
 
+    public function showInfo()
+    {
+
+        $dataNew = session('data');
+        $dataNew['pageNew'] = 'frontend.info.infoUser';
+        return view($this->MAIN_PAGE, ['data' => $dataNew]);
+    }
+
     public function showBill()
     {
         $dataNew = session('data');
@@ -222,5 +229,16 @@ class UserController extends Controller
 
 
         return view("frontend.info.list-bill-for-user", ['data' => $dataNew]);
+    }
+
+    public function index(Request $request)
+    {
+
+        return Pagination($this->limit, $this->userModel, 'home', 'user', $request);
+    }
+    public function pagination(Request $request)
+    {
+
+        return Pagination($this->limit, $this->userModel, 'loadTable', 'user', $request);
     }
 }

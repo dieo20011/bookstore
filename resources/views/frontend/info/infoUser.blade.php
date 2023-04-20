@@ -16,7 +16,7 @@
                     <div class="register-form-header">
                         Đăng ký tài khoản
                     </div>
-                    <?php $info = $_SESSION['data']['userInfo'];?>
+                    <?php $info = session('data.userInfo');?>
                     <form action="">
                         <div class="form-register">
                                 <div class="input-grroup">

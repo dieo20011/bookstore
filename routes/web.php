@@ -55,23 +55,41 @@ Route::prefix('/Order')->name('order.')->group(
 );
 Route::prefix('/Bill')->name('bill.')->group(
     function () {
+
+        Route::get('/', [BillController::class, 'index'])->name('index');
         Route::post('/store', [BillController::class, 'store']);
         Route::post('/showDetail', [BillController::class, 'showDetail']);
         Route::post('/updateDetailBillForUser', [BillController::class, 'updateDetailBillForUser']);
         Route::post('/deleteDetailBillForUser', [BillController::class, 'deleteDetailBillForUser']);
     }
 );
+Route::middleware('checkLogin')->prefix('Admin/Bill')->name('bill.')->group(
+    function () {
+        Route::match(['get', 'post'], '/Pagination', [BillController::class, 'pagination'])->name('pagination');
+        Route::get('/add', [BillController::class, 'store'])->name('add');
+        Route::match(['get', 'post'], '/delete', [BillController::class, 'delete'])->name('delete');
+        Route::get('/', [BillController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/showFormBillDetail', [BillController::class, 'showFormBillDetail'])->name('showFormBillDetail');
+        Route::match(['get', 'post'], '/show/{id}', [BillController::class, 'show'])->name('show');
+        Route::match(['get', 'post'], '/edit', [BillController::class, 'update'])->name('update');
+    }
+);
 //login  & register
 Route::prefix('User/')->name('user.')->group(
     function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/login', [UserController::class, 'login'])->name('login');
         Route::post('/checkLogin', [UserController::class, 'checkLogin'])->name('checkLogin');
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-        Route::get('/showBill', [UserController::class, 'showBill'])->name('showBill');
+        Route::get('/showBill', [UserController::class, 'showBill'])->name('showDBill');
+        Route::get('/showInfo', [UserController::class, 'showInfo'])->name('showInfo');
         Route::get('/register', [UserController::class, 'register'])->name('register');
+        Route::get('/add', [UserController::class, 'register'])->name('add');
+        Route::match(['get', 'post'], '/delete', [UserController::class, 'delete'])->name('delete');
         Route::post('/checkRegister', [UserController::class, 'checkRegister'])->name('checkRegister');
         Route::post('/update', [UserController::class, 'update'])->name('update');
         Route::post('/searchForTime', [UserController::class, 'searchForTime']);
+        Route::match(['get', 'post'], '/Pagination', [UserController::class, 'pagination'])->name('pagination');
     }
 );
 

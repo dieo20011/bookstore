@@ -3,7 +3,7 @@
     <div class="table-responsive">
       @include('admin.product.loadTable')
     </div>
-      @include('admin.includes.paginationNav');
+      @include('admin.includes.paginationNav')
     <script>
     load("Product/Pagination")
     </script>

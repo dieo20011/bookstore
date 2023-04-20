@@ -22,6 +22,10 @@ function getTitlePage($titleRoute)
             return "sách";
         case 'import':
             return "phiếu nhập";
+        case 'user':
+            return "Khách hàng";
+        case 'bill':
+            return "Hóa đơn";
     }
 }
 function Pagination($limit, $model, $pageMain, $title, $request)
@@ -84,4 +88,25 @@ function currency_format($number, $suffix = 'đ')
 function compareByDonGia($a, $b)
 {
     return $a['DonGia'] - $b['DonGia'];
+}
+
+// select * form $table = "a, b, c" where a.id = b.id or b.id = c.id
+// [danhmuc, tacgia, nxb, theloai] 'column' value
+function checkForeignKey($table, $id, $column)
+{
+    $checkFK = true;
+    for ($i = 0; $i < count($table); $i++) {
+
+        $sql = "SELECT * FROM $table[$i] WHERE $table[$i].$column = $id";
+        $query = [];
+        $query = _query($sql);
+        if (count($query) > 0) {
+            $checkFK =  false;
+        }
+    }
+    return $checkFK;
+}
+function _query($sql)
+{
+    return DB::select($sql);
 }

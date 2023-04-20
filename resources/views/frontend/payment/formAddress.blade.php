@@ -2,12 +2,12 @@
     <div class="form-address">
         <div class="group-input input-grroup">
             <label for=""> <span>Họ và tên</span> </label>
-            <input type="text" name="name" rules="required" placeholder="Họ và tên">
+            <input type="text" name="name" rules="required" placeholder="Họ và tên" value="<?php if(isset($data['userInfo'])){echo trim($data['userInfo']['TenKH'], " ");}?>">
             <span class="errMassage"></span>
         </div>
         <div class="group-input input-grroup" id="address-form">
             <label for=""> <span>điện thoại</span></label>
-            <input rules="required" type="number" placeholder="" name="phone" value="<?php if(isset($data['arr-info'])){echo $data['arr-info'][7];}?>">
+            <input rules="required" type="number" placeholder="" name="phone" value="<?php if(isset($data['arr-info'])){echo trim($data['arr-info'][7], " ");}?>">
             <span class="errMassage"></span>
         </div>
         <div class="group-input input-grroup">
