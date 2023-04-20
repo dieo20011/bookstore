@@ -61,7 +61,7 @@ $(document).ready(function () {
             },
         });
         $.ajax({
-            url: "http://127.0.0.1:8000/Admin/Product/select",
+            url: "/Admin/Product/select",
             method: "POST",
             data: { idSelect: idSelect },
             success: function (data) {
@@ -97,7 +97,7 @@ $(document).ready(function () {
             },
         });
         $.ajax({
-            url: "http://127.0.0.1:8000/Admin/Import/addImportTemp",
+            url: "/Admin/Import/addImportTemp",
             method: "POST",
             data: {
                 MaSP: MaSP,
@@ -121,7 +121,7 @@ $(document).ready(function () {
         });
         alert("ị");
         $.ajax({
-            url: "http://127.0.0.1:8000/Admin/Import/updateDetailImport",
+            url: "/Admin/Import/updateDetailImport",
             method: "POST",
             data: {
                 MaSP: MaSP,
@@ -152,7 +152,7 @@ $(document).ready(function () {
         });
         console.log("ok");
         $.ajax({
-            url: "http://127.0.0.1:8000/Admin/Import/showDetail",
+            url: "/Admin/Import/showDetail",
             method: "POST",
             data: { id: id },
             success: function (data) {
@@ -200,7 +200,7 @@ $(document).ready(function () {
             },
         });
         $.ajax({
-            url: "http://127.0.0.1:8000/Admin/Import/showFormImportDetail",
+            url: "/Admin/Import/showFormImportDetail",
             method: "POST",
             data: { MaSP: id, MaPN: MaPN },
             success: function (data) {
