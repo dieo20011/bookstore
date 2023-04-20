@@ -56,6 +56,9 @@ Route::prefix('/Order')->name('order.')->group(
 Route::prefix('/Bill')->name('bill.')->group(
     function () {
         Route::post('/store', [BillController::class, 'store']);
+        Route::post('/showDetail', [BillController::class, 'showDetail']);
+        Route::post('/updateDetailBillForUser', [BillController::class, 'updateDetailBillForUser']);
+        Route::post('/deleteDetailBillForUser', [BillController::class, 'deleteDetailBillForUser']);
     }
 );
 //login  & register
@@ -64,9 +67,11 @@ Route::prefix('User/')->name('user.')->group(
         Route::get('/login', [UserController::class, 'login'])->name('login');
         Route::post('/checkLogin', [UserController::class, 'checkLogin'])->name('checkLogin');
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+        Route::get('/showBill', [UserController::class, 'showBill'])->name('showBill');
         Route::get('/register', [UserController::class, 'register'])->name('register');
         Route::post('/checkRegister', [UserController::class, 'checkRegister'])->name('checkRegister');
         Route::post('/update', [UserController::class, 'update'])->name('update');
+        Route::post('/searchForTime', [UserController::class, 'searchForTime']);
     }
 );
 

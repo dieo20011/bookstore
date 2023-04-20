@@ -126,6 +126,7 @@ td {
     text-align: center;
     border-radius: 3px;
     background-color: #e5e5e5;
+    cursor: pointer;
 }
 
 .bill-container .group-item .product-right {

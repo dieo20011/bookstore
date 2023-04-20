@@ -13,46 +13,61 @@ class BillDetailModel extends Model
     protected $ID = 'MaHD';
     public function getAll($limit = 10, $start = 0, $orderBy = "asc", $column = 'MaHD')
     {
-        $importDetails = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
-        return $importDetails;
+        $billDetails = DB::table($this->table)->orderBy($column, $orderBy)->offset($start)->limit($limit)->get();
+        return $billDetails;
     }
     public function findById($id)
     {
-        $importDetail = DB::table($this->table)->where($this->ID, $id)->first();
-        return $importDetail;
+        $billDetail = DB::table($this->table)->where($this->ID, $id)->first();
+        return $billDetail;
     }
     public function updateData($id, $idpr, $data)
     {
-        $importDetail = DB::table($this->table)->where(
+        $billDetail = DB::table($this->table)->where(
             [
                 [$this->ID, '=', $id],
                 ['MaSP', '=', $idpr],
             ]
         )->update($data);
-        return $importDetail;
+        return $billDetail;
     }
 
-    public function deleteData($id)
+    public function getByIDPB($billId, $productID)
     {
-        $importDetail = DB::table($this->table)->where($this->ID, $id)->delete();
-        return $importDetail;
+
+        $billDetail = DB::table($this->table)->where(
+            [
+                [$this->ID, '=', $billId],
+                ['MaSP', '=', $productID],
+            ]
+        )->get();
+        return $billDetail;
+    }
+    public function deleteData($id, $idSP)
+    {
+        $billDetail = DB::table($this->table)->where([
+            [$this->ID, '=', $id],
+            ['MaSP', '=', $idSP],
+        ])->delete();
+        return $billDetail;
     }
 
     public function store($data)
     {
-        $importDetail = DB::table($this->table)->insertGetId($data);
-        return $importDetail;
+        $billDetail = DB::table($this->table)->insertGetId($data);
+        return $billDetail;
     }
 
-    public function getByImportID($importId)
+    public function getByImportID($bill)
     {
-        return DB::select("SELECT * FROM " . $this->table . " where MaHD= :id", ['id' => $importId]);
+        return DB::select("SELECT * FROM " . $this->table . " where MaHD = :id", ['id' => $bill]);
     }
 
-    public function getByIDPI($importId, $productID)
+    public function getByBillID($billId)
     {
 
-        return DB::select("SELECT * FROM " . $this->table . " where MaHD = $importId and MaSP = $productID");
+        $billsDetail = DB::table($this->table)->where("MaHD",  $billId)->get();
+        return $billsDetail;
     }
 
     public function getColumnName()

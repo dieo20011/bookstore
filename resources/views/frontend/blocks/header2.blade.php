@@ -83,8 +83,8 @@
                     <div class="header-link">
                         <a  id="info-user" class="btn-login"> <?php echo $info['TenKH']?> </a>
                         <ul id="submenu-info">
-                            <li><a class="submenu" href="?controller=user&action=showInfo">Thông tin cá nhân</a></li>
-                            <li><a class="submenu" href="?controller=user&action=showBill">Đơn hàng</a></li>
+                            <li><a class="submenu" href="/User/showInfo">Thông tin cá nhân</a></li>
+                            <li><a class="submenu" href="/User/showBill">Đơn hàng</a></li>
                         </ul>
                         <a href="/User/logout">Logout</a>
                     </div>

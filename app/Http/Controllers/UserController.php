@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\UserModel;
+use App\Models\BillModel;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -21,6 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->billModel = new BillModel();
     }
     public function login(Request $request)
     {
@@ -183,5 +186,41 @@ class UserController extends Controller
         $mainPage = 'frontend.payment.infoAddress';
         $dataNew["address-infor"] = $arrInfor;
         return view($mainPage, ['data' => $dataNew]);
+    }
+
+    public function showBill()
+    {
+        $dataNew = session('data');
+        $bill = $this->billModel->getByIDUser(session('data.userInfo.MaKH'));
+        $dataNew['pageNew'] = 'frontend.info.bill';
+        $bill = json_decode(json_encode($bill), True);
+        $dataNew['bill'] = $bill;
+        return view($this->MAIN_PAGE, ['data' => $dataNew]);
+    }
+    public function searchForTime()
+    {
+        $dataNew = session('data');
+
+        if (!isset($_POST['FromDate']) || !isset($_POST['ToDate'])) {
+            $since = $_POST['since'];
+
+            $ToDate = date('Y-m-d');
+            $FromDate = date('Y-m-d', strtotime("-{$since} days", strtotime($ToDate)));
+
+            $bill = $this->billModel->searchForTimes(session('data.userInfo.MaKH'), $FromDate, $ToDate);
+        } else {
+            $FromDate = $_POST['FromDate'];
+            $ToDate = $_POST['ToDate'];
+            $bill = $this->billModel->searchForTimes(session('data.userInfo.MaKH'), $FromDate, $ToDate);
+            $dataNew['FromDate'] = $FromDate;
+            $dataNew['ToDate'] = $ToDate;
+        }
+
+        // $dataNew['pageNew'] = 'frontend.info.list-bill-for-user';
+        $bill = json_decode(json_encode($bill), True);
+        $dataNew['bill'] = $bill;
+
+
+        return view("frontend.info.list-bill-for-user", ['data' => $dataNew]);
     }
 }
